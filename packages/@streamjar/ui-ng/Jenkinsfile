@@ -1,0 +1,21 @@
+def name = "streamjar/ui:${BRANCH_NAME}-${BUILD_NUMBER}"
+
+node {
+	stage("Checkout") {
+		checkout scm
+	}
+
+	def app
+
+	docker.withRegistry('https://docker.sjsrv.uk') {
+		stage("Build") {
+			app = docker.build name
+		}
+
+		stage("Push") {
+			app.push()
+		}
+	}
+
+	sh "docker rmi ${name}"
+}

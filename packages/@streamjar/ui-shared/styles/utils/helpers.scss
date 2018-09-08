@@ -1,0 +1,7 @@
+@mixin jar-gradient-bg($theme: ()) {
+	background: map-get($theme, gradient);
+}
+
+@mixin jar-primary-bg($theme) {
+	background: map-get($theme, primary);
+}

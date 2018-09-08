@@ -1,0 +1,5 @@
+@mixin jar-theme-dialog($theme) {
+	.jar-dialog jar-dialog-header {
+		background: map-get($theme, gradient);
+	}
+}

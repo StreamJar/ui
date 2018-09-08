@@ -1,0 +1,9 @@
+@mixin jar-theme-select($theme) {
+	.jar-select {
+		border-color: map-get($theme, primary);
+
+		&__ui {
+			@include jar-gradient-bg($theme);
+		}
+	}
+}

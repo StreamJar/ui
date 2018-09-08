@@ -1,0 +1,17 @@
+@import '../../utils/variables';
+
+::-webkit-scrollbar {
+	width: 12px;
+	background: transparent;
+	cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(#FFF, .15);
+}
+
+::-moz-selection { background: rgba(255, 255, 255, 0.32); }
+::selection { background: rgba(255, 255, 255, 0.32); }
+::-webkit-scrollbar-corner {
+	background: transparent;
+}

@@ -1,0 +1,28 @@
+<jar-input-label *ngIf="title">{{title}}</jar-input-label>
+
+<div class="jar-input"  [class.jar-input-focus]="focus$ | async" [class.jar-input-error]="(error$ | async) !== ''" fxLayout="row" fxLayoutAlign="center center">
+	<!-- <span class="jar-input-text">Pre</span> -->
+	<ng-content select="jar-input-prefix"></ng-content>
+
+	<input
+		class="jar-input__container"
+		style="width: 100%"
+		#el="ngModel"
+		[type]="type"
+		[(ngModel)]="value"
+		[placeholder]="placeholder"
+		[minlength]="minlength"
+		[maxlength]="maxlength"
+		[min]="min"
+		[max]="max"
+		[step]="step"
+		[pattern]="pattern"
+		(focus)="focus(true)"
+		(focusout)="focus(false)"
+		[readonly]="readonly"/>
+
+	<!-- <span class="jar-input-text">Pre</span> -->
+	<jar-icon class="jar-input__error" *ngIf="(error$ | async) !== ''" icon="error_outline" [jarTooltip]="error$ | async" jarTooltipPos="top"></jar-icon>
+
+	<ng-content select="jar-input-suffix"></ng-content>
+</div>

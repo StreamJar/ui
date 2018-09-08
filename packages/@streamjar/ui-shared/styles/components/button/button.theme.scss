@@ -1,0 +1,29 @@
+@mixin jar-button($colour, $theme) {
+    .jar-button[colour=#{$colour}]:not(.jar-button-raised) {
+        color: $theme;
+
+        &:focus, &:active, &:hover {
+            background: rgba(#FFF, 0.12);
+        }
+    }
+
+    .jar-button:not(.jar-button-raised).jar-button-disabled {
+        color: rgba(#FFF, 0.3);
+    }
+}
+
+@mixin jar-raised-button($colour, $background, $theme) {
+    .jar-button[colour=#{$colour}].jar-button-raised {
+        background: $background;
+        color: $theme;
+
+        &.jar-button-disabled {
+            background:  rgba(#FFF, 0.1);
+            color:  rgba(#FFF, 0.3);
+        }
+    }
+}
+
+@mixin jar-theme-button($theme) {
+	@include jar-raised-button('primary', map-get($theme, gradient), #FFF);
+}

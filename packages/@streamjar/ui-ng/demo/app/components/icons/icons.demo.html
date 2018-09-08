@@ -1,0 +1,26 @@
+<demo [config]="config">
+	<p> Icons are available via <a href=""> Material Icons </a> or through any icons stored in <code>/assets/icons</code> in this project. Our local icons are prefixed with jar_ </p>
+
+	<div fxLayout="row">
+		<jar-icon style="color: #FFF;" icon="star"></jar-icon>
+		<jar-icon icon="jar_windows"></jar-icon>
+		<button jarBtn round icon="jar_twitter"></button>
+		<button jarBtn icon="jar_windows"></button>
+		<button jarBtn icon="jar_mac"></button>
+		<button jarBtn icon="jar_filter"></button>
+		<button jarBtn icon="jar_mixer"></button>
+		<button jarBtn icon="jar_jar"></button>
+		<button jarBtn icon="star"></button>
+	</div>
+
+	<p> Custom Icons </p>
+	<div fxLayout="row wrap">
+		<div class="icon" *ngFor="let icon of icons" fxLayout="column" fxFlex="20" fxLayoutAlign="center center">
+			<jar-icon  style="padding: 10px;"[icon]="'jar_' + icon"></jar-icon>
+			<div>
+				<code style="color: #FFF;">jar_{{icon}}</code>
+			</div>
+		</div>
+	</div>
+
+</demo>

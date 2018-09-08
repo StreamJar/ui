@@ -1,0 +1,8 @@
+<div class="jar-select-item">
+	<div md-ripple [mdRippleTrigger]="_getHostElement()"></div>
+
+	<div class="jar-select-item__container" fxLayout="row">
+		<jar-checkbox class="jar-select-item__check" *ngIf="select.mode === Mode.Multiple" [(ngModel)]="checked" no-ripple></jar-checkbox>
+		<span class="jar-select-item__value"> {{name}} </span>
+	</div>
+</div>

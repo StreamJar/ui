@@ -1,0 +1,9 @@
+{
+	"name": "@streamjar/ui-shared",
+	"version": "0.0.0",
+	"author": "Luke Thompson <luke@streamjar.tv>",
+	"license": "MIT",
+	"publishConfig": {
+		"registry": "https://npm.sjsrv.uk"
+	}
+}

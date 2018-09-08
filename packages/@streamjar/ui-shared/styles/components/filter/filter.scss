@@ -1,0 +1,33 @@
+.jar-filter-section {
+	width: 200px;
+	float: left;
+	border-left: 1px solid rgba(#FFF, 0.2);
+	border-right: 1px solid rgba(#FFF, 0.2);
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+
+	height: calc(100% - 20px);
+
+	.jar-filter-section__header {
+		margin-bottom: 10px;
+	}
+}
+
+.jar-filter {
+	.jar-filter__settings {
+		position: fixed;
+		min-width: 200px;
+		border: 1px solid rgba(255, 255, 255, .26);
+		border-radius: 3px;
+
+		jar-filter-section:last-child .jar-filter-section {
+			border-right: 0px;
+		}
+		jar-filter-section:first-child .jar-filter-section {
+			border-left: 0px;
+		}
+	}
+}

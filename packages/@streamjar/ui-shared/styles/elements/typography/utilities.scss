@@ -1,0 +1,36 @@
+.jar-align-center {
+	text-align: center;
+}
+
+.jar-layout-spaced {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.jar-typography-emphasis {
+	opacity: 0.7;
+	font-weight: bold;
+}
+
+.jar-typography-light {
+	color: #FFF;
+}
+
+a.jar-typography-unmarked {
+	text-decoration: none !important;
+	font-weight: inherit;
+}
+
+.jar-truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.wrapper {
+    max-width: 1300px;
+    width: 95%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    margin: 0 auto;
+}

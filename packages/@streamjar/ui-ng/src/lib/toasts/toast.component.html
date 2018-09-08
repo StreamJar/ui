@@ -1,0 +1,8 @@
+<div class="jar-toasts">
+	<div class="jar-toast" [@toastAnimation]="state" *ngIf="toast">
+		<div fxLayout="row" fxLayoutAlign="center center">
+			<button jarBtn [icon]="icon" [colour]="theme" (mouseenter)="enter()" (mouseleave)="leave()" (click)="close()" round raised></button>
+			<div class="jar-toast__status"> {{ toast.message }} </div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+<div
+	#el
+	[style.top.px]="topPos$ | async"
+	[style.left.px]="leftPos$ | async"
+	[style.opacity]="opacity$ | async"
+	[@dialogAnimation]="state$ | async"
+	class="jar-tooltip">
+	{{ref.value | async }}
+</div>

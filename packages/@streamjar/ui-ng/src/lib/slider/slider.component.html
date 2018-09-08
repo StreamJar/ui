@@ -1,0 +1,3 @@
+<div class="jar-slider">
+	<input class="jar-slider__input" type="range" [min]="min" [max]="max" [step]="step" [disabled]="disabled" [ngModel]="slider$ | async" (ngModelChange)="slider$.next($event)"/>
+</div>

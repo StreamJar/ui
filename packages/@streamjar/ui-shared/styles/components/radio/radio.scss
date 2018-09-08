@@ -1,0 +1,90 @@
+@import '../../utils/variables.scss';
+
+$radio-size: 20px;
+
+.jar-radio {
+	margin: 5px 0;
+	padding: 5px;
+	cursor: pointer;
+
+	&-focused {
+		.jar-radio__circle {
+			border: {
+				color: #FFF;
+				width: 2px;
+				style: solid;
+				radius: 50%;
+			}
+		}
+
+		.jar-radio__fill {
+			background: #FFF;
+		}
+	}
+
+	&__ripple {
+		position: absolute;
+		left: -$radio-size/2;
+		top: -$radio-size/2;
+		right: -$radio-size/2;
+		bottom: -$radio-size/2;
+		border-radius: 50%;
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	&__inner {
+		width: 20px;
+		height: 20px;
+		position: relative;
+	}
+
+	&__circle {
+		box-sizing: border-box;
+		height: $radio-size;
+		left: 0;
+		position: absolute;
+		top: 0;
+		transition: border-color ease 280ms;
+		width: $radio-size;
+
+		border: {
+			width: 2px;
+			style: solid;
+			radius: 50%;
+		}
+	}
+
+	&__fill {
+		border-radius: 50%;
+		box-sizing: border-box;
+		height: $radio-size;
+		left: 0;
+		position: absolute;
+		top: 0;
+		transition: transform ease 280ms, background ease 280ms;
+		width: $radio-size;
+		transform: scale(0);
+
+		.jar-radio-checked & {
+			transform: scale(0.5);
+		}
+
+	}
+
+	&__label {
+		line-height: $radio-size;
+		color: #FFF;
+		padding-left: 10px;
+		text-transform: uppercase;
+		font-size: 12px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	&__input {
+		display: none;
+		opacity: 0;
+		visibility: hidden;
+	}
+}

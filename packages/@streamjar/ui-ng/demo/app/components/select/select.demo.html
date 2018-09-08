@@ -1,0 +1,16 @@
+<demo [config]="config">
+	<jar-select [title]="'Simple'" [(ngModel)]="out">
+		<jar-select-item name="Cat" value="cat"></jar-select-item>
+		<jar-select-item name="Dog" value="dog"></jar-select-item>
+		<jar-select-item name="Moose" value="moose"></jar-select-item>
+	</jar-select>
+
+	<p> Out: {{ out | json }} </p>
+
+	<jar-select [title]="'Multiple'" multiple [(ngModel)]="out2">
+		<jar-select-item name="Cat" value="cat"></jar-select-item>
+		<jar-select-item name="Dog" value="dog"></jar-select-item>
+		<jar-select-item name="Moose" value="moose"></jar-select-item>
+	</jar-select>
+	<p> Out: {{ out2 | json }} </p>
+</demo>

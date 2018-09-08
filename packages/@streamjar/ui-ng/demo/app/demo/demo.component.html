@@ -1,0 +1,35 @@
+<ng-container *ngIf="config">
+    <h2 class="demo__name"> {{ config.name }} </h2>
+
+    <div class="demo__section">
+        <h5> Example </h5>
+
+        <ng-content></ng-content>
+    </div>
+
+    <div class="demo__section" *ngIf="tabs.length">
+        <h5> Documentation </h5>
+
+		<jar-tabs (selected)="docs = $event">
+			<jar-tab *ngFor="let tab of tabs" [value]="tab"> {{tab}} </jar-tab>
+		</jar-tabs>
+
+		<ng-container *ngIf="docs">
+			<demo-table [name]="docs" [docs]="config.docs[docs]"></demo-table>
+		</ng-container>
+    </div>
+
+    <div class="demo__section" *ngIf="config.html || config.scss || config.ts">
+        <h5> Code </h5>
+
+        <jar-tabs (selected)="show = $event">
+            <jar-tab [value]="DemoContent.HTML" *ngIf="config.html">HTML</jar-tab>
+            <jar-tab [value]="DemoContent.TS" *ngIf="config.ts">TS</jar-tab>
+            <jar-tab [value]="DemoContent.SCSS" *ngIf="config.scss">SCSS</jar-tab>
+        </jar-tabs>
+
+        <ngx-monaco-editor *ngIf="show === DemoContent.HTML" [options]="htmlOpts" [(ngModel)]="config.html"></ngx-monaco-editor>
+        <ngx-monaco-editor *ngIf="show === DemoContent.SCSS" [options]="scssOpts" [(ngModel)]="config.scss"></ngx-monaco-editor>
+        <ngx-monaco-editor *ngIf="show === DemoContent.TS" [options]="tsOpts" [(ngModel)]="config.ts"></ngx-monaco-editor>
+    </div>
+</ng-container>

@@ -1,0 +1,77 @@
+.jar-input {
+	margin: 5px;
+	position: relative;
+	font-size: 16px;
+	border-radius: 3px;
+	color: #FFF;
+	padding: 0px 5px;
+
+	&-focus {
+		border-color: rgba(#FFF, 1) !important;
+	}
+
+	&-error {
+		.jar-input__error {
+			display: initial !important;
+			padding-left: 5px;
+		}
+
+		border-color: #8c3535 !important;
+
+		&.jar-input-focus {
+			border-color: #a95555 !important;
+		}
+	}
+
+	.jar-input__container {
+		color: #FFF;
+		background: transparent;
+		padding: 9px 6px;
+
+		&::placeholder {
+			color: rgba(#FFF, 0.4);
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	.jar-input__error {
+		color: #a95555;
+		display: none;
+	}
+}
+
+.jar-input-label {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.66);
+	padding-bottom: 10px;
+    padding-top: 20px;
+    display: block;
+    padding-left: 10px;
+}
+
+.jar-textarea {
+	padding: 5px;
+
+	.jar-textarea__container {
+		background: transparent;
+		padding: 9px 11px;
+		font-size: 16px;
+		background: rgba(0, 0, 0, 0.08);
+		color: #FFF;
+		border-radius: 3px;
+
+		&::placeholder {
+			color: rgba(#FFF, 0.4);
+		}
+
+		&:focus {
+			outline: none;
+			border: 1px solid rgba(#FFF, 1);
+		}
+	}
+}

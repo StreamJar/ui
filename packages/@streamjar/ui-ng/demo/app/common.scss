@@ -1,0 +1,22 @@
+
+.demo {
+    &__name {
+        margin: 20px 0;
+    }
+
+    &__section {
+        background: #272727;
+        padding: 15px;
+        width: 100%;
+        margin: 10px 0;
+
+        h5 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+    }
+}
+ngx-monaco-editor {
+    height: 400px;
+}

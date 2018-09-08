@@ -1,0 +1,35 @@
+<div fxFill fxLayout="row">
+	<aside class="jar-theme-bg--gradient" fxFlex="15">
+		<div fxLayout="row" fxLayoutALign="flex-start center">
+			<img class="us" src="/assets/jar.svg" /> <div><h5> @streamjar/ui </h5> </div>
+		</div>
+
+		<button jarBtn [routerLink]="'/avatar'"> Avatars </button>
+		<button jarBtn [routerLink]="'/button'"> Button </button>
+		<button jarBtn [routerLink]="'/card'"> Card </button>
+		<button jarBtn [routerLink]="'/checkbox'"> Checkbox </button>
+		<button jarBtn [routerLink]="'/dialog'"> Dialog </button>
+		<button jarBtn [routerLink]="'/filter'"> Filter </button>
+		<button jarBtn [routerLink]="'/icons'"> Icons </button>
+		<button jarBtn [routerLink]="'/inputs'"> Inputs </button>
+		<button jarBtn [routerLink]="'/pattern'"> Pattern </button>
+		<button jarBtn [routerLink]="'/platforms'"> Platforms </button>
+		<button jarBtn [routerLink]="'/popup'"> Popup </button>
+		<button jarBtn [routerLink]="'/menu'"> Menu </button>
+		<button jarBtn [routerLink]="'/radio'"> Radio </button>
+		<button jarBtn [routerLink]="'/section'"> Section </button>
+		<button jarBtn [routerLink]="'/select'"> Select </button>
+		<button jarBtn [routerLink]="'/slider'"> Slider </button>
+		<button jarBtn [routerLink]="'/spinner'"> Spinner </button>
+		<button jarBtn [routerLink]="'/tabs'"> Tabs </button>
+		<button jarBtn [routerLink]="'/toasts'"> Toasts </button>
+		<button jarBtn [routerLink]="'/tooltip'"> Tooltip </button>
+	</aside>
+
+	<div class="content" fxLayout="row" fxLayoutAlign="center flex-start" fxFlex>
+		<div fxFlex="80" class="demo">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+</div>
+

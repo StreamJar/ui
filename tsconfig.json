@@ -1,0 +1,37 @@
+{
+    "angularCompilerOptions": { 
+        "strictMetadataEmit": true
+    },
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "types": [
+            "node"
+        ],
+        "strictNullChecks": true,
+        "noImplicitAny": false,
+        "declaration": true,
+        "declarationDir": "dist",
+        "skipLibCheck": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "outDir": "dist",
+        "baseUrl": ".",
+        "paths": {
+            "@angular/*": [
+                "node_modules/@angular/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

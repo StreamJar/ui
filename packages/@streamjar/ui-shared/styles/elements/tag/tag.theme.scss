@@ -1,0 +1,5 @@
+@mixin jar-theme-tag($theme) {
+	.jar-tag {
+		@include jar-gradient-bg($theme);
+	}
+}

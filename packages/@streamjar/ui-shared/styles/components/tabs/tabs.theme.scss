@@ -1,0 +1,5 @@
+@mixin jar-theme-tabs($theme) {
+	.jar-tabs .jar-tabs__position {
+		@include jar-primary-bg($theme);
+	}
+}

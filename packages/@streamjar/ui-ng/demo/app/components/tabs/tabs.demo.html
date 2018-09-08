@@ -1,0 +1,8 @@
+<demo [config]="config">
+	<jar-tabs [current]="selected" (selected)="selected = $event">
+		<jar-tab [value]="true"> Yes </jar-tab>
+		<jar-tab [value]="false"> No </jar-tab>
+	</jar-tabs>
+
+	<p> Yes is selected: {{ selected }} </p>
+</demo>

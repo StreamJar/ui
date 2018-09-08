@@ -1,0 +1,8 @@
+<div class="jar-popup" fxLayout="row" fxLayoutAlign="center center">
+	<div class="jar-popup__container" fxLayout="column" fxLayoutAlign="flex-start">
+		<h2 class="jar-logo" *ngIf="title === ''"><img src="/assets/jar-white.svg" /></h2>
+		<h2 *ngIf="title !== ''"> {{ title }} </h2>
+		<p class="jar-popup-tagline"> {{ tag }} </p>
+		<ng-content></ng-content>
+	</div>
+</div>

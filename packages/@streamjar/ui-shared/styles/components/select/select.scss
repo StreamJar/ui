@@ -1,0 +1,76 @@
+
+.jar-select {
+	display: block;
+	margin: 5px;
+	min-height: 42px;
+	background: transparent;
+	font-size: 16px;
+	border-radius: 3px;
+	border-width: 1px;
+	border-style: solid;
+	color: #FFF;
+	cursor: pointer;
+	user-select: none;
+	position: relative;
+
+
+	&-multiple {
+		.jar-select__items {
+	    	padding: 7.5px 2.5px 0px !important;
+		}
+	}
+
+	.jar-select__items {
+    	padding: 0px 2.5px 0px;
+	}
+
+	.jar-select__item {
+		border-radius: 3px;
+		padding: 2.5px 5px;
+		font-size: 13px;
+		display: inline-block;
+		margin-left: 5px;
+		margin-bottom: 7.5px;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+
+	&__option {
+		padding-left: 15px;
+	}
+
+	&__ui {
+		color: rgba(#FFF, 0.2);
+		padding: 0 5px;
+	}
+}
+
+.jar-select-item {
+	position: relative;
+	line-height: 24px;
+	overflow: hidden;
+	padding: 5px 5px;
+	color: #FFF;
+	cursor: pointer;
+
+	&:hover {
+		background: rgba(#FFFFFF, 0.1);
+	}
+
+	&__value {
+		font-weight: bold;
+		padding-left: 10px;
+		font-size: 14px;
+		text-transform: uppercase;
+		line-height: 32px;
+	}
+
+	&__check {
+		pointer-events: none;
+	}
+
+	&__container {
+		position: relative;
+		z-index: 10;
+	}
+}

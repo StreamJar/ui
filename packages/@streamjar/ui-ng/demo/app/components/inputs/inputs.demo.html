@@ -1,0 +1,29 @@
+<demo [config]="config">
+	<jar-file [accept]="'image/jpeg'">
+		<button jarBtn raised colour="success" icon="file_upload"> Upload</button>
+	</jar-file>
+
+
+	<jar-input name="a" type="text" title="Text" value="hello"></jar-input>
+	<jar-input [ngModel]="5" name="b" type="number" title="Number" [min]="2" [max]="10" required> </jar-input>
+
+	<jar-input name="a" type="text" title="Prefix" value="hello"><jar-input-prefix>£</jar-input-prefix></jar-input>
+	<jar-input name="a" type="text" title="Suffix" value="hello"><jar-input-suffix>x</jar-input-suffix></jar-input>
+
+	<jar-input name="a" type="text" title="Suffix" value="hello"></jar-input>
+
+	<jar-textarea title="static" rows="5" [ngModel]="'blah'"></jar-textarea>
+	<jar-textarea title="dynamic size" resize rows="2"></jar-textarea>
+
+	<jar-input
+		[ngModel]=" 'a'"
+		readonly
+		name="name"
+		title="Client Name"
+		required
+		minlength="4"
+		maxlength="24">
+	</jar-input>
+
+	<jar-input required minlength="3" name="a" type="text" title="Text" value="hello"></jar-input>
+</demo>

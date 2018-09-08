@@ -1,0 +1,23 @@
+<div class="jar-checkbox" [class.disabled]="isDisabled$ | async" fxLayout="row" #label [class.jar-checkbox-focused]="focused" [class.jar-checkbox-labeled]="label$ | async" [attr.colour]="theme$ | async">
+	<div class="jar-checkbox-inner" [class.jar-checkbox-inner-checked]="checked$ | async">
+		<div *ngIf="!(noRipple$ | async) && !(isDisabled$ | async)" class="jar-checkbox-ripple" md-ripple [mdRippleTrigger]="label" [mdRippleCentered]="true"></div>
+
+		<input #input
+			type="checkbox"
+			style="display: none;"
+			tabindex="-1"
+			[checked]="checked$ | async"
+			[tabIndex]="tabIndex"
+			(focus)="gainedFocus()"
+			(blur)="lostFocus()"
+			(change)="onInputChange()">
+
+		<svg version="1.1" class="jar-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve">
+			<path class="jar-checkmark-path" fill="none" stroke="white" d="M4.1,12.7 9,17.6 20.3,6.3"/>
+		</svg>
+	</div>
+
+	<label class="jar-checkbox-label">
+		<ng-content></ng-content>
+	</label>
+</div>

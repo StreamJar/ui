@@ -1,0 +1,14 @@
+.jar-tooltip {
+	opacity: 0;
+	position: fixed;
+	z-index:10001;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    border-radius: 7px;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 14px;
+	user-select: none;
+	pointer-events: none;
+    margin-bottom: 5px;
+}

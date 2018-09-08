@@ -1,0 +1,11 @@
+<div class="jar-overlay" (click)="dismiss($event)" fxLayout="column" fxLayoutAlign="center center" [@overlay]="state">
+	<div class="jar-dialog" fxLayout="column" [@dialogAnimation]="state" [style.min-width]="minWidth" [style.max-width]="maxWidth" [style.width]="width" [style.height]="height">
+		<div class="jar-dialog__overlay" fxLayout="row" fxLayoutAlign="center center" *ngIf="(loadingState$ | async) === LoadingState.LOADED">
+			<jar-spinner size="40"></jar-spinner>
+		</div>
+
+		<ng-content select="jar-dialog-header"></ng-content>
+		<ng-content select="jar-dialog-content"></ng-content>
+		<ng-content select="jar-dialog-footer"></ng-content>
+	</div>
+</div>

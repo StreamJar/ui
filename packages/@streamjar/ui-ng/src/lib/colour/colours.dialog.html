@@ -1,0 +1,41 @@
+<jar-dialog maxWidth="450px" height="485px">
+	<jar-dialog-header>
+		Colour Picker
+	</jar-dialog-header>
+
+	<jar-dialog-content>
+		<div class="colourBackground" fxLayout="row" fxLayoutAlign="center center">
+			<div class="colourBackground__fill" [style.background-color]="rgbaColour"></div>
+			<jar-input class="colourBackground__input" [value]='rgbaColour' (change)="userChange($event)"></jar-input>
+		</div>
+
+		<div class="layout" fxLayout="row">
+			<div class="spectrum" fxFlex joverlaySliderPicker (onChange)="setData($event)" [multiple]="true" [style.background-color]="hueColour">
+				<div class="spectrum-saturation">
+					<div class="spectrum-lum">
+						<div class="spectrum-cursor" [style.top]="((1 - v) * 100) + '%'" [style.left]="(s * 100) + '%'"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="hueSlider" joverlaySliderPicker (onChange)="setHue($event)">
+				<div class="slider-cursor" [style.top]="(hue * 100) + '%'"></div>
+			</div>
+
+			<div class="opacitySlider" joverlaySliderPicker (onChange)="setOpacity($event)">
+				<div class="opacitySliderColour" [style.background-image]="toGradient()">
+					<div class="slider-cursor" [style.top]="(opacity * 100) + '%'"></div>
+				</div>
+			</div>
+
+		</div>
+
+
+	</jar-dialog-content>
+
+	<jar-dialog-footer fxLayout="row">
+		<div fxFlex></div>
+		<button jarBtn (click)="close()"> Cancel </button>
+		<button jarBtn colour="primary" raised (click)="close(true)"> Choose </button>
+	</jar-dialog-footer>
+</jar-dialog>

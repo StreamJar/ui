@@ -1,0 +1,29 @@
+jar-icon {
+	display: inline-block;
+	font-size: 24px;
+	display: inline-flex;
+	flex-direction: row;
+	align-items: center;
+
+	.material-icons {
+		font-size: 1em;
+		display: block;
+	}
+
+	.jar-icons {
+		width: 1em;
+		height: 1em;
+		color: #FFF;
+		overflow: hidden;
+		position: relative;
+		fill: #FFF;
+
+		svg {
+			position: absolute;
+			top: 1px;
+			left: 1px;
+			width: calc(100% - 2px);
+			height: calc(100% - 2px);
+		}
+	}
+}

@@ -1,0 +1,55 @@
+$colour-white: #FFF;
+$colour-muted-grey: rgb(39, 39, 39);
+$colour-transparent: rgba(248, 123, 123, 0.4);
+$colour-gradient-vivid: linear-gradient(to bottom right, #35005e 0%, #503a60 100%);
+$colour-gradient-subtle: linear-gradient(to bottom right, #3d115f 0%, #472760 100%);
+
+$spacing-1x: 5px;
+$spacing-2x: 10px;
+$spacing-3x: 15px;
+$spacing-4x: 20px;
+
+$colourSuccess: #67af25;
+$colourDanger: #e26060;
+$colourWarning: #dc965a;
+
+$platformMixer: #1fbaed;
+$platformTwitch: #6441a5;
+$platformYoutube: #cc181e;
+$platformSmashcast: #208EFC;
+$platformDiscord: #7289DA;
+
+$platformPayPal: #003087;
+$platformStripe: #00afe1;
+
+$platformGamewisp: #F8A853;
+$platformPatreon: #F96854;
+$platformTwitter: #1da1f2;
+
+$platformTiltify: #9ad049;
+$platformExtralife: #23c1e8;
+
+$platformSpotify: #1DB954;
+
+
+@mixin platform-style($name, $platform) {
+	.platform-#{$name}-background {
+		background: $platform;
+	}
+
+	.platform-#{$name}-text {
+		color: $platform;
+	}
+	.platform-#{$name}-border {
+		border-color: $platform !important;
+	}
+	.platform-#{$name}-fiill {
+		fill: $platform;
+	}
+}
+
+@include platform-style('mixer', $platformMixer);
+@include platform-style('twitch', $platformTwitch);
+@include platform-style('youtube', $platformYoutube);
+@include platform-style('smashcast', $platformSmashcast);
+@include platform-style('discord', $platformDiscord);

@@ -1,0 +1,5 @@
+@mixin jar-theme-form($theme) {
+	.jar-input, .jar-textarea textarea {
+		border: 1px solid map-get($theme, primary);
+	}
+}

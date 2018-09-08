@@ -1,0 +1,26 @@
+<p class="elementName"> Element Name: <code> {{ name }} </code> </p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="table__name"> Name </th>
+            <th class="table__type"> Type </th>
+            <th class="table__default"> Default </th>
+            <th class="table__intype"> In-Type </th>
+            <th class="table__desc"> Description </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let doc of docs">
+            <td class="table__name"> {{ doc.name }} </td>
+            <td class="table__type">
+                <div *ngIf="doc.type === ITableType.INPUT" class="tag tag-input"> INPUT </div>
+                <div *ngIf="doc.type === ITableType.OUTPUT" class="tag tag-output"> OUTPUT </div>
+                <div *ngIf="doc.type === ITableType.METHOD" class="tag tag-method"> @METHOD </div>
+            </td>
+            <td class="table__default"> {{ doc.defaultValue }} </td>
+            <td class="table__intype"> {{ doc.inType}} </td>
+            <td class="table__desc"> {{doc.description}} </td>
+        </tr>
+    </tbody>
+</table>

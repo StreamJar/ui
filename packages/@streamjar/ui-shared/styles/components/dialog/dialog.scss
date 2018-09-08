@@ -1,0 +1,49 @@
+@import '../../utils/variables.scss';
+
+.jar-dialog {
+	max-width: calc(100vw - 15px);
+	max-height: 80vh;
+	overflow: overlay;
+	background: #1d1d1d;
+	min-width: 250px;
+	min-height: 300px;
+	border-radius: 5px;
+	width: calc(100vw - 15px);
+	pointer-events: all;
+	position: relative;
+	z-index: 1000;
+
+	.jar-dialog__overlay {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba(#FFF, 0.4);
+		z-index: 5000;
+	}
+
+	jar-dialog-header {
+		line-height: 40px;
+		padding: 0px 15px;
+		border-radius: 5px;
+		flex-direction: row;
+		display: flex;
+
+		.jar-dialog-header__title {
+			font-weight: bold;
+			opacity: 0.6;
+			line-height: 46px;
+			font-size: 16px;
+		}
+	}
+}
+
+.jar-overlay {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.52);
+}

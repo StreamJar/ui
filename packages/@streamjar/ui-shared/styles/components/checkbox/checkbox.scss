@@ -1,0 +1,95 @@
+@import '../../utils/variables.scss';
+@import './checkbox.theme.scss';
+
+$checkbox-height: 24px;
+
+.jar-checkbox {
+	padding: 5px;
+	cursor: pointer;
+	user-select: none;
+
+	&.disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+
+		.jar-checkbox-label {
+			cursor: not-allowed;
+		}
+	}
+
+	&-focused {
+		.jar-checkbox-inner {
+			border: 2px solid #FFF;
+		}
+	}
+
+	&-ripple {
+		position: absolute;
+		left: -$checkbox-height/2;
+		top: -$checkbox-height/2;
+		right: -$checkbox-height/2;
+		bottom: -$checkbox-height/2;
+		border-radius: 50%;
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	&-labeled {
+		padding-top: 40px;
+	}
+
+	&-inner {
+		height: $checkbox-height;
+		width: $checkbox-height;
+		border-radius: 3px;
+		position: relative;
+		border: 2px solid rgba(255, 255, 255, 0.14);
+
+		&-checked {
+			border-color: transparent;
+
+			.jar-checkmark {
+				opacity: 1 !important;
+			}
+		}
+
+		.jar-checkmark {
+			opacity: 0;
+			height: 20px;
+			width: 20px;
+			user-select: none;
+
+			.jar-checkmark-path {
+				stroke-width: 2px;
+			}
+		}
+	}
+
+	&-label {
+		line-height: $checkbox-height;
+		color: #FFF;
+		padding-left: 10px;
+		text-transform: uppercase;
+		font-size: 12px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+}
+
+@include jar-checkbox('accent', #FFF, #000);
+@include jar-checkbox('success', $colourSuccess);
+@include jar-checkbox('danger', $colourDanger);
+
+@include jar-checkbox('platform-mixer', $platformMixer);
+@include jar-checkbox('platform-twitch', $platformTwitch);
+@include jar-checkbox('platform-smashcast', $platformSmashcast);
+@include jar-checkbox('platform-youtube', $platformYoutube);
+@include jar-checkbox('platform-discord', $platformDiscord);
+@include jar-checkbox('platform-paypal', $platformPayPal);
+@include jar-checkbox('platform-stripe', $platformStripe);
+@include jar-checkbox('platform-gamewisp', $platformGamewisp);
+@include jar-checkbox('platform-twitter', $platformTwitter);
+@include jar-checkbox('platform-patreon', $platformPatreon);
+@include jar-checkbox('platform-spotify', $platformSpotify);
+@include jar-checkbox('platform-extralife', $platformExtralife);
+@include jar-checkbox('platform-tiltify', $platformTiltify);

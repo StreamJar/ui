@@ -1,0 +1,23 @@
+<jar-input-label *ngIf="title">{{title}}</jar-input-label>
+
+<div class="jar-textarea" fxLayout="column">
+	<textarea
+		class="jar-textarea__container"
+		*ngIf="resizeInput"
+		[(ngModel)]="value"
+		jar-textarea-autosize
+		[minRows]="rows"
+		[readonly]="readonly"
+		[placeholder]="placeholder"
+		[maxlength]="maxlength">
+	</textarea>
+	<textarea
+		class="jar-textarea__container"
+		*ngIf="!resizeInput"
+		[(ngModel)]="value"
+		[rows]="rows"
+		[readonly]="readonly"
+		[placeholder]="placeholder"
+		[maxlength]="maxlength">
+	</textarea>
+</div>

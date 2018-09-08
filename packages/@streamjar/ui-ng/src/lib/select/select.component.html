@@ -1,0 +1,19 @@
+<jar-input-label *ngIf="title">{{title}}</jar-input-label>
+<div class="jar-select" fxLayout="row" [jarMenuTrigger]="menu" [parentWidth]="true" [toggleStatus]="status$ | async" [class.jar-select-multiple]="mode === Mode.Multiple">
+	<div class="jar-select__items" fxFlex fxLayout="row wrap" fxLayoutAlign="flex-start center" *ngIf="mode === Mode.Multiple">
+		<div class="jar-select__item" *ngFor="let a of (value$ | async)"> {{ getValue(a)}} </div>
+	</div>
+
+	<div class="jar-select__option" fxFlex fxLayout="row wrap" fxLayoutAlign="flex-start center" *ngIf="mode === Mode.Single">
+		{{ getValue((value$ | async)[0]) }}
+	</div>
+
+	<div class="jar-select__ui" fxLayout="column" fxLayoutAlign="center center">
+		<jar-icon icon="arrow_drop_down"></jar-icon>
+	</div>
+</div>
+
+
+<jar-menu #menu>
+	<ng-content></ng-content>
+</jar-menu>
