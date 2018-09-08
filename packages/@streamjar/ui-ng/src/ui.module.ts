@@ -42,8 +42,8 @@ const modules = [
 	PatternModule,
 	SectionModule,
 	CardModule,
-	PopupModule,
 	PlatformsModule,
+	PopupModule,
 ];
 
 @NgModule({
