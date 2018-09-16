@@ -6,8 +6,10 @@ import { AvatarDemo } from './components/avatar-demo';
 import { ButtonDemo } from './components/button-demo';
 import { CardDemo } from './components/card-demo';
 import { CheckboxDemo } from './components/checkbox-demo';
+import { FilterDemo } from './components/filter-demo';
 import { IconDemo } from './components/icon-demo';
 import { MenuDemo } from './components/menu-demo';
+import { PlatformsDemo } from './components/platforms-demo';
 import { PopupDemo } from './components/popup-demo';
 import { RadioDemo } from './components/radio-demo';
 import { SectionDemo } from './components/section-demo';
@@ -27,10 +29,10 @@ const PAGES = [
 	{ component: CardDemo, disabled: false, name: 'Card', route: '/card' },
 	{ component: CheckboxDemo, disabled: false, name: 'Checkbox', route: '/checkbox' },
 	{ component: null, disabled: true, name: 'Dialog', route: '/dialog' },
-	{ component: null, disabled: true, name: 'Filter', route: '/filter' },
+	{ component: FilterDemo, disabled: false, name: 'Filter', route: '/filter' },
 	{ component: null, disabled: true, name: 'Form', route: '/forms' },
 	{ component: IconDemo, disabled: false, name: 'Icons', route: '/icons' },
-	{ component: null, disabled: true, name: 'Platforms', route: '/platforms' },
+	{ component: PlatformsDemo, disabled: false, name: 'Platforms', route: '/platforms' },
 	{ component: PopupDemo, disabled: false, name: 'Popup', route: '/popup' },
 	{ component: MenuDemo, disabled: false, name: 'Menu', route: '/menu' },
 	{ component: RadioDemo, disabled: false, name: 'Radio', route: '/radio' },
