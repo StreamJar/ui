@@ -6,5 +6,6 @@ export { Menu } from './menu';
 export { Radio, RadioGroup } from './radio';
 export { Ripple } from './ripple';
 export { Select, SelectItem } from './select';
+export { Tabs, Tab } from './tabs';
 export { toasts } from './toasts';
 export { Tooltip } from './tooltip';
