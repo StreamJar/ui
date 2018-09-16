@@ -3,13 +3,8 @@ import { ITableType } from '../../table/table.component';
 import { IDemoConfig } from '../../demo/demo.component';
 
 const html = `
-<button jarBtn [jarMenuTrigger]="ref"> Menu </button>
+<button raised jarBtn [jarMenuTrigger]="ref"> Menu </button>
 <jar-menu #ref>
-	<p style="color: #FFF; padding: 10px; text-align: center"> I'm a menu!</p>
-</jar-menu>
-
-<button jarBtn [jarMenuTrigger]="ref2"> Large Menu </button>
-<jar-menu #ref2 multiplier="2">
 	<p style="color: #FFF; padding: 10px; text-align: center"> I'm a menu!</p>
 </jar-menu>
 `;
@@ -24,11 +19,11 @@ export class MenuDemoComponent {
     public config: IDemoConfig = {
 		docs: {
 			'jar-menu': [{
-				name: 'multiplier',
+				name: 'width',
 				type: ITableType.INPUT,
 				inType: 'number',
-				defaultValue: '1',
-				description: 'Amount to scale the size of the dropdown by.'
+				defaultValue: '',
+				description: 'Maxmimum width of the container.'
 			}],
 			'[jarMenuTrigger]': [{
 				name: 'jarMenuTrigger',
