@@ -2,7 +2,7 @@
 
 $buttonHeight: 36px;
 
-[jarBtn] {
+[jarBtn], .jarBtn {
 	display: inline-block;
     position: relative;
     background: transparent;
@@ -14,7 +14,7 @@ $buttonHeight: 36px;
 	margin: 5px;
 
     &:focus {
-		.jar-button {
+		.jar-button:not(.jar-button-disabled) {
         	border: 2px solid rgba(#FFF, 0.5);
 		}
 
@@ -37,10 +37,6 @@ $buttonHeight: 36px;
     text-overflow: ellipsis;
     border: 2px solid transparent;
 
-	.jar-button__icon {
-		height: 36px;
-	}
-
     &-disabled {
         cursor: not-allowed;
     }
@@ -55,39 +51,37 @@ $buttonHeight: 36px;
             opacity: 0.3;
         }
 
-    }
+	}
+
+	&-icon {
+		border-radius: 50%;
+		width: 40px;
+		height: 40px;
+		padding: 0px 6px;
+	}
 
 	.right {
-		.jar-button__icon {
-			margin-right: 0;
-			margin-left: 5px;
+		.jar-button__text-hasIcon {
+			margin-left: 0;
+			margin-right: 5px;
 		}
 	}
 
-    .jar-button__content {
-        display: inline-block;
-    }
-
-    &:not(.jar-button-icon) {
-		.jar-button__icon ~ .jar-button__content {
-			margin-left: 5px;
-
-			&:empty {
-				margin-left: 0px;
-			}
+    .jar-button__text {
+		&:empty {
+			margin: 0;
 		}
-    }
 
-    &-icon {
-        border-radius: 50%;
-        width: $buttonHeight;
-        height: $buttonHeight;
-        padding: 5px;
+		&-hasIcon {
+			margin-left: 5px;
+		}
 
-        .jar-button__content {
-            display: none;
-        }
-    }
+        display: inline-block;
+	}
+
+	jar-icon, .jar-icon {
+		height: 36px;
+	}
 }
 
 @include jar-button('primary', rgba(#FFF, 0.8));
