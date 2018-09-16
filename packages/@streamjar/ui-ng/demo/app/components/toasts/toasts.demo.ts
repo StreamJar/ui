@@ -26,7 +26,7 @@ export class Toasts {
 	}
 
 	public success() {
-		this.toasts.success('This is an succesful toast');
+		this.toasts.success('This is an successful toast');
 	}
 
 	public danger() {
@@ -57,7 +57,7 @@ export class ToastsDemoComponent {
 	}
 
 	public success() {
-		this.toasts.success('This is an succesful toast');
+		this.toasts.success('This is an successful toast');
 	}
 
 	public danger() {
