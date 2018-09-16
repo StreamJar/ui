@@ -7,6 +7,7 @@ import { ButtonDemo } from './components/button-demo';
 import { CardDemo } from './components/card-demo';
 import { CheckboxDemo } from './components/checkbox-demo';
 import { FilterDemo } from './components/filter-demo';
+import { FormDemo } from './components/form-demo';
 import { IconDemo } from './components/icon-demo';
 import { MenuDemo } from './components/menu-demo';
 import { PlatformsDemo } from './components/platforms-demo';
@@ -30,7 +31,7 @@ const PAGES = [
 	{ component: CheckboxDemo, disabled: false, name: 'Checkbox', route: '/checkbox' },
 	{ component: null, disabled: true, name: 'Dialog', route: '/dialog' },
 	{ component: FilterDemo, disabled: false, name: 'Filter', route: '/filter' },
-	{ component: null, disabled: true, name: 'Form', route: '/forms' },
+	{ component: FormDemo, disabled: false, name: 'Form', route: '/forms' },
 	{ component: IconDemo, disabled: false, name: 'Icons', route: '/icons' },
 	{ component: PlatformsDemo, disabled: false, name: 'Platforms', route: '/platforms' },
 	{ component: PopupDemo, disabled: false, name: 'Popup', route: '/popup' },

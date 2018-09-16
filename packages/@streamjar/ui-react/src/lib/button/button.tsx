@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import { Icon } from '../icon';
 import { Ripple } from '../ripple';
+import { FormContext, IFormContext } from '../form';
 
 export interface IButtonProps {
 	raised?: boolean;
@@ -28,12 +29,22 @@ export class Button extends React.PureComponent<IButtonProps> {
 
 	constructor(props: IButtonProps) {
 		super(props);
+
+		this.getButton = this.getButton.bind(this);
 	}
 
 	public render(): JSX.Element {
+		return <FormContext.Consumer children={this.getButton} />;
+	}
+
+	public getButton(state: IFormContext): JSX.Element {
 		const { colour, children, disabled, iconRight, icon, onClick, raised, round, type } = this.props;
 
-		const isDisabled = disabled;
+		let isDisabled = disabled;
+
+		if (!state.valid && type === 'submit') {
+			isDisabled = true;
+		}
 
 		const parent: string = classnames({
 			'jar-button': true,

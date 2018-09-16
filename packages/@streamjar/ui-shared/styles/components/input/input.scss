@@ -56,6 +56,26 @@
 
 .jar-textarea {
 	padding: 5px;
+	position: relative;
+
+	&-error {
+		.jar-textarea__container {
+			border-color: #8c3535 !important;
+			padding-right: 20px !important;
+
+			&:focus {
+				border-color: #a95555 !important;
+			}
+		}
+
+		.jar-textarea__error {
+			position: absolute;
+			right: 10px;
+			top: 6px;
+			color: #a95555;
+			padding-left: 5px;
+		}
+	}
 
 	.jar-textarea__container {
 		background: transparent;
@@ -64,6 +84,7 @@
 		background: rgba(0, 0, 0, 0.08);
 		color: #FFF;
 		border-radius: 3px;
+		resize: none;
 
 		&::placeholder {
 			color: rgba(#FFF, 0.4);
