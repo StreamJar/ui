@@ -1,16 +1,20 @@
 <div
-    class="jar-button"
+    class="jar-button layout-row layout-align-center-center"
     [class.jar-button-raised]="raisedBtn$ | async"
     [class.jar-button-disabled]="disabledBtn$ | async"
     [class.jar-button-icon]="iconBtn$ | async"
     [class.jar-button-custom]="customBtn$ | async"
-    [attr.colour]="theme$ | async"
-	fxLayout="row"
-	fxLayoutAlign="center center">
+    [attr.data-colour]="theme$ | async">
     <div *ngIf="!(disabledBtn$| async)" md-ripple [mdRippleTrigger]="_getHostElement()"></div>
 
-    <div class="jar-button__content" [fxLayout]="(right$ | async) ? 'row-reverse' : 'row'" [fxLayoutAlign]="(customBtn$ | async) ? 'flex-start flex-start' : 'center center'" [class.right]="right$ | async">
+<div
+	class="jar-button__content"
+	[class.layout-row-reverse]="(right$ | async)"
+	[class.layout-row]="!(right$ | async)"
+	[class.layout-align-center-center]="!(customBtn$ | async)"
+	[class.layout-align-start-start]="(customBtn$ | async)"
+	[class.right]="right$ | async">
         <jar-icon *ngIf="(iconVal$ | async)" [icon]="iconVal$ | async" class="jar-button__icon"></jar-icon>
-        <div class="jar-button__content"><ng-content></ng-content></div>
+        <div class="jar-button__text" [class.jar-button__text-hasIcon]="iconVal$ | async"><ng-content></ng-content></div>
     </div>
 </div>

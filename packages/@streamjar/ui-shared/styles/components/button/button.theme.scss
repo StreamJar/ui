@@ -1,5 +1,5 @@
 @mixin jar-button($colour, $theme) {
-    .jar-button[colour=#{$colour}]:not(.jar-button-raised) {
+    .jar-button[data-colour=#{$colour}]:not(.jar-button-raised) {
         color: $theme;
 
         &:focus, &:active, &:hover {
@@ -13,7 +13,7 @@
 }
 
 @mixin jar-raised-button($colour, $background, $theme) {
-    .jar-button[colour=#{$colour}].jar-button-raised {
+    .jar-button[data-colour=#{$colour}].jar-button-raised {
         background: $background;
         color: $theme;
 
