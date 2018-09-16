@@ -38,6 +38,11 @@
 
 $width: 100px;
 
+.jar-spinner-outer {
+	display: block;
+	margin: 0 auto;
+}
+
 .jar-spinner {
 	position: relative;
 	width: $width;

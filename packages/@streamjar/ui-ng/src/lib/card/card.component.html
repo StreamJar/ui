@@ -1,13 +1,13 @@
 <div class="jar-card" fxLayout="column">
-	<div class="jar-card__inner" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center">
-		<jar-avatar class="jar-card__avatar" *ngIf="icon" [data]="icon" size="50" ngClass.xs="smallAvatar"></jar-avatar>
+	<div class="jar-card__inner layout-row layout-align-start-center layout-column-xs layout-align-center-center-xs">
+		<jar-avatar class="jar-card__avatar" *ngIf="icon" [data]="icon" size="50"></jar-avatar>
 
-		<div class="jar-card__content" fxFlex>
+		<div class="jar-card__content flex">
 		    <ng-content select=".jar-card-content"></ng-content>
 		</div>
 	</div>
 
-	<div class="jar-card-footer" fxLayout="row" fxLayoutAlign="end center">
+	<div class="jar-card-footer layout-row layout-align-end-center layout-column-xs">
 	    <ng-content select=".jar-card-actions"></ng-content>
 	</div>
 </div>
