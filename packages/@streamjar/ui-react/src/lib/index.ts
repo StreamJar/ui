@@ -1,11 +1,16 @@
 export { Avatar } from './avatar';
 export { Button } from './button';
+export { Card, CardActions, CardContent } from './card';
 export { Checkbox } from './checkbox';
 export { Icon } from './icon';
 export { Menu } from './menu';
+export { Popup } from './popup';
 export { Radio, RadioGroup } from './radio';
 export { Ripple } from './ripple';
+export { Section } from './section';
 export { Select, SelectItem } from './select';
+export { Slider } from './slider';
+export { Spinner } from './spinner';
 export { Tabs, Tab } from './tabs';
 export { toasts } from './toasts';
 export { Tooltip } from './tooltip';
