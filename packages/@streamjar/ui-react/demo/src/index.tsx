@@ -4,7 +4,9 @@ import * as Router from 'react-router-component';
 
 import { AvatarDemo } from './components/avatar-demo';
 import { ButtonDemo } from './components/button-demo';
+import { CheckboxDemo } from './components/checkbox-demo';
 import { IconDemo } from './components/icon-demo';
+import { RadioDemo } from './components/radio-demo';
 import { ToastsDemo } from './components/toasts-demo';
 import { TooltipDemo } from './components/tooltip-demo';
 
@@ -15,7 +17,7 @@ const PAGES = [
 	{ component: AvatarDemo, disabled: false, name: 'Avatars', route: '/' },
 	{ component: ButtonDemo, disabled: false, name: 'Button', route: '/button' },
 	{ component: null, disabled: true, name: 'Card', route: '/card' },
-	{ component: null, disabled: true, name: 'Checkbox', route: '/checkbox' },
+	{ component: CheckboxDemo, disabled: false, name: 'Checkbox', route: '/checkbox' },
 	{ component: null, disabled: true, name: 'Dialog', route: '/dialog' },
 	{ component: null, disabled: true, name: 'Filter', route: '/filter' },
 	{ component: null, disabled: true, name: 'Form', route: '/forms' },
@@ -23,7 +25,7 @@ const PAGES = [
 	{ component: null, disabled: true, name: 'Platforms', route: '/platforms' },
 	{ component: null, disabled: true, name: 'Popup', route: '/popup' },
 	{ component: null, disabled: true, name: 'Menu', route: '/menu' },
-	{ component: null, disabled: true, name: 'Radio', route: '/radio' },
+	{ component: RadioDemo, disabled: false, name: 'Radio', route: '/radio' },
 	{ component: null, disabled: true, name: 'Section', route: '/section' },
 	{ component: null, disabled: true, name: 'Select', route: '/select' },
 	{ component: null, disabled: true, name: 'Slider', route: '/slider' },

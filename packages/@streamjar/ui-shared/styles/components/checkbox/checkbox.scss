@@ -7,6 +7,7 @@ $checkbox-height: 24px;
 	padding: 5px;
 	cursor: pointer;
 	user-select: none;
+	outline: none;
 
 	&.disabled {
 		opacity: 0.5;

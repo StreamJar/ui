@@ -4,7 +4,7 @@
 
 
 @mixin jar-checkbox($colour, $theme, $check: #FFF) {
-	.jar-checkbox[colour=#{$colour}] {
+	.jar-checkbox[data-colour=#{$colour}] {
 		.jar-checkbox-inner.jar-checkbox-inner-checked {
 			background: $theme;
 		}

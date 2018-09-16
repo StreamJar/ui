@@ -6,6 +6,7 @@ $radio-size: 20px;
 	margin: 5px 0;
 	padding: 5px;
 	cursor: pointer;
+	outline: none;
 
 	&-focused {
 		.jar-radio__circle {
