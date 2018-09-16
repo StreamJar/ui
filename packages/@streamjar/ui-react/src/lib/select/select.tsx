@@ -5,6 +5,7 @@ import { Checkbox } from '../checkbox';
 import { Icon } from '../icon';
 import { Menu } from '../menu';
 import { Ripple } from '../ripple';
+import { InputLabel } from '../form/input-label';
 
 export interface ISelectProps {
 	title?: string;
@@ -126,6 +127,8 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 
 		return (
 			<React.Fragment>
+				{title && <InputLabel>{title}</InputLabel>}
+
 				<div className={classes} onClick={this.toggleDropdown}>
 					<div className={wrapper}>
 						{this.getValidItems()}
