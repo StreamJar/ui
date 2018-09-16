@@ -8,6 +8,7 @@ import { IconDemo } from './components/icon-demo';
 
 import './styles.scss';
 import { Button } from '../../src/lib';
+import { TooltipDemo } from './components/tooltip-demo';
 
 const PAGES = [
 	{ component: AvatarDemo, disabled: false, name: 'Avatars', route: '/' },
@@ -28,7 +29,7 @@ const PAGES = [
 	{ component: null, disabled: true, name: 'Spinner', route: '/spinner' },
 	{ component: null, disabled: true, name: 'Tabs', route: '/tabs' },
 	{ component: null, disabled: true, name: 'Toasts', route: '/toasts' },
-	{ component: null, disabled: true, name: 'Tooltip', route: '/tooltip' },
+	{ component: TooltipDemo, disabled: false, name: 'Tooltip', route: '/tooltip' },
 ];
 
 ReactDOM.render(
