@@ -1,4 +1,4 @@
-<div class="jar-checkbox" [class.disabled]="isDisabled$ | async" fxLayout="row" #label [class.jar-checkbox-focused]="focused" [class.jar-checkbox-labeled]="label$ | async" [attr.colour]="theme$ | async">
+<div class="jar-checkbox" [class.disabled]="isDisabled$ | async" fxLayout="row" #label [class.jar-checkbox-focused]="focused" [class.jar-checkbox-labeled]="label$ | async" [attr.data-colour]="theme$ | async">
 	<div class="jar-checkbox-inner" [class.jar-checkbox-inner-checked]="checked$ | async">
 		<div *ngIf="!(noRipple$ | async) && !(isDisabled$ | async)" class="jar-checkbox-ripple" md-ripple [mdRippleTrigger]="label" [mdRippleCentered]="true"></div>
 
