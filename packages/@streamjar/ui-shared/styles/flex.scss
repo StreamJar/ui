@@ -1,0 +1,60 @@
+@function str-replace($string, $search, $replace: '') {
+	$index: str-index($string, $search);
+
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+
+	@return $string;
+}
+
+$directions: (column, column-reverse, row, row-reverse);
+$alignments: ( center: center, end: flex-end, start: flex-start );
+$layouts: (5, 10, 15, 20, 25, 30, 33, 35, 40, 45, 50, 55, 60, 65, 66, 70, 75, 80, 85, 90, 95, 100);
+$breakpoints: (
+	xs: ( query: (min-width: 0px) and (max-width: 599px) ),
+	sm: ( query: (min-width: 600px) and (max-width: 959px) ),
+	md: ( query: (min-width: 960px) and (max-width: 1279px) ),
+);
+
+@mixin jar-flex-layout($bp: '') {
+	@each $direction in $directions {
+		.layout-#{$direction}#{$bp} {
+			display: flex;
+			flex-direction: $direction;
+
+			&.layout-wrap {
+				flex-wrap: wrap;
+			}
+		}
+	}
+
+	@each $direction in map-keys($alignments) {
+		@each $altDirection in map-keys($alignments) {
+			.layout-align-#{$direction}-#{$altDirection}#{$bp} {
+				place-content: map-get($alignments, $altDirection) map-get($alignments, $direction);
+				align-items: map-get($alignments, $altDirection);
+			}
+		}
+	}
+
+	@each $layout in $layouts {
+		.flex-#{$layout}#{$bp} {
+			flex: 1 1 100%;
+			box-sizing: border-box;
+			max-width: percentage($layout / 100);
+		}
+	}
+}
+
+@include jar-flex-layout();
+
+@each $bp in map-keys($breakpoints) {
+	@media #{map-get(map-get($breakpoints, $bp), query)} {
+		@include jar-flex-layout(-$bp);
+	}
+}
+
+.flex {
+	flex: 1 1 0%;
+}

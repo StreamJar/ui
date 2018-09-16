@@ -1,0 +1,67 @@
+@import '~@streamjar/ui-shared/styles/utils/helpers';
+
+$theme: (
+	gradient: linear-gradient(to bottom right, #693194 0%, #633884 100%),
+	primary: #643688,
+);
+
+table {
+    width: 100%;
+    color: #FFF;
+    text-align: left;
+}
+
+.table {
+    &__name {
+        width: 100px;
+    }
+
+    &__intype {
+        width: 300px;
+    }
+
+    tbody &__default, tbody &__intype {
+        font-family: monospace;
+    }
+
+    &__default {
+        width: 300px;
+    }
+
+    &__desc {
+
+    }
+
+    thead th {
+        line-height: 35px;
+        padding: 0 7.5px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 12px;
+		margin-bottom: 10px;
+
+		@include jar-gradient-bg($theme);
+    }
+
+    tbody td {
+        padding: 7.5px;
+        font-size: 14px;
+    }
+
+    tbody tr:hover td {
+        background: rgba(#FFF, .1);
+    }
+
+    .tag-input {
+        margin: 0;
+	}
+
+    .tag-output {
+		background: orangered;
+        margin: 0;
+    }
+    .tag-method {
+		background: blue;
+        margin: 0;
+    }
+}
