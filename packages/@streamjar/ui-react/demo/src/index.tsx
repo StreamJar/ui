@@ -5,10 +5,11 @@ import * as Router from 'react-router-component';
 import { AvatarDemo } from './components/avatar-demo';
 import { ButtonDemo } from './components/button-demo';
 import { IconDemo } from './components/icon-demo';
+import { ToastsDemo } from './components/toasts-demo';
+import { TooltipDemo } from './components/tooltip-demo';
 
 import './styles.scss';
 import { Button } from '../../src/lib';
-import { TooltipDemo } from './components/tooltip-demo';
 
 const PAGES = [
 	{ component: AvatarDemo, disabled: false, name: 'Avatars', route: '/' },
@@ -28,7 +29,7 @@ const PAGES = [
 	{ component: null, disabled: true, name: 'Slider', route: '/slider' },
 	{ component: null, disabled: true, name: 'Spinner', route: '/spinner' },
 	{ component: null, disabled: true, name: 'Tabs', route: '/tabs' },
-	{ component: null, disabled: true, name: 'Toasts', route: '/toasts' },
+	{ component: ToastsDemo, disabled: false, name: 'Toasts', route: '/toasts' },
 	{ component: TooltipDemo, disabled: false, name: 'Tooltip', route: '/tooltip' },
 ];
 
