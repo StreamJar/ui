@@ -1,5 +1,5 @@
 <demo [config]="config">
-    <div style="padding: 5px;">
+    <div>
         <button jarBtn> Normal </button>
         <button jarBtn colour="accent" > Accent </button>
         <button jarBtn colour="success"> Success </button>
@@ -7,16 +7,16 @@
         <button jarBtn [disabled]="true"> Disabled </button>
         <button jarBtn disabled (click)="alert()"> Disabled </button>
     </div>
-
-    <div style="padding: 5px;">
-        <a href="https://streamjar.tv" jarBtn> Normal </a>
+<!--
+    <div>
+		<a href="https://streamjar.tv" jarBtn> Normal </a>
         <a href="https://streamjar.tv" jarBtn colour="accent" > Accent </a>
         <a href="https://streamjar.tv" jarBtn colour="success"> Success </a>
         <a href="https://streamjar.tv" jarBtn colour="danger"> DANGER </a>
         <a href="https://streamjar.tv" jarBtn [disabled]="true"> Disabled </a>
-    </div>
+    </div> -->
 
-    <div style="padding: 5px;">
+    <div>
         <button jarBtn raised> Normal </button>
         <button jarBtn raised colour="accent"> Accent </button>
         <button jarBtn raised colour="success"> Success </button>
@@ -24,7 +24,7 @@
         <button jarBtn raised [disabled]="true"> Disabled </button>
     </div>
 
-    <div style="padding: 5px;">
+    <div>
         <button jarBtn raised icon="star"> Hello </button>
         <button jarBtn raised icon="star"> </button>
         <button jarBtn raised icon-right icon="star"> Hello </button>
@@ -34,7 +34,7 @@
         <button jarBtn raised round [disabled]="true" icon="warning" colour="danger"></button>
     </div>
 
-    <div style="padding: 5px;">
+    <div>
         <button jarBtn raised colour="platform-mixer" > Mixer </button>
         <button jarBtn raised colour="platform-twitch"> Twitch </button>
         <button jarBtn raised colour="platform-smashcast"> Smashcast </button>

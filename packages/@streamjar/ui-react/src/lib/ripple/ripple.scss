@@ -1,0 +1,22 @@
+@import '~@material/ripple/mdc-ripple';
+
+.jar-ripple {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+
+	@include mdc-ripple-surface;
+
+	&-bound {
+		@include mdc-ripple-radius-bounded;
+	}
+
+	&-unbound {
+		@include mdc-ripple-radius-unbounded;
+	}
+
+	@include mdc-states-base-color(white);
+}

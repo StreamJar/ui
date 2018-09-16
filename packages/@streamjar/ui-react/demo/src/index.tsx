@@ -3,18 +3,21 @@ import * as ReactDOM from 'react-dom';
 import * as Router from 'react-router-component';
 
 import { AvatarDemo } from './components/avatar-demo';
+import { ButtonDemo } from './components/button-demo';
+import { IconDemo } from './components/icon-demo';
 
 import './styles.scss';
+import { Button } from '../../src/lib';
 
 const PAGES = [
 	{ component: AvatarDemo, disabled: false, name: 'Avatars', route: '/' },
-	{ component: null, disabled: true, name: 'Button', route: '/button' },
+	{ component: ButtonDemo, disabled: false, name: 'Button', route: '/button' },
 	{ component: null, disabled: true, name: 'Card', route: '/card' },
 	{ component: null, disabled: true, name: 'Checkbox', route: '/checkbox' },
 	{ component: null, disabled: true, name: 'Dialog', route: '/dialog' },
 	{ component: null, disabled: true, name: 'Filter', route: '/filter' },
 	{ component: null, disabled: true, name: 'Form', route: '/forms' },
-	{ component: null, disabled: true, name: 'Icons', route: '/icons' },
+	{ component: IconDemo, disabled: false, name: 'Icons', route: '/icons' },
 	{ component: null, disabled: true, name: 'Platforms', route: '/platforms' },
 	{ component: null, disabled: true, name: 'Popup', route: '/popup' },
 	{ component: null, disabled: true, name: 'Menu', route: '/menu' },
@@ -37,7 +40,7 @@ ReactDOM.render(
 
 			<Router.Link href="/avatar"></Router.Link>
 
-			{PAGES.map(page => <Router.Link key={page.route} href={page.route}>{page.name}</Router.Link>)}
+			{PAGES.map(page => <Router.Link key={page.route} href={page.route}><Button disabled={page.disabled}>{page.name}</Button></Router.Link>)}
 		</aside>
 
 		<div className="content layout-row layout-align-center-start">
