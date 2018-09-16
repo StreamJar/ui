@@ -9,6 +9,7 @@ import { IconDemo } from './components/icon-demo';
 import { MenuDemo } from './components/menu-demo';
 import { RadioDemo } from './components/radio-demo';
 import { SelectDemo } from './components/select-demo';
+import { TabsDemo } from './components/tabs-demo';
 import { ToastsDemo } from './components/toasts-demo';
 import { TooltipDemo } from './components/tooltip-demo';
 
@@ -32,7 +33,7 @@ const PAGES = [
 	{ component: SelectDemo, disabled: false, name: 'Select', route: '/select' },
 	{ component: null, disabled: true, name: 'Slider', route: '/slider' },
 	{ component: null, disabled: true, name: 'Spinner', route: '/spinner' },
-	{ component: null, disabled: true, name: 'Tabs', route: '/tabs' },
+	{ component: TabsDemo, disabled: false, name: 'Tabs', route: '/tabs' },
 	{ component: ToastsDemo, disabled: false, name: 'Toasts', route: '/toasts' },
 	{ component: TooltipDemo, disabled: false, name: 'Tooltip', route: '/tooltip' },
 ];
