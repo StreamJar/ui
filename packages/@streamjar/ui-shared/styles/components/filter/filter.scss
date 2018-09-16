@@ -6,28 +6,25 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding-left: 10px;
+	height: calc(100% - 20px);
 	padding-right: 10px;
 	padding-bottom: 10px;
-
-	height: calc(100% - 20px);
 
 	.jar-filter-section__header {
 		margin-bottom: 10px;
 	}
 }
 
-.jar-filter {
-	.jar-filter__settings {
-		position: fixed;
-		min-width: 200px;
-		border: 1px solid rgba(255, 255, 255, .26);
-		border-radius: 3px;
+.jar-filter__settings {
+	position: fixed;
+	min-width: 200px;
+	border: 1px solid rgba(255, 255, 255, .26);
+	border-radius: 3px;
 
-		jar-filter-section:last-child .jar-filter-section {
-			border-right: 0px;
-		}
-		jar-filter-section:first-child .jar-filter-section {
-			border-left: 0px;
-		}
+	jar-filter-section:last-child .jar-filter-section, .jar-filter-section-container:last-child .jar-filter-section {
+		border-right: 0px;
+	}
+	jar-filter-section:first-child .jar-filter-section, .jar-filter-section-container:first-child .jar-filter-section {
+		border-left: 0px;
 	}
 }
