@@ -17,8 +17,6 @@ export interface ICheckboxState {
 	focus: boolean;
 }
 
-import './checkbox.scss';
-
 export class Checkbox extends React.PureComponent<ICheckboxProps, ICheckboxState> {
 	public static defaultProps: Partial<ICheckboxProps> = {
 		colour: 'primary',

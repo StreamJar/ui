@@ -2,7 +2,6 @@ import * as classnames from 'classnames';
 import * as React from 'react';
 
 import { Ripple } from '../ripple';
-import './radio.scss';
 
 export interface IRadioGroupProps {
 	name: string;

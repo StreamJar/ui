@@ -2,8 +2,6 @@ import { MDCRipple } from '@material/ripple';
 import * as classnames from 'classnames';
 import * as React from 'react';
 
-import './ripple.scss';
-
 export interface IRippleProps {
 	unbounded?: boolean;
 	listenTo?(): React.RefObject<HTMLDivElement>;
