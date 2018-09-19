@@ -78,7 +78,7 @@ export class Tabs extends React.PureComponent<ITabsProps, ITabsState> {
 				top: target.offsetHeight - 4,
 				width: target.clientWidth,
 			},
-			value: this.props.value,
+			value: val,
 		});
 	}
 
