@@ -34,6 +34,14 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 		this.state = { anchor: null, value: this.getValueNormalised() };
 	}
 
+	public componentWillUpdate(props: ISelectProps): void {
+		if (this.props.value !== props.value) {
+			this.setState({
+				value: this.getValueNormalised(),
+			});
+		}
+	}
+
 	public getValueNormalised(): string[] {
 		if (this.props.value === undefined) {
 			return [];
@@ -48,7 +56,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 		return arr;
 	}
 
-	public toggleDropdown(el?: React.SyntheticEvent<HTMLDivElement>): void {
+	public toggleDropdown = (el?: React.SyntheticEvent<HTMLDivElement>): void => {
 		if (this.state.anchor) {
 			this.setState({
 				anchor: null,
@@ -62,7 +70,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 		}
 	}
 
-	public onClick(value: string): void {
+	public onClick = (value: string): void => {
 		this.setState(state => {
 			let newState = [value];
 
@@ -81,7 +89,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 	}
 
 	public render(): JSX.Element {
-		const { children, multiple, title } = this.props;
+		const { children, multiple } = this.props;
 		const { anchor, value } = this.state;
 
 		const classes = classnames({
@@ -92,13 +100,19 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 
 		this.values = new Map();
 
-		const childs = React.Children.map(children, (child: any) => {
-			this.values.set(child.props.value, child.props.name);
+		const childs = React.Children.map(children, child => {
+			const item = child as React.ReactElement<ISelectItemProps & { children: string }> | null;
 
-			return React.cloneElement(child, {
-				...child.props,
+			if (!item) {
+				return item;
+			}
+
+			this.values.set(item.props.value, item.props.name);
+
+			return React.cloneElement(item, {
+				...item.props,
 				multiple,
-				onClick: () => { this.onClick(child.props.value); },
+				onClick: () => { this.onClick(item.props.value as any); },
 				values: value,
 			});
 		});
