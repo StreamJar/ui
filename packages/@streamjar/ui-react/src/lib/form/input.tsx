@@ -42,10 +42,6 @@ export class Input extends React.PureComponent<IInputProps, IInputState> {
 	constructor(props: IInputProps) {
 		super(props);
 
-		this.blur = this.blur.bind(this);
-		this.focus = this.focus.bind(this);
-		this.getInput = this.getInput.bind(this);
-
 		this.state = { value: this.props.value || '', focus: false };
 	}
 
@@ -55,19 +51,19 @@ export class Input extends React.PureComponent<IInputProps, IInputState> {
 		}
 	}
 
-	public focus(): void {
+	public focus = (): void => {
 		this.setState({
 			focus: true,
 		});
 	}
 
-	public blur(): void {
+	public blur = (): void => {
 		this.setState({
 			focus: false,
 		});
 	}
 
-	public change(form: IFormContext, event: React.SyntheticEvent<HTMLInputElement>): void {
+	public change(form: IFormContext, event: React.ChangeEvent<HTMLInputElement>): void {
 		this.setState({
 			value: event.currentTarget.value,
 		});
@@ -80,7 +76,7 @@ export class Input extends React.PureComponent<IInputProps, IInputState> {
 		return <FormContext.Consumer children={this.getInput} />;
 	}
 
-	private getInput(state: IFormContext) {
+	private getInput = (state: IFormContext) => {
 		const {
 			title,
 			name,

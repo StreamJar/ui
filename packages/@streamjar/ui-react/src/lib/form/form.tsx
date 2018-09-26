@@ -44,18 +44,13 @@ export class Form extends React.PureComponent<IFormProps, IFormState> {
 	constructor(props: IFormProps) {
 		super(props);
 
-		this.setValue = this.setValue.bind(this);
-		this.submit = this.submit.bind(this);
-		this.hasErrored = this.hasErrored.bind(this);
-		this.getMessage = this.getMessage.bind(this);
-
 		this.state = {
 			inputs: {},
 			valid: true,
 		};
 	}
 
-	public setValue(key: string, value: string): void {
+	public setValue = (key: string, value: string): void => {
 		if (this.state.inputs.hasOwnProperty(key)) {
 			if (this.state.inputs[key].value !== value) {
 				this.state.inputs[key].dirty = true;
@@ -82,7 +77,7 @@ export class Form extends React.PureComponent<IFormProps, IFormState> {
 			});
 	}
 
-	public submit(event: React.SyntheticEvent<HTMLFormElement>): void {
+	public submit = (event: React.FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
 		event.stopPropagation();
 
@@ -99,7 +94,7 @@ export class Form extends React.PureComponent<IFormProps, IFormState> {
 		}
 	}
 
-	public getMessage(key: string): string {
+	public getMessage = (key: string): string => {
 		if (this.state.inputs.hasOwnProperty(key) && this.state.inputs[key].error !== null) {
 			return this.state.inputs[key].error!.message;
 		}
@@ -107,7 +102,7 @@ export class Form extends React.PureComponent<IFormProps, IFormState> {
 		return '';
 	}
 
-	public hasErrored(key: string): boolean {
+	public hasErrored = (key: string): boolean => {
 		return this.state.inputs.hasOwnProperty(key) && !!this.state.inputs[key].error && !!this.state.inputs[key].dirty;
 	}
 

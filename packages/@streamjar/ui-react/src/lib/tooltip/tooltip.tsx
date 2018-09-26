@@ -29,18 +29,14 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 		super(props);
 
 		this.state = { anchor: null, hide: false };
-
-		this.mouseLeave = this.mouseLeave.bind(this);
-		this.mouseOver = this.mouseOver.bind(this);
-		this.getTooltip = this.getTooltip.bind(this);
 	}
 
 	public componentDidMount(): void {
 		this.getTarget();
 	}
 
-	public componentWillReceiveProps(prev: any, next: any): void {
-		if (prev.children !== next.children) {
+	public componentDidUpdate(prev: any): void {
+		if (this.props.children !== prev.children) {
 			this.getTarget();
 		}
 	}
@@ -65,27 +61,6 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 
 		el.removeEventListener('mouseover', this.mouseOver);
 		el.removeEventListener('mouseleave', this.mouseLeave);
-	}
-
-	public mouseOver(): void {
-		if (this.childRef) {
-			this.setState({
-				anchor: this.childRef,
-				hide: false,
-			});
-		}
-	}
-
-	public mouseLeave(): void {
-		this.setState({
-			hide: true,
-		});
-
-		setTimeout(() => {
-			this.setState({
-				anchor: null,
-			});
-		},         100);
 	}
 
 	public render(): JSX.Element {
@@ -114,9 +89,30 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 		);
 	}
 
-	private getTooltip(state: string): JSX.Element {
+	private getTooltip = (state: string): JSX.Element => {
 		const { message } = this.props;
 
 		return <div className="jar-tooltip" style={{ ...DEFAULT, ...CLASSES[state]}}> {message} </div>;
+	}
+
+	private mouseOver = (): void => {
+		if (this.childRef) {
+			this.setState({
+				anchor: this.childRef,
+				hide: false,
+			});
+		}
+	}
+
+	private mouseLeave = (): void => {
+		this.setState({
+			hide: true,
+		});
+
+		setTimeout(() => {
+			this.setState({
+				anchor: null,
+			});
+		},         100);
 	}
 }

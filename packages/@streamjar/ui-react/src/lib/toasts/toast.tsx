@@ -52,11 +52,6 @@ export class Toast extends React.PureComponent<IToastProps, IToastState> {
 			isRemovingSoon: true,
 			toasts: [],
 		};
-
-		this.iconLostFocus = this.iconLostFocus.bind(this);
-		this.iconFocus = this.iconFocus.bind(this);
-		this.clearToast = this.clearToast.bind(this);
-		this.getToast = this.getToast.bind(this);
 	}
 
 	public componentDidMount(): void {
@@ -71,7 +66,7 @@ export class Toast extends React.PureComponent<IToastProps, IToastState> {
 		});
 	}
 
-	public showToast(toast: IToast): void {
+	public showToast = (toast: IToast): void => {
 		this.timeout = setTimeout(() => {
 			this.clearToast();
 		},                        toast.duration);
@@ -79,7 +74,7 @@ export class Toast extends React.PureComponent<IToastProps, IToastState> {
 		this.setState({ current: toast, isRemovingSoon: false  });
 	}
 
-	public clearToast(): void {
+	public clearToast = (): void => {
 		clearTimeout(this.timeout);
 
 		this.setState({ isRemovingSoon: true });
@@ -99,11 +94,11 @@ export class Toast extends React.PureComponent<IToastProps, IToastState> {
 		},         ANIMATION);
 	}
 
-	public iconFocus(): void {
+	public iconFocus = (): void => {
 		this.setState({ focused: true });
 	}
 
-	public iconLostFocus(): void {
+	public iconLostFocus = (): void => {
 		this.setState({ focused: false });
 	}
 
@@ -117,7 +112,7 @@ export class Toast extends React.PureComponent<IToastProps, IToastState> {
 		);
 	}
 
-	private getToast(state: string): JSX.Element {
+	private getToast = (state: string): JSX.Element => {
 		const { current } = this.state;
 
 		const icon: string = this.state.focused || !current ? 'delete' : ICONS[current.type];

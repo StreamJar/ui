@@ -17,7 +17,7 @@ export interface IRadioGroupState {
 export interface IRadioContext {
 	name: string;
 	value: string | number;
-	onChange(value: React.SyntheticEvent<HTMLInputElement>): void;
+	onChange(value: React.ChangeEvent<HTMLInputElement>): void;
 }
 
 // tslint:disable-next-line
@@ -32,12 +32,10 @@ export class RadioGroup extends React.PureComponent<IRadioGroupProps, IRadioGrou
 	constructor(props: IRadioGroupProps) {
 		super(props);
 
-		this.onChange = this.onChange.bind(this);
-
 		this.state = { value: this.props.value };
 	}
 
-	public onChange(e: React.SyntheticEvent<HTMLInputElement>) {
+	public onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({
 			value: e.currentTarget.value,
 		});
@@ -73,32 +71,26 @@ export class Radio extends React.PureComponent<IRadioProps, { focus: boolean }> 
 		this.radio = React.createRef();
 		this.el = React.createRef();
 
-		this.onClick = this.onClick.bind(this);
-		this.handleBlur = this.handleBlur.bind(this);
-		this.handleFocus = this.handleFocus.bind(this);
-		this.createRadio = this.createRadio.bind(this);
-		this.getElement = this.getElement.bind(this);
-
 		this.state = { focus: false };
 	}
 
-	public onClick(): void {
+	public onClick = (): void => {
 		this.radio.current!.click();
 	}
 
-	public handleFocus(): void {
+	public handleFocus = (): void => {
 		this.setState({
 			focus: true,
 		});
 	}
 
-	public handleBlur(): void {
+	public handleBlur = (): void => {
 		this.setState({
 			focus: false,
 		});
 	}
 
-	public getElement(): React.RefObject<HTMLDivElement> {
+	public getElement = (): React.RefObject<HTMLDivElement> => {
 		return this.el;
 	}
 
@@ -106,7 +98,7 @@ export class Radio extends React.PureComponent<IRadioProps, { focus: boolean }> 
 		return <Context.Consumer children={this.createRadio} />;
 	}
 
-	private createRadio(state: IRadioContext): JSX.Element {
+	private createRadio = (state: IRadioContext): JSX.Element => {
 		const { value } = this.props;
 		const { focus } = this.state;
 
