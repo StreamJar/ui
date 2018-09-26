@@ -39,12 +39,10 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 
 		this.state = { hide: false };
 		this.menuRef = React.createRef();
-		this.close = this.close.bind(this);
-		this.renderMenu = this.renderMenu.bind(this);
 	}
 
-	public componentWillReceiveProps(prev: IMenuProps, next: IMenuProps): void {
-		if (prev.anchor !== next.anchor) {
+	public componentWillUpdate(prev: IMenuProps): void {
+		if (prev.anchor !== this.props.anchor) {
 			this.setState({
 				hide: false,
 			});
@@ -61,7 +59,7 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 		document.removeEventListener('click', this.close, { capture: true });
 	}
 
-	public close(event: MouseEvent): void {
+	public close = (event: MouseEvent): void => {
 		if (!this.menuRef.current || !this.menuRef.current.contains(event.target as any)) {
 			event.stopPropagation();
 			event.preventDefault();
@@ -77,7 +75,7 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 		},         100);
 	}
 
-	public renderMenu(state: string): JSX.Element {
+	public renderMenu = (state: string): JSX.Element => {
 		const { children } = this.props;
 
 		return (
