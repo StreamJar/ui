@@ -9,7 +9,7 @@ export interface IDialogS {
 
 export class Dialog extends BaseDialog<{}, IDialogS> {
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 
 		this.setupDialog({

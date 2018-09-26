@@ -88,7 +88,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 	}
 
 	public render(): JSX.Element {
-		const { children, multiple } = this.props;
+		const { children, multiple, title } = this.props;
 		const { anchor, value } = this.state;
 
 		const classes = classnames({
