@@ -41,15 +41,13 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 		this.menuRef = React.createRef();
 	}
 
-	public componentWillUpdate(prev: IMenuProps): void {
+	public componentDidUpdate(prev: IMenuProps): void {
 		if (prev.anchor !== this.props.anchor) {
 			this.setState({
 				hide: false,
 			});
 		}
-	}
 
-	public componentDidUpdate(): void {
 		if (this.props.anchor) {
 			document.addEventListener('click', this.close, { capture: true });
 		}

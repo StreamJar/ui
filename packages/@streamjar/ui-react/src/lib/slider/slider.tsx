@@ -27,7 +27,7 @@ export class Slider extends React.PureComponent<ISliderProps, ISliderState> {
 		this.state = { value: this.props.value || 0};
 	}
 
-	public onChange = (e: React.SyntheticEvent<HTMLInputElement>): void => {
+	public onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		this.setState({
 			value: +e.currentTarget.value,
 		});

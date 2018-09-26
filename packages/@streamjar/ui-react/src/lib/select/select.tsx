@@ -32,7 +32,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 		this.state = { anchor: null, value: this.getValueNormalised() };
 	}
 
-	public componentWillUpdate(props: ISelectProps): void {
+	public componentDidUpdate(props: ISelectProps): void {
 		if (this.props.value !== props.value) {
 			this.setState({
 				value: this.getValueNormalised(),
@@ -54,7 +54,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 		return arr;
 	}
 
-	public toggleDropdown = (el?: React.SyntheticEvent<HTMLDivElement>): void => {
+	public toggleDropdown = (el?: React.MouseEvent<HTMLDivElement>): void => {
 		if (this.state.anchor) {
 			this.setState({
 				anchor: null,
