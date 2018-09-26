@@ -112,7 +112,7 @@ export class Toast extends React.PureComponent<IToastProps, IToastState> {
 		);
 	}
 
-	private getToast(state: string): JSX.Element {
+	private getToast = (state: string): JSX.Element => {
 		const { current } = this.state;
 
 		const icon: string = this.state.focused || !current ? 'delete' : ICONS[current.type];
