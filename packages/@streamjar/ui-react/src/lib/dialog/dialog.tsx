@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { Transition } from 'react-transition-group';
 
 import { Portal } from '../outlet/portal';
 import { Button } from '../button';
-import { Transition } from 'react-transition-group';
 import { Spinner } from '../spinner';
 
 // tslint:disable max-classes-per-file
@@ -111,9 +111,6 @@ export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDi
 
 	constructor(props: IDialogProps & P) {
 		super(props);
-
-		this.closeBackdrop = this.closeBackdrop.bind(this);
-		this.getDialog = this.getDialog.bind(this);
 	}
 
 	public abstract initialState(): S;
@@ -186,21 +183,13 @@ export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDi
 		},         ANIMATION);
 	}
 
-	public closeBackdrop(event: React.SyntheticEvent<HTMLDivElement>): void {
+	public closeBackdrop = (event: React.MouseEvent<HTMLDivElement>): void => {
 		if (event.currentTarget === event.target) {
 			this.close(null);
 		}
 	}
 
-	public render(): JSX.Element {
-		const { jarOpen } = this.state;
-
-		return (
-			<Transition in={jarOpen} appear={true} unmountOnExit={true} timeout={{ exit: 200, enter: 0}} children={this.getDialog} />
-		);
-	}
-
-	public getDialog(state: string): JSX.Element {
+	public getDialog = (state: string): JSX.Element => {
 		if (this.props.show === false) {
 			return <React.Fragment />;
 		}
@@ -212,11 +201,13 @@ export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDi
 		// we could use a provider here.. ooooor we could mutate some childs children. sorry.
 		if (dialog.type === React.Fragment) {
 			const childProps = React.Children.map(dialog.props.children, (child: any) => {
-				if (child.type !== DialogHeader) {
+				const item = child as React.ReactElement<IDialogHeaderProps & { children: string }> | null;
+
+				if (child.type !== DialogHeader || !item) {
 					return child;
 				}
 
-				return React.cloneElement(child, { ...child.props, onClose: () => { this.close(null); } });
+				return React.cloneElement(item, { ...item.props, onClose: () => { this.close(null); } });
 			});
 
 			dialog = React.cloneElement(dialog, { children: childProps });
@@ -242,6 +233,14 @@ export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDi
 					</div>
 				</div>
 			</Portal>
+		);
+	}
+
+	public render(): JSX.Element {
+		const { jarOpen } = this.state;
+
+		return (
+			<Transition in={jarOpen} appear={true} unmountOnExit={true} timeout={{ exit: 200, enter: 0}} children={this.getDialog} />
 		);
 	}
 
