@@ -9,6 +9,15 @@ $checkbox-height: 24px;
 	user-select: none;
 	outline: none;
 
+	.rippleContainer {
+		margin-left: -75%;
+		margin-top: -75%;
+		width: 250%;
+		height: 250%;
+		display: block;
+		position: absolute;
+	}
+
 	&.disabled {
 		opacity: 0.5;
 		cursor: not-allowed;
