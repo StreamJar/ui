@@ -1,6 +1,6 @@
 {
 	"name": "@streamjar/ui-react",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"author": "Luke Thompson <luke@streamjar.tv>",
 	"license": "MIT",
 	"main": "dist/index.js",
