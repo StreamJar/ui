@@ -17,7 +17,7 @@ export interface IRadioGroupState {
 export interface IRadioContext {
 	name: string;
 	value: string | number;
-	onChange(value: React.SyntheticEvent<HTMLInputElement>): void;
+	onChange(value: React.ChangeEvent<HTMLInputElement>): void;
 }
 
 // tslint:disable-next-line
@@ -35,7 +35,7 @@ export class RadioGroup extends React.PureComponent<IRadioGroupProps, IRadioGrou
 		this.state = { value: this.props.value };
 	}
 
-	public onChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+	public onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({
 			value: e.currentTarget.value,
 		});

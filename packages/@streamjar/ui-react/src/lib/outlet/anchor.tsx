@@ -35,7 +35,6 @@ export class Anchor extends React.PureComponent<IAnchorProps, IAnchorState> {
 		super(props);
 
 		this.anchorRef = React.createRef();
-		this.setPosition = this.setPosition.bind(this);
 
 		this.state = {
 			location: {
@@ -93,7 +92,7 @@ export class Anchor extends React.PureComponent<IAnchorProps, IAnchorState> {
 		return { width: itemWidth, height: itemHeight, left, top };
 	}
 
-	public setPosition(): void  {
+	public setPosition = (): void => {
 		const { width, left, top, height } = this.calculateWidth();
 
 		if (this.anchorRef.current) {

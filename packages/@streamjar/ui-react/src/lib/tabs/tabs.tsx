@@ -45,9 +45,7 @@ export class Tabs extends React.PureComponent<ITabsProps, ITabsState> {
 	}
 
 	public componentDidMount(): void {
-		setTimeout(() => {
-			this.selectTab(this.props.value);
-		});
+		this.selectTab(this.props.value);
 	}
 
 	public componentDidUpdate(prev: ITabsProps): void {

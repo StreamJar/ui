@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { Avatar, IAvatar } from '../avatar';
+import { Avatar, AvatarValue } from '../avatar';
 
 export interface ICardContentProps {
-	icon: IAvatar;
+	icon?: AvatarValue;
 }
 
 export class Card extends React.PureComponent {

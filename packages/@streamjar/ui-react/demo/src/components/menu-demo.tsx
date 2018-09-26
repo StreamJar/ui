@@ -40,7 +40,7 @@ export class Menu extends React.Component<{}, { anchor: HTMLButtonElement | null
 		this.state = { anchor: null };
 	}
 
-	public onChange(e?: React.SyntheticEvent<HTMLButtonElement>): void {
+	public onChange(e?: React.ChangeEvent<HTMLButtonElement>): void {
 		if (e) {
 			const target = e.currentTarget;
 
@@ -79,7 +79,7 @@ export class Menu extends React.Component<{}, { anchor: HTMLButtonElement | null
 		this.state = { anchor: null };
 	}
 
-	public onChange(e?: React.SyntheticEvent<HTMLButtonElement>): void {
+	public onChange(e?: React.ChangeEvent<HTMLButtonElement>): void {
 		if (e) {
 			const target = e.currentTarget;
 

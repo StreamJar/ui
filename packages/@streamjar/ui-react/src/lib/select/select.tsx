@@ -29,8 +29,6 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 	constructor(props: ISelectProps) {
 		super(props);
 
-		this.toggleDropdown = this.toggleDropdown.bind(this);
-
 		this.state = { anchor: null, value: this.getValueNormalised() };
 	}
 
