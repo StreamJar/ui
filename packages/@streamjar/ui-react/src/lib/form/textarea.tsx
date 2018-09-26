@@ -34,8 +34,6 @@ export class Textarea extends React.PureComponent<ITextareaProps, ITextareaState
 	constructor(props: ITextareaProps) {
 		super(props);
 
-		this.getTextarea = this.getTextarea.bind(this);
-
 		this.state = { value: this.props.value || '' };
 	}
 
@@ -45,7 +43,7 @@ export class Textarea extends React.PureComponent<ITextareaProps, ITextareaState
 		}
 	}
 
-	public onChange(ctx: IFormContext, event: React.SyntheticEvent<HTMLTextAreaElement>): void {
+	public onChange(ctx: IFormContext, event: React.ChangeEvent<HTMLTextAreaElement>): void {
 		this.setState({
 			value: event.currentTarget.value,
 		});
@@ -55,13 +53,10 @@ export class Textarea extends React.PureComponent<ITextareaProps, ITextareaState
 	}
 
 	public render() {
-		const { title, rows, resize, placeholder, maxLength, readonly, name } = this.props;
-		const { value } = this.state;
-
 		return <FormContext.Consumer children={this.getTextarea} />;
 	}
 
-	public getTextarea(state: IFormContext): JSX.Element {
+	public getTextarea = (state: IFormContext): JSX.Element => {
 		const { title, rows, resize, placeholder, maxLength, readonly, name } = this.props;
 		const { value } = this.state;
 
@@ -96,6 +91,5 @@ export class Textarea extends React.PureComponent<ITextareaProps, ITextareaState
 				</div>
 			</React.Fragment>
 		);
-
 	}
 }
