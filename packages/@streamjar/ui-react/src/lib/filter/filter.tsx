@@ -13,14 +13,15 @@ export class Filter extends React.PureComponent<{}, IFilterState> {
 	constructor(props: {}) {
 		super(props);
 
-		this.toggleFilter = this.toggleFilter.bind(this);
-		this.close = this.close.bind(this);
-
 		this.ref = React.createRef();
 		this.state = { anchor: null };
 	}
 
-	public toggleFilter(anchor: React.SyntheticEvent<HTMLButtonElement>): void {
+	public componentWillUnmount(): void {
+		document.removeEventListener('click', this.close, { capture: true });
+	}
+
+	public toggleFilter = (anchor: React.MouseEvent<HTMLButtonElement>): void => {
 		const target = anchor.currentTarget;
 
 		if (this.state.anchor) {
@@ -36,7 +37,7 @@ export class Filter extends React.PureComponent<{}, IFilterState> {
 		});
 	}
 
-	public close(event?: MouseEvent): void {
+	public close = (event?: MouseEvent): void => {
 		if (event) {
 			if (this.ref.current!.contains(event.target as any)) {
 				return;
@@ -48,10 +49,6 @@ export class Filter extends React.PureComponent<{}, IFilterState> {
 
 		document.removeEventListener('click', this.close, { capture: true });
 		this.setState({ anchor: null });
-	}
-
-	public componentWillUnmount(): void {
-		document.removeEventListener('click', this.close, { capture: true });
 	}
 
 	public render(): JSX.Element {
