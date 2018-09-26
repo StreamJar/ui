@@ -12,7 +12,7 @@ export interface IButtonProps {
 	colour?: string;
 	iconRight?: boolean;
 	type: string;
-	onClick(event: React.SyntheticEvent<HTMLButtonElement>): void;
+	onClick(event: React.MouseEvent<HTMLButtonElement>): void;
 }
 
 export class Button extends React.PureComponent<IButtonProps> {

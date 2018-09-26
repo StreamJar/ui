@@ -54,7 +54,7 @@ export class ButtonDemo extends React.Component {
 			{
 				name: 'onClick',
 				default: '() => { /* */ }',
-				type: '(event?: React.SyntheticEvent<HTMLButtonElement>) => void',
+				type: '(event?: React.ChangeEvent<HTMLButtonElement>) => void',
 				description: 'The click event for the button',
 			},
 		],
