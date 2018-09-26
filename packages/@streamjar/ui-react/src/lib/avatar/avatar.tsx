@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Md5 } from 'ts-md5';
 
-export type IAvatar = string | { email?: string; avatar?: string };
+export type AvatarValue = string | { email?: string; avatar?: string };
 
 export interface IAvatarParams {
 	size?: number;
-	data: IAvatar;
+	data: AvatarValue;
 }
 
 export const getGravatar = (email: string): string => {
