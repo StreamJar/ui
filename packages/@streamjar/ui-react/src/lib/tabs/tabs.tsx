@@ -8,7 +8,7 @@ export interface ITabProps {
 }
 
 export class Tab extends React.PureComponent<ITabProps> {
-	public render() {
+	public render(): JSX.Element {
 		const { children } = this.props;
 
 		return <div className="jar-tab" onClick={this.props.onChange}> <Ripple /> {children} </div>;
@@ -45,20 +45,13 @@ export class Tabs extends React.PureComponent<ITabsProps, ITabsState> {
 	}
 
 	public componentDidMount(): void {
-		if (this.props.value) {
-			this.setState({
-				value: this.props.value,
-			});
-
-		}
-
 		setTimeout(() => {
 			this.selectTab(this.props.value);
 		});
 	}
 
-	public componentWillReceiveProps(prev: ITabsProps, next: ITabsProps): void {
-		if (prev.value !== next.value) {
+	public componentDidUpdate(prev: ITabsProps): void {
+		if (prev.value !== this.props.value) {
 			this.setState({
 				value: this.props.value,
 			});
@@ -96,15 +89,17 @@ export class Tabs extends React.PureComponent<ITabsProps, ITabsState> {
 		this.valueIndex = new Map();
 
 		const children = React.Children.map(this.props.children, (child: any, index: number) => {
-			if (child.type !== Tab) {
-				return child;
+			const item = child as React.ReactElement<ITabsProps & { children: string }> | null;
+
+			if (child.type !== Tab || !item) {
+				return item;
 			}
 
-			this.valueIndex.set(child.props.value, index);
+			this.valueIndex.set(item.props.value, index);
 
-			return React.cloneElement(child, {
-				...child.props,
-				onChange: () => { this.selectTab(child.props.value); },
+			return React.cloneElement(item, {
+				...item.props,
+				onChange: () => { this.selectTab(item.props.value); },
 			});
 		});
 
