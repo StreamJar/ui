@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Checkbox } from '../../../src/lib';
 import { Demo, IDemoConfig } from '../demo/demo';
 
-export class CheckboxDemo extends React.Component {
+export class CheckboxDemo extends React.Component<{}, { a: boolean }> {
 	public config: IDemoConfig = {
 		name: 'Checkbox',
 		components: [{
@@ -55,14 +55,26 @@ export class CheckboxDemo extends React.Component {
 		`,
 	};
 
+	constructor(props: { a: boolean }) {
+		super(props);
+
+		this.state = { a: true };
+
+		setTimeout(() => {
+			this.setState({
+				a: false,
+			});
+		},         5000);
+	}
+
 	public render() {
 		return (
 			<Demo config={this.config}>
-				<Checkbox> Checkbox </Checkbox>
+				<Checkbox value={this.state.a}> Checkbox </Checkbox>
 				<Checkbox colour="success"> Success </Checkbox>
 				<Checkbox colour="danger"> Dangerous </Checkbox>
 				<Checkbox noRipple={true} label="a"> No Ripple </Checkbox>
-				<Checkbox disabled={true} value={true} label="a"> Disabled </Checkbox>
+				<Checkbox disabled={true} label="a"> Disabled </Checkbox>
 			</Demo>
 		);
 	}

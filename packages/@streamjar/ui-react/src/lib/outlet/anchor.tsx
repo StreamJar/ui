@@ -15,9 +15,10 @@ export interface IAnchorProps {
 
 export interface IAnchorState {
 	location: {
-		width: number;
-		top: number;
-		left: number;
+		width?: number;
+		height?: number;
+		top?: number;
+		left?: number;
 	};
 }
 
@@ -34,7 +35,11 @@ export class Anchor extends React.PureComponent<IAnchorProps, IAnchorState> {
 		super(props);
 
 		this.anchorRef = React.createRef();
-		this.setPosition = this.setPosition.bind(this);
+
+		this.state = {
+			location: {
+			},
+		};
 	}
 
 	public componentDidMount(): void {
@@ -87,21 +92,27 @@ export class Anchor extends React.PureComponent<IAnchorProps, IAnchorState> {
 		return { width: itemWidth, height: itemHeight, left, top };
 	}
 
-	public setPosition(): void  {
+	public setPosition = (): void => {
 		const { width, left, top, height } = this.calculateWidth();
 
 		if (this.anchorRef.current) {
-			this.anchorRef.current.style.left = `${Math.floor(left)}px`;
-			this.anchorRef.current.style.top = `${Math.floor(top)}px`;
-			this.anchorRef.current.style.width = `${width}px`;
-			this.anchorRef.current.style.height = `${height}px`;
+			this.setState({
+				location: {
+					left: Math.floor(left),
+					top: Math.floor(top),
+					width,
+					height,
+				},
+			});
 		}
 	}
 
 	public render(): JSX.Element {
+		const { location } = this.state;
+
 		return (
 			<Portal>
-				<div className="anchor" style={{ position: 'fixed' }} ref={this.anchorRef}>
+				<div className="anchor" style={{ position: 'fixed', ...location }} ref={this.anchorRef}>
 					{this.props.children}
 				</div>
 

@@ -31,12 +31,6 @@ export class Checkbox extends React.PureComponent<ICheckboxProps, ICheckboxState
 	constructor(props: ICheckboxProps) {
 		super(props);
 
-		this.handleChange = this.handleChange.bind(this);
-		this.handleClick = this.handleClick.bind(this);
-		this.handleFocus = this.handleFocus.bind(this);
-		this.handleBlur = this.handleBlur.bind(this);
-		this.getElement = this.getElement.bind(this);
-
 		this.input = React.createRef();
 		this.el = React.createRef();
 
@@ -46,7 +40,13 @@ export class Checkbox extends React.PureComponent<ICheckboxProps, ICheckboxState
 		};
 	}
 
-	public handleChange(): void  {
+	public componentDidUpdate(prev: ICheckboxProps) {
+		if (this.props.value !== prev.value) {
+			this.setState({ value: !!this.props.value });
+		}
+	}
+
+	public handleChange = (): void => {
 		(this.props.onChange!)(!this.state.value);
 
 		this.setState((state) => ({
@@ -54,31 +54,25 @@ export class Checkbox extends React.PureComponent<ICheckboxProps, ICheckboxState
 		}));
 	}
 
-	public componentDidUpdate(prev: ICheckboxProps) {
-		if (this.props.value !== prev.value) {
-			this.setState({ value: !!this.props.value });
-		}
-	}
-
-	public handleClick(): void {
+	public handleClick = (): void => {
 		if (!this.props.disabled) {
 			this.input.current!.click();
 		}
 	}
 
-	public handleFocus(): void {
+	public handleFocus = (): void => {
 		this.setState({
 			focus: true,
 		});
 	}
 
-	public handleBlur(): void {
+	public handleBlur = (): void => {
 		this.setState({
 			focus: false,
 		});
 	}
 
-	public getElement(): React.RefObject<HTMLDivElement> {
+	public getElement = (): React.RefObject<HTMLDivElement> => {
 		return this.el;
 	}
 
@@ -126,7 +120,6 @@ export class Checkbox extends React.PureComponent<ICheckboxProps, ICheckboxState
 					<svg version="1.1" className="jar-checkmark" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" xmlSpace="preserve">
 						<path className="jar-checkmark-path" fill="none" stroke="white" d="M4.1,12.7 9,17.6 20.3,6.3" />
 					</svg>
-
 				</div>
 
 				<label className="jar-checkbox-label">

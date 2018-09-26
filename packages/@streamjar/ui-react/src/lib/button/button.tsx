@@ -13,7 +13,7 @@ export interface IButtonProps {
 	colour?: string;
 	iconRight?: boolean;
 	type: string;
-	onClick(event: React.SyntheticEvent<HTMLButtonElement>): void;
+	onClick(event: React.MouseEvent<HTMLButtonElement>): void;
 }
 
 export class Button extends React.PureComponent<IButtonProps> {
@@ -24,20 +24,18 @@ export class Button extends React.PureComponent<IButtonProps> {
 		onClick: () => { /* */ },
 		raised: false,
 		round: false,
-		type: 'submit',
+		type: 'button',
 	};
 
 	constructor(props: IButtonProps) {
 		super(props);
-
-		this.getButton = this.getButton.bind(this);
 	}
 
 	public render(): JSX.Element {
 		return <FormContext.Consumer children={this.getButton} />;
 	}
 
-	public getButton(state: IFormContext): JSX.Element {
+	public getButton = (state: IFormContext): JSX.Element => {
 		const { colour, children, disabled, iconRight, icon, onClick, raised, round, type } = this.props;
 
 		let isDisabled = disabled;

@@ -22,13 +22,10 @@ export class Platforms extends React.PureComponent<IPlatformsProps, IPlatformsSt
 	constructor(props: IPlatformsProps) {
 		super(props);
 
-		this.disableAll = this.disableAll.bind(this);
-		this.disableAllFalse = this.disableAllFalse.bind(this);
-
 		this.state = this.handleProps();
 	}
 
-	public componentWillUpdate(prev: IPlatformsProps): void  {
+	public componentDidUpdate(prev: IPlatformsProps): void  {
 		if (prev.value !== this.props.value) {
 			this.setState(this.handleProps());
 		}
@@ -48,7 +45,7 @@ export class Platforms extends React.PureComponent<IPlatformsProps, IPlatformsSt
 		});
 	}
 
-	public disableAll(value: boolean = false): void {
+	public disableAll = (value: boolean = false): void => {
 		if (!value) {
 			this.setState({ all: false });
 		} else {
@@ -61,7 +58,7 @@ export class Platforms extends React.PureComponent<IPlatformsProps, IPlatformsSt
 		}
 	}
 
-	public disableAllFalse(): void {
+	public disableAllFalse = (): void => {
 		this.disableAll(false);
 	}
 
