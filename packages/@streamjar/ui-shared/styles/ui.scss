@@ -2,3 +2,19 @@
 @import './flex';
 @import './elements/element-styles';
 @import './components/component-styles';
+
+@include jar-flex-layout();
+
+@each $bp in map-keys($breakpoints) {
+	@media #{map-get($breakpoints, $bp)} {
+		.hide-#{$bp} {
+			display: none;
+		}
+
+		@include jar-flex-layout("-#{$bp}");
+	}
+}
+
+.flex {
+	flex: 1 1 0%;
+}
