@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+
 import { IDemoConfig } from '../../demo/demo.component';
 import { ColourService } from '../../../../src/lib/colour/index';
 
