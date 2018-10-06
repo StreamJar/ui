@@ -1,15 +1,11 @@
 import { Component, Inject} from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+
 import { DialogRefService, DIALOG_ATTRS } from '../dialog';
 
 import * as chromaJ from 'chroma-js';
 
 const chroma = chromaJ;
-export interface IColour {
-	colour: string;
-	pack: 'picker' | 'theme' | 'preset';
-}
-
 const HSV_MULT = 360;
 
 @Component({
@@ -32,16 +28,13 @@ export class ColourDialogComponent {
 		private sanitizer: DomSanitizer,
 		@Inject(DIALOG_ATTRS) public data: any,
 	) {
-		if (data.colour && data.colour.colour) {
-			this.parseColour(data.colour.colour);
+		if (data.colour) {
+			this.parseColour(data.colour);
 		}
 	}
 
 	public close(save: boolean = false): void {
-		this.dialog.close(save ? {
-			colour: this.rgbaColour,
-			pack: 'picker',
-		} : this.data.colour);
+		this.dialog.close(save ? this.rgbaColour : this.data.colour);
 	}
 
 	public setHue(val): void {
@@ -89,7 +82,6 @@ export class ColourDialogComponent {
 			this.s = hsv[1];
 			this.v = hsv[2];
 		} catch (e) {
-			// Invalid Colour.
 		}
 
 		this.sync();

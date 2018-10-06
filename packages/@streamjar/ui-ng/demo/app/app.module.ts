@@ -1,6 +1,7 @@
 import { SectionDemoComponent } from './components/section/section.demo';
 import { PopupDemoComponent } from './components/popup/popup.demo';
 import { PlatformsDemoComponent } from './components/platforms/platforms.demo';
+import { ColourModule } from './../../src/lib/colour/index';
 import { SectionModule } from './../../src/lib/section/index';
 import { PopupModule } from './../../src/lib/popup/index';
 import { CardModule } from './../../src/lib/card/index';
@@ -34,6 +35,7 @@ import { ToastsDemoComponent } from './components/toasts/toasts.demo';
 import { TooltipDemoComponent } from './components/tooltip/tooltip.demo';
 import { DemoComponent } from './demo/demo.component';
 import { DemoTableComponent } from './table/table.component';
+import { ColourDemoComponent } from './components/colour/colour.demo';
 
 @NgModule({
 	bootstrap: [AppComponent],
@@ -68,6 +70,7 @@ import { DemoTableComponent } from './table/table.component';
 		PlatformsDemoComponent,
 		PopupDemoComponent,
 		SectionDemoComponent,
+		ColourDemoComponent,
 	],
 	imports: [
 		BrowserAnimationsModule,
@@ -98,6 +101,7 @@ import { DemoTableComponent } from './table/table.component';
 		DialogModule.forRoot(),
 		ToastModule.forRoot(),
 		InputModule.forRoot(),
+		ColourModule.forRoot(),
 		RouterModule.forRoot([
 			{
 				path: '',
@@ -119,6 +123,10 @@ import { DemoTableComponent } from './table/table.component';
 			{
 				path: 'checkbox',
 				component: CheckboxDemoComponent,
+			},
+			{
+				path: 'colour',
+				component: ColourDemoComponent,
 			},
 			{
 				path: 'dialog',
