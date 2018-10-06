@@ -1,6 +1,6 @@
 {
 	"name": "@streamjar/ui-ng",
-	"version": "2.0.4",
+	"version": "2.0.5",
 	"author": "Luke Thompson <luke@streamjar.tv>",
 	"license": "MIT",
 	"main": "dist/index.js",
