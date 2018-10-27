@@ -56,7 +56,6 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 			document.addEventListener('click', this.close, { capture: true });
 		}
 
-		console.log('got update', this.props.anchor);
 		if (this.props.anchor === null && this.state.anchor !== null) {
 			this.close(null);
 		}
@@ -100,7 +99,6 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 	public render(): JSX.Element | null {
 		const { width, anchorWidth } = this.props;
 		const { anchor, hide } = this.state;
-		console.log('has anchor', anchor);
 
 		if (anchor) {
 			return (
