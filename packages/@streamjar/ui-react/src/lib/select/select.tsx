@@ -6,12 +6,17 @@ import { Icon } from '../icon';
 import { Menu } from '../menu';
 import { Ripple } from '../ripple';
 import { InputLabel } from '../form/input-label';
+import { Input } from '../form';
+import { Spinner } from '../spinner';
 
 export interface ISelectProps {
 	title?: string;
 	multiple?: boolean;
+	search?: boolean;
+	searching?: boolean;
 	value: string | string[];
 	onChange(val: string | string[]): void;
+	onSearch(val: string): void;
 }
 
 export interface ISelectState {
@@ -22,10 +27,13 @@ export interface ISelectState {
 export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 	public static defaultProps: Partial<ISelectProps> = {
 		onChange: () => { /* */ },
+		onSearch: () => { /* */ },
 	};
 
 	public ref: React.RefObject<HTMLElement> = React.createRef();
+	public inputRef: React.RefObject<HTMLDivElement> = React.createRef();
 	public values = new Map();
+	public to?: number;
 
 	constructor(props: ISelectProps) {
 		super(props);
@@ -55,17 +63,23 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 		return arr;
 	}
 
-	public toggleDropdown = (el?: React.MouseEvent<HTMLDivElement>): void => {
+	public toggleDropdown = (el?: React.MouseEvent | null): void => {
+		if (this.state.anchor) {
+			this.onClose();
+		} else {
+			if (el && el.currentTarget) {
+				this.setState({
+					anchor: el.currentTarget as HTMLDivElement,
+				});
+			}
+		}
+	}
+
+	public onClose = () => {
 		if (this.state.anchor) {
 			this.setState({
 				anchor: null,
 			});
-		} else {
-			if (el) {
-				this.setState({
-					anchor: el.currentTarget,
-				});
-			}
 		}
 	}
 
@@ -83,12 +97,20 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 
 			this.valueChanged(newState);
 
-			return { value: newState };
+			return { value: newState, anchor: null };
 		});
 	}
 
+	public search = (text: string) => {
+		clearTimeout(this.to!);
+
+		this.to = setTimeout(() => {
+			this.props.onSearch(text);
+		},                   200) as any;
+	}
+
 	public render(): JSX.Element {
-		const { children, multiple, title } = this.props;
+		const { children, multiple, title, search, searching } = this.props;
 		const { anchor, value } = this.state;
 
 		const classes = classnames({
@@ -96,8 +118,6 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 			'jar-select-multiple': multiple,
 			'layout-row': true,
 		});
-
-		this.values = new Map();
 
 		const childs = React.Children.map(children, child => {
 			const item = child as React.ReactElement<ISelectItemProps & { children: string }> | null;
@@ -139,8 +159,14 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 					</div>
 				</div>
 
-				<Menu anchor={anchor} anchorWidth={true} onClose={this.toggleDropdown}>
-					{childs}
+				<Menu anchor={anchor} anchorWidth={true} supportContentClick={true} onClose={this.onClose}>
+					<div ref={this.inputRef}>
+						{search && <Input name="search" placeholder="Search" onChange={this.search} />}
+						{search && searching && <Spinner size={25} />}
+						{search && !searching && !childs.length && <p style={{textAlign: 'center', fontWeight: 'bold', paddingTop: 5}}> No results </p>}
+					</div>
+
+					{!searching && childs}
 				</Menu>
 			</React.Fragment>
 		);

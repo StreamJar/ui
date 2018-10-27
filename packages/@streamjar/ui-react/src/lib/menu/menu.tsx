@@ -7,11 +7,13 @@ export interface IMenuProps {
 	width?: number;
 	anchor: HTMLElement | null;
 	anchorWidth?: boolean;
-	onClose(): void;
+	supportContentClick?: boolean;
+	onClose(event: MouseEvent | null): void;
 }
 
 export interface IMenuState {
 	hide: boolean;
+	anchor: HTMLElement | null;
 }
 
 const DEFAULT: React.CSSProperties = {
@@ -29,6 +31,7 @@ const CLASSES: { [key: string]: React.CSSProperties} = {
 export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 	public static defaultProps: Partial<IMenuProps> = {
 		onClose: () => { /* */ },
+		supportContentClick: false,
 		width: 165,
 	};
 
@@ -37,13 +40,14 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 	constructor(props: IMenuProps) {
 		super(props);
 
-		this.state = { hide: false };
+		this.state = { hide: false, anchor: null };
 		this.menuRef = React.createRef();
 	}
 
 	public componentDidUpdate(prev: IMenuProps): void {
-		if (prev.anchor !== this.props.anchor) {
+		if (this.props.anchor && prev.anchor !== this.props.anchor) {
 			this.setState({
+				anchor: this.props.anchor,
 				hide: false,
 			});
 		}
@@ -51,14 +55,23 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 		if (this.props.anchor) {
 			document.addEventListener('click', this.close, { capture: true });
 		}
+
+		console.log('got update', this.props.anchor);
+		if (this.props.anchor === null && this.state.anchor !== null) {
+			this.close(null);
+		}
 	}
 
 	public componentWillUnmount(): void {
 		document.removeEventListener('click', this.close, { capture: true });
 	}
 
-	public close = (event: MouseEvent): void => {
-		if (!this.menuRef.current || !this.menuRef.current.contains(event.target as any)) {
+	public close = (event: MouseEvent | null): void => {
+		if (event && this.menuRef.current && this.menuRef.current!.contains(event.target as any) && this.props.supportContentClick) {
+			return;
+		}
+
+		if (event && (!this.menuRef.current || !this.menuRef.current.contains(event.target as any))) {
 			event.stopPropagation();
 			event.preventDefault();
 		}
@@ -68,8 +81,9 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 		});
 
 		setTimeout(() => {
+			this.setState({ anchor: null });
+			this.props.onClose(event);
 			this.componentWillUnmount();
-			this.props.onClose();
 		},         100);
 	}
 
@@ -84,8 +98,9 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 	}
 
 	public render(): JSX.Element | null {
-		const { anchor, width, anchorWidth } = this.props;
-		const { hide } = this.state;
+		const { width, anchorWidth } = this.props;
+		const { anchor, hide } = this.state;
+		console.log('has anchor', anchor);
 
 		if (anchor) {
 			return (
