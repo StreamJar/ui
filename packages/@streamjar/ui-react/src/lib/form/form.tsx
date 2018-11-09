@@ -64,7 +64,10 @@ export class Form extends React.PureComponent<IFormProps, IFormState> {
 			};
 		}
 
-		this.props.validation.validateAt(key, { [key]: value })
+		const obj: { [key: string]: string } = {};
+		Object.keys(this.state.inputs).forEach((k: string) => { obj[k] = this.state.inputs[k].value; });
+
+		this.props.validation.validateAt(key, obj)
 			.then(() => null)
 			.catch((e: ValidationError) => e)
 			.then((e: ValidationError | null) => {
