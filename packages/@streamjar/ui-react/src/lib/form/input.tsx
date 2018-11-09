@@ -58,11 +58,7 @@ export class Input extends React.PureComponent<IInputProps, IInputState> {
 			});
 
 			if (this.ctx) {
-				if (this.props.value || this.props.value === '') {
-					this.ctx.setValue(this.props.name, this.props.value!);
-				} else {
-					this.ctx.clearValue(this.props.name);
-				}
+				this.ctx.setValue(this.props.name, this.props.value!, true);
 			}
 		}
 	}

@@ -8,7 +8,7 @@ export interface IFormContext {
 		value: string;
 		dirty: boolean;
 	}; };
-	setValue(key: string, value: string): void;
+	setValue(key: string, value: string, dirty?: boolean): void;
 	clearValue(key: string): void;
 	hasErrored(key: string): boolean;
 	getMessage(key: string): string;
@@ -70,10 +70,10 @@ export class Form extends React.PureComponent<IFormProps, IFormState> {
 		});
 	}
 
-	public setValue = (key: string, value: string): void => {
+	public setValue = (key: string, value: string, resetDirty = false): void => {
 		if (this.state.inputs.hasOwnProperty(key)) {
 			if (this.state.inputs[key].value !== value) {
-				this.state.inputs[key].dirty = true;
+				this.state.inputs[key].dirty = resetDirty ? false : true;
 				this.state.inputs[key].value = value;
 			}
 		} else {
