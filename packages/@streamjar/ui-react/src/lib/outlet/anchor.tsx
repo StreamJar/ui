@@ -112,7 +112,7 @@ export class Anchor extends React.PureComponent<IAnchorProps, IAnchorState> {
 
 		return (
 			<Portal>
-				<div className="anchor" style={{ position: 'fixed', ...location }} ref={this.anchorRef}>
+				<div className="anchor" style={{ position: 'fixed', ...location, zIndex: 100000 }} ref={this.anchorRef}>
 					{this.props.children}
 				</div>
 
