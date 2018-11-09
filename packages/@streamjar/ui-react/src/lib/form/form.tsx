@@ -9,6 +9,7 @@ export interface IFormContext {
 		dirty: boolean;
 	}; };
 	setValue(key: string, value: string): void;
+	clearValue(key: string): void;
 	hasErrored(key: string): boolean;
 	getMessage(key: string): string;
 }
@@ -19,6 +20,7 @@ export const FormContext = React.createContext<IFormContext>({
 	hasErrored: () => false,
 	inputs: {},
 	setValue: () => { /* */ },
+	clearValue: () => { /* */ },
 	valid: true,
 });
 
@@ -48,6 +50,24 @@ export class Form extends React.PureComponent<IFormProps, IFormState> {
 			inputs: {},
 			valid: true,
 		};
+	}
+
+	public clearValue = (key: string): void => {
+		if (this.state.inputs[key]) {
+			this.state.inputs[key].dirty = false;
+			this.state.inputs[key].value = '';
+		} else {
+			this.state.inputs[key] = {
+				dirty: false,
+				error: null,
+				value: '',
+			};
+		}
+
+		this.setState({
+			inputs: { ...this.state.inputs },
+			valid: !Object.keys(this.state.inputs).map(i => this.state.inputs[i].error).filter(i => !!i).length,
+		});
 	}
 
 	public setValue = (key: string, value: string): void => {
@@ -116,6 +136,7 @@ export class Form extends React.PureComponent<IFormProps, IFormState> {
 		const value: IFormContext = {
 			getMessage: this.getMessage,
 			hasErrored: this.hasErrored,
+			clearValue: this.clearValue,
 			inputs,
 			setValue: this.setValue,
 			valid,
