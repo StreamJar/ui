@@ -73,7 +73,7 @@ module.exports = {
 	devServer: {
 		contentBase: path.join(__dirname, "/../node_modules/@streamjar/ui-shared"),
 		watchContentBase: true,
-		port: 8080,
+		port: 8089,
 		historyApiFallback: true
 	}
 };

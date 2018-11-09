@@ -4,7 +4,10 @@ import * as yup from 'yup';
 import { Button, Form, Input, Textarea } from '../../../src/lib';
 import { Demo, IDemoConfig } from '../demo/demo';
 
-export class FormDemo extends React.PureComponent {
+export interface IFormDemoState {
+	value: string;
+}
+export class FormDemo extends React.PureComponent<{}, IFormDemoState> {
 	public config: IDemoConfig = {
 		name: 'Input / Form',
 		components: [{
@@ -160,14 +163,25 @@ public render(): JSX.Element {
 		`,
 	};
 
+	constructor(props: {}) {
+		super(props);
+
+		this.state = { value: 'hi'};
+	}
+
 	public validation = yup.object().shape({
 		name: yup.string().required().min(1).max(5),
 		age: yup.number().required().max(5),
 		cost: yup.number().required().max(5),
 		multiplier: yup.number().required(),
 		meaning: yup.string().min(10),
+		managed: yup.string(),
 		something: yup.string().min(10),
 	});
+
+	public update = (value: string): void => {
+		this.setState({ value });
+	}
 
 	public render(): JSX.Element {
 		return (
@@ -177,6 +191,8 @@ public render(): JSX.Element {
 					<Input name="age" type="number" title="Age" value="1" />
 					<Input name="cost" type="number" title="cost" value="1" prefix={<span>£</span>}/>
 					<Input name="multiplier" type="number" title="multiplier" value="1" suffix={<span>x</span>}/>
+
+					<Input name="managed" type="string" title="Managed Input" value={this.state.value} onChange={this.update}/>
 
 					<Textarea name="meaning" title="description"></Textarea>
 					<Textarea name="something" rows={5} title="magic"></Textarea>

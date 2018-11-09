@@ -51,6 +51,18 @@ export class Input extends React.PureComponent<IInputProps, IInputState> {
 		}
 	}
 
+	public componentDidUpdate(prevProps: IInputProps) {
+		if (this.props.value && this.props.value !== prevProps.value && this.props.value !== this.state.value) {
+			this.setState({
+				value: this.props.value,
+			});
+
+			if (this.ctx) {
+				this.ctx.setValue(this.props.name, this.props.value);
+			}
+		}
+	}
+
 	public focus = (): void => {
 		this.setState({
 			focus: true,
