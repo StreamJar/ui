@@ -5,7 +5,7 @@
 Installing `@streamjar/ui` is relatively simple.
 
 ### Install package
-> npm install @streamjar/ui --registry=https://npm.sjsrv.uk
+> npm install @streamjar/ui-ng
 
 ### Configure Angular
 Add the following to your assets in angular.json

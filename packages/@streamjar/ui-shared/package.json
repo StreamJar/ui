@@ -3,9 +3,6 @@
 	"version": "2.1.5",
 	"author": "Luke Thompson <luke@streamjar.tv>",
 	"license": "MIT",
-	"publishConfig": {
-		"registry": "https://npm.sjsrv.uk"
-	},
 	"dependencies": {
 		"@material/animation": "^0.39.0",
 		"@material/ripple": "^0.39.3",

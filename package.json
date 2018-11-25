@@ -18,8 +18,5 @@
     "run-sequence": "^2.2.1",
     "del": "^3.0.0",
     "merge-stream": "^1.0.1"
-  },
-  "publishConfig": {
-    "registry": "https://npm.sjsrv.uk"
   }
 }
