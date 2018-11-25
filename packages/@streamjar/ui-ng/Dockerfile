@@ -19,7 +19,6 @@ RUN mkdir ~/.ssh \
 COPY package.json /usr/src/app/package.json
 WORKDIR /usr/src/app
 RUN ls .
-RUN npm config set registry https://npm.sjsrv.uk
 RUN npm install
 COPY . /usr/src/app
 ARG BUILD_NUMBER=internal

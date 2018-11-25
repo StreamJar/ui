@@ -8,5 +8,6 @@
       "verifyAccess": false
     }
   },
-  "version": "2.1.6"
+  "registry": "https://registry.npmjs.org",
+  "version": "2.1.5"
 }
