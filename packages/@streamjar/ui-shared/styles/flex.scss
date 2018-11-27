@@ -32,7 +32,14 @@ $breakpoints: (
 		.flex-#{$layout}#{$bp} {
 			flex: 1 1 100%;
 			box-sizing: border-box;
+		}
+
+		.layout-row > .flex-#{$layout}#{$bp} {
 			max-width: percentage($layout / 100);
+		}
+
+		.layout-column > .flex-#{$layout}#{$bp} {
+			max-height: percentage($layout / 100);
 		}
 	}
 }
