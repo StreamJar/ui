@@ -7,6 +7,7 @@ $breakpoints: (
 	md: "(min-width: 960px)",
 );
 
+
 @mixin jar-flex-layout($bp: '') {
 	@each $direction in $directions {
 		.layout-#{$direction}#{$bp} {
@@ -23,6 +24,7 @@ $breakpoints: (
 		@each $altDirection in map-keys($alignments) {
 			.layout-align-#{$direction}-#{$altDirection}#{$bp} {
 				place-content: map-get($alignments, $altDirection) map-get($alignments, $direction);
+				justify-content: map-get($alignments, $direction);
 				align-items: map-get($alignments, $altDirection);
 			}
 		}
