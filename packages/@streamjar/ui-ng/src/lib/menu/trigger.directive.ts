@@ -36,11 +36,11 @@ export class JarMenuTriggerDirective implements OnDestroy {
 
 	private menuRef: EmbeddedViewRef<any> = null;
 	private context = {
-		hidden$: new BehaviorSubject('0px'),
-		left$: new BehaviorSubject('0px'),
-		top$: new BehaviorSubject('0px'),
-		width$: new BehaviorSubject(0),
-		maxHeight$: new BehaviorSubject(0),
+		left$: new BehaviorSubject<number>(0),
+		top$: new BehaviorSubject<number>(null),
+		bottom$: new BehaviorSubject<number>(null),
+		width$: new BehaviorSubject<number>(0),
+		maxHeight$: new BehaviorSubject<number>(null),
 	};
 
 	constructor(
@@ -112,10 +112,22 @@ export class JarMenuTriggerDirective implements OnDestroy {
 	 */
 	private repositionElement(): void {
 		const elTop = this.elementRef.nativeElement.getBoundingClientRect().top + this.elementRef.nativeElement.offsetHeight;
-		this.context.left$.next(`${this.calcCenterWidth()}px`);
-		this.context.top$.next(`${elTop}px`);
+		const areaAboveElement = this.elementRef.nativeElement.getBoundingClientRect().top;
+		const areaBelowElement = window.innerHeight - elTop;
 
-		this.context.maxHeight$.next(window.innerHeight - elTop - 10);
+		// Prefer the top
+		if (areaAboveElement > areaBelowElement) {
+			this.context.top$.next(null);
+			this.context.bottom$.next(window.innerHeight - areaAboveElement);
+			this.context.maxHeight$.next(areaAboveElement - WINDOW_OFFSET);
+		} else { // Prefer the bottom
+			this.context.top$.next(elTop);
+			this.context.bottom$.next(null);
+
+			this.context.maxHeight$.next(window.innerHeight - elTop - WINDOW_OFFSET);
+		}
+
+		this.context.left$.next(this.calcCenterWidth());
 	}
 
 	/**
