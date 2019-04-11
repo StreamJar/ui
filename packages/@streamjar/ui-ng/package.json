@@ -1,6 +1,6 @@
 {
 	"name": "@streamjar/ui-ng",
-	"version": "2.1.10",
+	"version": "2.1.11",
 	"author": "Luke Thompson <luke@streamjar.tv>",
 	"license": "MIT",
 	"main": "dist/index.js",
@@ -42,7 +42,7 @@
 		"zone.js": "^0.8.26"
 	},
 	"dependencies": {
-		"@streamjar/ui-shared": "^2.1.10"
+		"@streamjar/ui-shared": "^2.1.11"
 	},
 	"peerDependencies": {
 		"chroma-js": "^1.3.7",
