@@ -1,5 +1,5 @@
-<ng-template #templateRef let-top="top$" let-left="left$" let-width="width$">
-	<div [@menu] class="jar-menu" style="position: fixed" [style.width]="(width | async) + 'px'" [style.top]="top | async" [style.left]="left | async" fxLayout="column">
+<ng-template #templateRef let-top="top$" let-left="left$" let-width="width$" let-maxHeight="maxHeight$">
+	<div [@menu] class="jar-menu" style="position: fixed" [style.width.px]="(width | async)" [style.max-height.px]="(maxHeight | async)" [style.top]="top | async" [style.left]="left | async" fxLayout="column">
 		<ng-content></ng-content>
 	</div>
 </ng-template>

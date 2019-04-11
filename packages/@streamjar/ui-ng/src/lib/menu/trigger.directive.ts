@@ -40,6 +40,7 @@ export class JarMenuTriggerDirective implements OnDestroy {
 		left$: new BehaviorSubject('0px'),
 		top$: new BehaviorSubject('0px'),
 		width$: new BehaviorSubject(0),
+		maxHeight$: new BehaviorSubject(0),
 	};
 
 	constructor(
@@ -110,8 +111,11 @@ export class JarMenuTriggerDirective implements OnDestroy {
 	 * Set the top/left positions of the menu based on the click target.
 	 */
 	private repositionElement(): void {
+		const elTop = this.elementRef.nativeElement.getBoundingClientRect().top + this.elementRef.nativeElement.offsetHeight;
 		this.context.left$.next(`${this.calcCenterWidth()}px`);
-		this.context.top$.next(`${this.elementRef.nativeElement.getBoundingClientRect().top + this.elementRef.nativeElement.offsetHeight}px`);
+		this.context.top$.next(`${elTop}px`);
+
+		this.context.maxHeight$.next(window.innerHeight - elTop - 10);
 	}
 
 	/**
