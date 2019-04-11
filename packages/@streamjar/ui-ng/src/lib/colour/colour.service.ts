@@ -10,7 +10,6 @@ export class ColourService {
 	constructor(private dialog: JarDialogService) {}
 
 	public pick(colour?: string): Observable<string> {
-		console.log(colour);
 		return this.dialog.show(ColourDialogComponent, { colour })
 			.pipe(switchMap(out => out.onClose));
 	}

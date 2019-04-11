@@ -25,6 +25,10 @@ export class JarMenuTriggerDirective implements OnDestroy {
 	@Input()
 	public parentWidth = false;
 
+
+	@Input()
+	public shouldDestroyFn: (event: MouseEvent) => boolean = () => true;
+
 	@Input()
 	set toggleStatus(val: boolean) {
 		if (!val && !this.menuRef) {
@@ -62,7 +66,7 @@ export class JarMenuTriggerDirective implements OnDestroy {
 	 * @param event Click Event.
 	 */
 	private handleClick(event): void {
-		if (this.menuRef && !this.elementRef.nativeElement.contains(event.target)) {
+		if (this.menuRef && !this.elementRef.nativeElement.contains(event.target) && this.shouldDestroyFn(event)) {
 			this.menuRef.destroy();
 			this.menuRef = null;
 		}
@@ -145,8 +149,10 @@ export class JarMenuTriggerDirective implements OnDestroy {
 			return;
 		}
 
-		this.menuRef.destroy();
-		this.menuRef = null;
+		if (this.shouldDestroyFn(e)) {
+			this.menuRef.destroy();
+			this.menuRef = null;
+		}
 	}
 
 	/**

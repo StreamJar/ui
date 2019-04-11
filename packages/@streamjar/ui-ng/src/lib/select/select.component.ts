@@ -17,6 +17,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { JarMenuComponent } from '../menu/menu.component';
 import { JarSelectItemComponent } from './selectItem.component';
+import { JarInputComponent } from '../input/input.component';
 
 export const JAR_RADIO_GROUP_CONTROL_VALUE_ACCESSOR: any = {
 	multi: true,
@@ -36,8 +37,15 @@ export enum Mode {
 	templateUrl: './select.component.html',
 })
 export class JarSelectComponent implements ControlValueAccessor, OnDestroy, OnInit {
+	private hasSub = false;
+
 	@Input()
 	public title: string;
+
+	@Input()
+	public set canFilter(val: boolean) {
+		this.canFilter$.next(true);
+	}
 
 	@ContentChildren(forwardRef(() => JarSelectItemComponent))
 	public items: QueryList<JarSelectItemComponent> = null;
@@ -45,7 +53,9 @@ export class JarSelectComponent implements ControlValueAccessor, OnDestroy, OnIn
 	public Mode = Mode;
 	public mode = Mode.Single;
 	private shown = false;
+	public canFilter$ = new BehaviorSubject(false);
 	public status$ = new BehaviorSubject(false);
+	public search$ = new BehaviorSubject('');
 	public value$ = new BehaviorSubject<string[]>([]);
 
 	public onChange = (val?: any) => undefined;
@@ -54,6 +64,9 @@ export class JarSelectComponent implements ControlValueAccessor, OnDestroy, OnIn
 
 	@ViewChild('menu')
 	public menu: JarMenuComponent;
+
+	@ViewChild('filterRef', { read: ElementRef })
+	public filterRef: ElementRef<JarInputComponent>;
 
 	@Input()
 	set multiple(value: boolean) {
@@ -77,6 +90,18 @@ export class JarSelectComponent implements ControlValueAccessor, OnDestroy, OnIn
 
 			this.cd.detectChanges();
 		}));
+
+		window
+	}
+
+	public ngAfterContentChecked(): void {
+		if (!this.hasSub && this.items) {
+			this.hasSub = true;
+
+			this.subscriptions.push(this.items.changes.subscribe(() => {
+				this.filter(this.search$.getValue());
+			}));
+		}
 	}
 
 	public ngOnDestroy(): void {
@@ -88,11 +113,17 @@ export class JarSelectComponent implements ControlValueAccessor, OnDestroy, OnIn
 	public handleClick(event: Event): boolean {
 		event.stopPropagation();
 
-		if (!this.elementRef.nativeElement.contains(event.target)) {
+		const isFilter = this.filterRef && this.filterRef.nativeElement && (<any>this.filterRef.nativeElement).contains(event.target);
+
+		if (!this.elementRef.nativeElement.contains(event.target) && !isFilter) {
 			this.shown = false;
 		}
 
 		return false;
+	}
+
+	public shouldDestroyFn = (event: MouseEvent): boolean => {
+		return !(this.filterRef && this.filterRef.nativeElement && (<any>this.filterRef.nativeElement).contains(event.target));
 	}
 
 	@HostListener('click')
@@ -106,6 +137,12 @@ export class JarSelectComponent implements ControlValueAccessor, OnDestroy, OnIn
 
 	public clean(items: string[]): string[] {
 		return items.filter(item => this.getValue(item) !== '');
+	}
+
+	public filter(term: string): void {
+		this.items.forEach(i => {
+			i.searchTerm = term;
+		});
 	}
 
 	public writeValue(value: any): void {

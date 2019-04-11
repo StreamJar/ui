@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Injector, Input, ChangeDetectorRef, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 
 import { JarSelectComponent, Mode } from './select.component';
 
@@ -13,6 +13,12 @@ export class JarSelectItemComponent implements OnInit, OnDestroy {
 	public Mode = Mode;
 	public name: string;
 	public value: string;
+
+	public visible$ = new BehaviorSubject(true);
+
+	public set searchTerm(value: string) {
+		this.visible$.next(!value || (this.name.toLowerCase().trim().includes(value.toLowerCase().trim())));
+	}
 
 	public subscriptions: Subscription[] = [];
 

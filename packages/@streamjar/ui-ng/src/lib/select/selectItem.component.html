@@ -1,4 +1,4 @@
-<div class="jar-select-item">
+<div class="jar-select-item" *ngIf="visible$ | async">
 	<div md-ripple [mdRippleTrigger]="_getHostElement()"></div>
 
 	<div class="jar-select-item__container" fxLayout="row">

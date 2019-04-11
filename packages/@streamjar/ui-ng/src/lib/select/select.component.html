@@ -1,5 +1,5 @@
 <jar-input-label *ngIf="title">{{title}}</jar-input-label>
-<div class="jar-select" fxLayout="row" [jarMenuTrigger]="menu" [parentWidth]="true" [toggleStatus]="status$ | async" [class.jar-select-multiple]="mode === Mode.Multiple">
+<div class="jar-select" fxLayout="row" [jarMenuTrigger]="menu" [shouldDestroyFn]="shouldDestroyFn" [parentWidth]="true" [toggleStatus]="status$ | async" [class.jar-select-multiple]="mode === Mode.Multiple">
 	<div class="jar-select__items" fxFlex fxLayout="row wrap" fxLayoutAlign="flex-start center" *ngIf="mode === Mode.Multiple">
 		<div class="jar-select__item" *ngFor="let a of (value$ | async)"> {{ getValue(a)}} </div>
 	</div>
@@ -15,5 +15,9 @@
 
 
 <jar-menu #menu>
+	<div #filterRef *ngIf="canFilter$ | async">
+		<jar-input placeholder="Search.." [ngModel]="search$ | async" (ngModelChange)="filter($event)"></jar-input>
+	</div>
+
 	<ng-content></ng-content>
 </jar-menu>
