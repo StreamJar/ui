@@ -1,6 +1,9 @@
 {
   "name": "@streamjar/ui-root",
   "private": true,
+  "scripts": {
+    "prepare": "lerna run build"
+  },
   "devDependencies": {
     "@angular/core": "^6.1.7",
     "@angular/compiler": "^6.1.7",
@@ -18,5 +21,8 @@
     "run-sequence": "^2.2.1",
     "del": "^3.0.0",
     "merge-stream": "^1.0.1"
+  },
+  "dependencies": {
+    "natives": "^1.1.6"
   }
 }
