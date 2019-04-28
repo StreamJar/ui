@@ -9,6 +9,11 @@ const html = `
 </jar-tabs>
 
 <p> Yes is selected: {{ selected }} </p>
+
+<jar-tabs>
+	<jar-tab [value]="true"> Yes </jar-tab>
+	<jar-tab disabled [value]="false"> I am disabled </jar-tab>
+</jar-tabs>
 `;
 
 const ts = `
@@ -50,6 +55,12 @@ export class TabsDemoComponent {
 				inType: 'any',
 				defaultValue: '',
 				description: 'Value to identify the tab by.'
+			}, {
+				name: 'disabled',
+				type: ITableType.INPUT,
+				inType: 'boolean',
+				defaultValue: 'false',
+				description: 'Whether the tab is disabled.'
 			}],
 		},
         name: 'Menu',

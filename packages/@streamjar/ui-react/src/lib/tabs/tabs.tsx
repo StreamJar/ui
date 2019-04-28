@@ -1,17 +1,35 @@
 import * as React from 'react';
-
+import * as classNames from 'classnames';
 import { Ripple } from '../ripple';
 
 export interface ITabProps {
 	value: string | boolean | number;
+	disabled?: boolean;
 	onChange?(): void;
 }
 
 export class Tab extends React.PureComponent<ITabProps> {
-	public render(): JSX.Element {
-		const { children } = this.props;
+	public static defaultProps: Partial<ITabProps> = {
+		disabled: false,
+		onChange: () => { /* */ },
+	};
 
-		return <div className="jar-tab" onClick={this.props.onChange}> <Ripple /> {children} </div>;
+	public render(): JSX.Element {
+		const { children, disabled } = this.props;
+
+		const classes: string = classNames('jar-tab', {
+			'jar-tab--disabled': disabled,
+		});
+
+		return <div className={classes} onClick={this.click}> <Ripple enabled={!disabled} /> {children} </div>;
+	}
+
+	private click = (): void => {
+		if (this.props.disabled) {
+			return;
+		}
+
+		this.props.onChange!();
 	}
 }
 

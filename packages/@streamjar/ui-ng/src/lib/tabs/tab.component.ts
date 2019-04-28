@@ -6,12 +6,18 @@ import { JarTabsComponent } from './tabs.component';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: 'jar-tab',
 	styles: [`:host { display: inline-block; height: 35px; }`],
-	template: '<div class="jar-tab"><ng-content></ng-content> <div md-ripple [mdRippleTrigger]="_getHostElement()"></div></div>',
+	template: '<div class="jar-tab" [class.jar-tab--disabled]="disabled"><ng-content></ng-content> <div md-ripple [mdRippleDisabled]="disabled" [mdRippleTrigger]="_getHostElement()"></div></div>',
 })
 export class JarTabComponent {
+	public disabled: boolean = false;
 
 	@Input()
 	public value = '';
+
+	@Input('disabled')
+	public set _disabled(boolean: boolean) {
+		this.disabled = (boolean !== false);
+	}
 
 	constructor(@Host() private tabs: JarTabsComponent, private _elementRef: ElementRef) {}
 
@@ -33,6 +39,8 @@ export class JarTabComponent {
 
 	@HostListener('click')
 	public click(): void {
-		this.tabs.next(this);
+		if (!this.disabled) {
+			this.tabs.next(this);
+		}
 	}
 }

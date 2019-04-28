@@ -23,4 +23,10 @@
 	color: #FFF;
 	cursor: pointer;
 	user-select: none;
+
+	&--disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+		filter: grayscale(1);
+	}
 }

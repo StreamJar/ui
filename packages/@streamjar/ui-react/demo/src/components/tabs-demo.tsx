@@ -26,12 +26,21 @@ export class TabsDemo extends React.Component {
 				default: '',
 				description: 'The value of the tab',
 				type: 'string | boolean | number',
+			}, {
+				name: 'disabled',
+				default: 'false',
+				description: 'Whether the tab is disabled',
+				type: 'boolean',
 			}],
 		}],
 		examples: `
 <Tabs value={true}>
 	<Tab value={true}>yes</Tab>
 	<Tab value={false}>no</Tab>
+</Tabs>
+<Tabs value={true}>
+	<Tab value={true}>yes</Tab>
+	<Tab disabled={true} value={false}>no</Tab>
 </Tabs>
 		`,
 	};
@@ -42,6 +51,10 @@ export class TabsDemo extends React.Component {
 				<Tabs value={true}>
 					<Tab value={true}>yes</Tab>
 					<Tab value={false}>no</Tab>
+				</Tabs>
+				<Tabs value={true}>
+					<Tab value={true}>yes</Tab>
+					<Tab disabled={true} value={false}>no</Tab>
 				</Tabs>
 			</Demo>
 		);

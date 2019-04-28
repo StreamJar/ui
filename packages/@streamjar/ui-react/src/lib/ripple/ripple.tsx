@@ -4,13 +4,15 @@ import * as React from 'react';
 
 export interface IRippleProps {
 	unbounded?: boolean;
+	enabled?: boolean
 	listenTo?(): React.RefObject<HTMLDivElement>;
 }
 
 export class Ripple extends React.PureComponent<IRippleProps> {
 	public static defaultProps: Partial<IRippleProps> = {
 		unbounded: false,
-};
+		enabled: true,
+	};
 
 	public ref: React.RefObject<HTMLDivElement>;
 	public ripple!: MDCRipple;
@@ -21,7 +23,42 @@ export class Ripple extends React.PureComponent<IRippleProps> {
 		this.ref = React.createRef();
 	}
 
+	public componentWillReceiveProps(newProps: IRippleProps): void {
+		if (this.props.enabled !== newProps.enabled) {
+			this.ripple.destroy();
+
+			if (newProps.enabled) {
+				this.setupRipple();
+			}
+		}
+	}
+
 	public componentDidMount(): void {
+		if (this.ref.current && this.props.enabled) {
+			this.setupRipple();
+		}
+	}
+
+	public componentWillUnmount(): void {
+		if (this.ripple) {
+			this.ripple.destroy();
+		}
+	}
+
+	public render(): JSX.Element {
+		const classes = classnames({
+			'jar-ripple': this.props.enabled,
+			'jar-ripple-bound': !this.props.unbounded,
+			'jar-ripple-unbound': this.props.unbounded,
+			'mdc-ripple-surface': true,
+		});
+
+		return (
+			<div className={classes} ref={this.ref}/>
+		);
+	}
+
+	private setupRipple(): void {
 		if (this.ref.current) {
 			this.ripple = new MDCRipple(this.ref.current);
 
@@ -39,6 +76,10 @@ export class Ripple extends React.PureComponent<IRippleProps> {
 					}
 
 					ref.current.addEventListener('mousedown', () => {
+						if (!this.props.enabled) {
+							return;
+						}
+
 						this.ripple.activate();
 					});
 
@@ -48,24 +89,5 @@ export class Ripple extends React.PureComponent<IRippleProps> {
 				}
 			});
 		}
-	}
-
-	public componentWillUnmount(): void {
-		if (this.ripple) {
-			this.ripple.destroy();
-		}
-	}
-
-	public render(): JSX.Element {
-		const classes = classnames({
-			'jar-ripple': true,
-			'jar-ripple-bound': !this.props.unbounded,
-			'jar-ripple-unbound': this.props.unbounded,
-			'mdc-ripple-surface': true,
-		});
-
-		return (
-			<div className={classes} ref={this.ref}/>
-		);
 	}
 }
