@@ -25,7 +25,9 @@ export class Ripple extends React.PureComponent<IRippleProps> {
 
 	public componentWillReceiveProps(newProps: IRippleProps): void {
 		if (this.props.enabled !== newProps.enabled) {
-			this.ripple.destroy();
+			if (this.ripple) {
+				this.ripple.destroy();
+			}
 
 			if (newProps.enabled) {
 				this.setupRipple();
