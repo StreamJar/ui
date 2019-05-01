@@ -49,6 +49,11 @@ export class SelectDemo extends React.PureComponent<{}, ISelectDemoState> {
 				description: 'The current value of the select',
 				type: 'string | string[]',
 			}, {
+				name: 'searchAsOption',
+				default: 'false',
+				description: 'Allows the search option to be added as an option',
+				type: 'boolean',
+			}, {
 				name: 'onChange',
 				default: '() => { /* */ }',
 				type: '(value: string | string[]) => void',
@@ -58,6 +63,11 @@ export class SelectDemo extends React.PureComponent<{}, ISelectDemoState> {
 				default: '() => { /* */ }',
 				type: '(value: string) => void',
 				description: 'Called when search changes',
+			}, {
+				name: 'onAddItem',
+				default: '() => { /* */ }',
+				type: '(value: string) => void',
+				description: 'Called when an item is added.',
 			}],
 		}, {
 			name: 'SelectItem',
@@ -85,6 +95,11 @@ export class SelectDemo extends React.PureComponent<{}, ISelectDemoState> {
 	<SelectItem name="c" value="c"></SelectItem>
 	<SelectItem name="d" value="d"></SelectItem>
 </Select>
+<Select
+	multiple={true} searching={this.state.searching}
+	onAddItem={this.add} onSearch={this.search} search={true} searchAsOption={true} onChange={console.log}>
+{this.state.values.map(i => <SelectItem key={i} name={i} value={i}></SelectItem>)}
+</Select>
 `,
 	};
 
@@ -111,6 +126,12 @@ export class SelectDemo extends React.PureComponent<{}, ISelectDemoState> {
 		},                   200) as any;
 	}
 
+	public add = (value: string): void => {
+		VALUES.push(value);
+
+		this.search(value);
+	}
+
 	public render() {
 		return (
 			<Demo config={this.config}>
@@ -127,6 +148,12 @@ export class SelectDemo extends React.PureComponent<{}, ISelectDemoState> {
 				</Select>
 
 				<Select multiple={true} search={true} searching={this.state.searching} onSearch={this.search} onChange={console.log}>
+					{this.state.values.map(i => <SelectItem key={i} name={i} value={i}></SelectItem>)}
+				</Select>
+
+				<Select
+					multiple={true} searching={this.state.searching}
+					onAddItem={this.add} onSearch={this.search} search={true} searchAsOption={true} onChange={console.log}>
 					{this.state.values.map(i => <SelectItem key={i} name={i} value={i}></SelectItem>)}
 				</Select>
 			</Demo>

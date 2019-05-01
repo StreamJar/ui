@@ -8,26 +8,31 @@ import { Ripple } from '../ripple';
 import { InputLabel } from '../form/input-label';
 import { Input } from '../form';
 import { Spinner } from '../spinner';
+import { Button } from '../button';
 
 export interface ISelectProps {
 	title?: string;
 	multiple?: boolean;
 	search?: boolean;
 	searching?: boolean;
+	searchAsOption?: boolean;
 	value: string | string[];
 	onChange(val: string | string[]): void;
 	onSearch(val: string): void;
+	onAddItem(val: string): void;
 }
 
 export interface ISelectState {
 	anchor: HTMLDivElement | null;
 	value: string[];
+	search: string;
 }
 
 export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 	public static defaultProps: Partial<ISelectProps> = {
 		onChange: () => { /* */ },
 		onSearch: () => { /* */ },
+		onAddItem: () => { /* */ },
 	};
 
 	public ref: React.RefObject<HTMLElement> = React.createRef();
@@ -38,7 +43,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 	constructor(props: ISelectProps) {
 		super(props);
 
-		this.state = { anchor: null, value: this.getValueNormalised() };
+		this.state = { anchor: null, value: this.getValueNormalised(), search: '' };
 	}
 
 	public componentDidUpdate(props: ISelectProps): void {
@@ -102,6 +107,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 	}
 
 	public search = (text: string) => {
+		this.setState({ search: text });
 		clearTimeout(this.to!);
 
 		this.to = setTimeout(() => {
@@ -110,7 +116,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 	}
 
 	public render(): JSX.Element {
-		const { children, multiple, title, search, searching } = this.props;
+		const { children, multiple, title, search, searching, searchAsOption } = this.props;
 		const { anchor, value } = this.state;
 
 		const classes = classnames({
@@ -161,7 +167,10 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 
 				<Menu anchor={anchor} anchorWidth={true} supportContentClick={true} onClose={this.onClose}>
 					<div ref={this.inputRef}>
-						{search && <Input name="search" placeholder="Search" onChange={this.search} />}
+						<div className="layout-row">
+							{search && <div className="flex"><Input name="search" placeholder="Search" onChange={this.search} /></div>}
+							{search && searchAsOption && <Button icon="add" round={true} onClick={this.addItem} />}
+						</div>
 						{search && searching && <Spinner size={25} />}
 						{search && !searching && !childs.length && <p style={{textAlign: 'center', fontWeight: 'bold', paddingTop: 5}}> No results </p>}
 					</div>
@@ -187,6 +196,14 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 		const validVal = val.filter(i => this.values.has(i));
 
 		this.props.onChange(this.props.multiple ? validVal : validVal[0]);
+	}
+
+	private addItem = (): void => {
+		if (this.state.search.trim() === '') {
+			return;
+		}
+
+		this.props.onAddItem(this.state.search);
 	}
 }
 
