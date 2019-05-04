@@ -1,40 +1,14 @@
-@import './components/button/button.theme';
-@import './components/checkbox/checkbox.theme';
-@import './components/dialog/dialog.theme';
-@import './components/filter/filter.theme';
-@import './components/input/form.theme';
-@import './components/menu/menu.theme';
-@import './components/radio/radio.theme';
-@import './components/select/select.theme';
-@import './components/slider/slider.theme';
-@import './components/tabs/tabs.theme';
-@import './components/toast/toast.theme';
-@import './components/tooltip/tooltip.theme';
-
 @import './elements/tag/tag.theme';
 
 @mixin jar-theme($theme: ()) {
-	@include jar-theme-button($theme);
-	@include jar-theme-checkbox($theme);
-	@include jar-theme-dialog($theme);
-	@include jar-theme-filter($theme);
-	@include jar-theme-form($theme);
-	@include jar-theme-menu($theme);
-	@include jar-theme-radio($theme);
-	@include jar-theme-select($theme);
-	@include jar-theme-slider($theme);
-	@include jar-theme-tabs($theme);
-	@include jar-theme-toast($theme);
-	@include jar-theme-tooltip($theme);
-
 	@include jar-theme-tag($theme);
 
 	.jar-theme-bg--gradient {
-		@include jar-gradient-bg($theme);
+		background: red;
 	}
 
 	.jar-theme-bg--primary {
-		@include jar-primary-bg($theme);
+		background: orange;
 	}
 }
 

@@ -1,13 +1,13 @@
 <ng-container *ngIf="config">
     <h2 class="demo__name"> {{ config.name }} </h2>
 
-    <div class="demo__section">
+    <div class="demo__section j-theme-bg-background-accent">
         <h5> Example </h5>
 
         <ng-content></ng-content>
     </div>
 
-    <div class="demo__section" *ngIf="tabs.length">
+    <div class="demo__section j-theme-bg-background-accent" *ngIf="tabs.length">
         <h5> Documentation </h5>
 
 		<jar-tabs (selected)="docs = $event">
@@ -19,7 +19,7 @@
 		</ng-container>
     </div>
 
-    <div class="demo__section" *ngIf="config.html || config.scss || config.ts">
+    <div class="demo__section j-theme-bg-background-accent" *ngIf="config.html || config.scss || config.ts">
         <h5> Code </h5>
 
         <jar-tabs (selected)="show = $event">

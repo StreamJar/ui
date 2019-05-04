@@ -24,6 +24,4 @@
     }
 }
 
-@mixin jar-theme-button($theme) {
-	@include jar-raised-button('primary', map-get($theme, gradient), #FFF);
-}
+@include jar-raised-button('primary', var(--j-theme-gradient), #FFF);

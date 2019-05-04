@@ -5,3 +5,8 @@
 @mixin jar-primary-bg($theme) {
 	background: map-get($theme, primary);
 }
+
+@mixin j-primary-color($prop, $pack) {
+	transition: 500ms ease-in-out color, 500ms ease-in-out background-color;
+	#{$prop}: var(--j-theme-#{$pack})
+}

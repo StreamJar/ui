@@ -7,7 +7,7 @@
 	.jar-popup__container {
 		width: 100%;
 		max-width: 400px !important;
-		background: $colour-gradient-subtle;
+		@include j-primary-color(background, gradient);
 		padding: 30px;
 
 		&-tagline {

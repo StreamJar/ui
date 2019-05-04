@@ -49,7 +49,7 @@ const PAGES = [
 
 ReactDOM.render(
 	<div className="demo-container layout-row ">
-		<aside className="jar-theme-bg--gradient">
+		<aside className="j-theme-bg-gradient j-dark">
 			<div className="layout-row layout-align-start-center">
 				<img className="us" src="/assets/jar.svg" alt="jar" /> <div><h5> @streamjar/ui-react </h5> </div>
 			</div>

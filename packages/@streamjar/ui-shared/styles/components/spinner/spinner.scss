@@ -1,3 +1,5 @@
+@import '../../utils/variables.scss';
+
 @keyframes jarSpinnerRotate {
 	100% {
 		transform: rotate(360deg);
@@ -22,17 +24,17 @@
 @keyframes jarSpinnerColour {
 	100%,
 	0% {
-		stroke: #FFF;
+		@include j-primary-color(stroke, headings);
 	}
 	40% {
-		stroke: #FFF;
+		@include j-primary-color(stroke, headings);
 	}
 	66% {
-		stroke: #FFF;
+		@include j-primary-color(stroke, headings);
 	}
 	80%,
 	90% {
-		stroke: #FFF;
+		@include j-primary-color(stroke, headings);
 	}
 }
 

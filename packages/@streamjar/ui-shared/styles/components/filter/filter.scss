@@ -18,6 +18,8 @@
 .jar-filter__settings {
 	position: fixed;
 	min-width: 200px;
+	@include j-primary-color(background, gradient);
+
 	border: 1px solid rgba(255, 255, 255, .26);
 	border-radius: 3px;
 

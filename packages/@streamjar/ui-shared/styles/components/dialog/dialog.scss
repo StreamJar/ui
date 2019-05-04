@@ -1,10 +1,11 @@
 @import '../../utils/variables.scss';
+@import '../../utils/helpers.scss';
 
 .jar-dialog {
 	max-width: calc(100vw - 15px);
 	max-height: 80vh;
 	overflow: overlay;
-	background: #1d1d1d;
+	@include j-primary-color(background, background-accent);
 	min-width: 250px;
 	min-height: 300px;
 	border-radius: 5px;
@@ -19,7 +20,8 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-		background: rgba(#FFF, 0.4);
+		@include j-primary-color(background, background-inverse);
+		opacity: 0.5;
 		z-index: 5000;
 	}
 
@@ -30,7 +32,11 @@
 		flex-direction: row;
 		display: flex;
 
+		@include j-primary-color(color, primary-text);
+		@include j-primary-color(background, gradient);
+
 		.jar-dialog-header__title {
+			@include j-primary-color(color, primary-text);
 			font-weight: bold;
 			opacity: 0.6;
 			line-height: 46px;
@@ -45,5 +51,5 @@
 	height: 100vh;
 	top: 0;
 	left: 0;
-	background: rgba(0, 0, 0, 0.52);
+	background: rgba(#FFF, 0.52);
 }

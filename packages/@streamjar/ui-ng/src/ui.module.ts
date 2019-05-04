@@ -21,6 +21,7 @@ import { PlatformsModule } from './lib/platforms';
 import { PopupModule } from './lib/popup';
 import { CardModule } from './lib/card';
 import { SectionModule } from './lib/section';
+import { ThemeToggleModule } from './lib/theme-toggle';
 
 const modules = [
 	ButtonModule,
@@ -43,6 +44,7 @@ const modules = [
 	SectionModule,
 	CardModule,
 	PlatformsModule,
+	ThemeToggleModule,
 	PopupModule,
 ];
 

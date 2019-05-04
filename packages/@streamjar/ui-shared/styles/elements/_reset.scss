@@ -1,3 +1,5 @@
+@import '../utils/helpers';
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -45,8 +47,8 @@ table {
 }
 
 html, body {
-    font-family: "Open Sans", sans-serif;
-    background: #1d1d1d;
+	font-family: "Open Sans", sans-serif;
+	@include  j-primary-color(background-color, background);
 }
 
 input, p {

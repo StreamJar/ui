@@ -1,7 +1,7 @@
 @import '../../utils/variables.scss';
 
 .jar-toasts {
-    position: fixed;
+	position: fixed;
     bottom: 30px;
     left: 0;
     right: 0;
@@ -16,6 +16,7 @@
 		border: 2px solid rgba(#FFF, 0.2);
 		padding: 10px 15px;
 		font-size: 16px;
+		@include j-primary-color(background, gradient);
 
 		&__status {
 			margin-left: 15px;

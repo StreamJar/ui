@@ -1,7 +1,5 @@
-@import '../../utils/variables.scss';
 
 @mixin jar-theme-tooltip($theme) {
 	.jar-tooltip {
-		@include jar-primary-bg($theme);
 	}
 }

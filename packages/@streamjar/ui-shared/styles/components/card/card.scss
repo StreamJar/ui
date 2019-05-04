@@ -1,6 +1,6 @@
 .jar-card {
     border: 1px solid rgba(59, 12, 94, 0.25);
-    background: $colour-muted-grey;
+	@include j-primary-color(background, background-accent);
 	padding: $spacing-3x;
 	margin: $spacing-2x;
 	min-height: 80px;

@@ -29,7 +29,9 @@ $checkbox-height: 24px;
 
 	&-focused {
 		.jar-checkbox-inner {
-			border: 2px solid #FFF;
+
+			border: 2px solid;
+			@include j-primary-color(border-color, primary);
 		}
 	}
 
@@ -53,7 +55,8 @@ $checkbox-height: 24px;
 		width: $checkbox-height;
 		border-radius: 3px;
 		position: relative;
-		border: 2px solid rgba(255, 255, 255, 0.14);
+		border: 2px solid;
+		@include j-primary-color(border-color, primary);
 
 		&-checked {
 			border-color: transparent;
@@ -77,7 +80,7 @@ $checkbox-height: 24px;
 
 	&-label {
 		line-height: $checkbox-height;
-		color: #FFF;
+		@include j-primary-color(color, text);
 		padding-left: 10px;
 		text-transform: uppercase;
 		font-size: 12px;
@@ -86,6 +89,20 @@ $checkbox-height: 24px;
 	}
 }
 
+@mixin jar-checkbox($colour, $theme, $check: #FFF) {
+	.jar-checkbox[data-colour=#{$colour}] {
+		.jar-checkbox-inner.jar-checkbox-inner-checked {
+			background: $theme;
+		}
+
+		.jar-checkmark-path {
+			stroke: $check;
+		}
+	}
+}
+
+
+@include jar-checkbox('primary', var(--j-theme-gradient));
 @include jar-checkbox('accent', #FFF, #000);
 @include jar-checkbox('success', $colourSuccess);
 @include jar-checkbox('danger', $colourDanger);

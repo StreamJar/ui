@@ -2,6 +2,6 @@
 
 @mixin jar-theme-toast($theme) {
 	.jar-toasts .jar-toast {
-		@include jar-gradient-bg($theme);
+		// @include jar-gradient-bg($theme);
 	}
 }

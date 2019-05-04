@@ -1,3 +1,5 @@
+@import '../../utils/helpers';
+
 .jar-slider {
 	&__input {
 		-webkit-appearance: none;
@@ -20,13 +22,16 @@
 			cursor: pointer;
 			border-radius: 5px;
 			width: 100%;
+			@include j-primary-color(background, gradient);
 		}
 
 		&::-webkit-slider-thumb {
 			height: 20px;
 			width: 20px;
 			border-radius: 15px;
-			background: #ffffff;
+			border: 2px solid;
+			@include j-primary-color(border-color, primary);
+			@include j-primary-color(background, background-accent);
 			cursor: pointer;
 			-webkit-appearance: none;
 			margin-top: -4.5px;
@@ -37,14 +42,19 @@
 			height: 11.4px;
 			cursor: pointer;
 			border-radius: 1.3px;
+			@include j-primary-color(background, gradient);
 		}
 
 		&::-moz-range-thumb {
 			height: 20px;
 			width: 20px;
 			border-radius: 15px;
-			background: #ffffff;
+			@include j-primary-color(background, primary);
 			cursor: pointer;
+		}
+
+		&:focus::-webkit-slider-runnable-track {
+			@include j-primary-color(background, gradient);
 		}
 	}
 }

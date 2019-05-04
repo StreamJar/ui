@@ -13,10 +13,10 @@ jar-icon, .jar-icon {
 	.jar-icons {
 		width: 1em;
 		height: 1em;
-		color: #FFF;
+		@include j-primary-color(color, text);
 		overflow: hidden;
 		position: relative;
-		fill: #FFF;
+		@include j-primary-color(fill, text);
 
 		svg {
 			position: absolute;

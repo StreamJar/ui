@@ -19,4 +19,5 @@ export { CardModule } from './lib/card';
 export { PlatformsModule } from './lib/platforms';
 export { PopupModule } from './lib/popup';
 export { SectionModule } from './lib/section';
+export { ThemeToggleModule } from './lib/theme-toggle';
 export { UiModule } from './ui.module';

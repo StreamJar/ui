@@ -1,13 +1,3 @@
 @mixin jar-theme-slider($theme) {
-	.jar-slider .jar-slider__input::-webkit-slider-runnable-track {
-		@include jar-gradient-bg($theme);
-	}
 
-	.jar-slider .jar-slider__input::-moz-range-track {
-		@include jar-gradient-bg($theme);
-	}
-
-	.jar-slider .jar-slider__input:focus::-webkit-slider-runnable-track {
-		@include jar-gradient-bg($theme);
-	}
 }

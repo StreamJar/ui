@@ -1,14 +1,16 @@
+@import '../../utils//helpers.scss';
+
 h1, h2, h3, h4, h5 {
 	text-transform: uppercase;
 	font-weight: bold;
-	color: #FFF;
+	@include j-primary-color(color, headings);
 }
 
 h1 {
 	font-size: 2em;
 	text-transform: uppercase;
 	font-weight: bold;
-	color: #FFF;
+	@include j-primary-color(color, headings);
 }
 
 h2 {
@@ -30,13 +32,13 @@ h5 {
 
 
 p {
-	color: rgba(255, 255, 255, 0.9);
+	@include j-primary-color(color, text);
 	line-height: 1.4;
 	margin: 7.5px 0px;
 }
 
 .jar-list {
-	color: rgba(255, 255, 255, 0.7);
+	@include j-primary-color(color, text);
 	line-height: 1.5;
 	list-style: disc;
 	padding-left: 21px;

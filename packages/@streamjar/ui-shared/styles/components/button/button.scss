@@ -84,8 +84,8 @@ $buttonHeight: 36px;
 	}
 }
 
-@include jar-button('primary', rgba(#FFF, 0.8));
-@include jar-button('accent', #FFF);
+@include jar-button('primary', var(--j-theme-text));
+@include jar-button('accent', var(--j-theme-primary));
 @include jar-button('success', #67af25);
 @include jar-button('danger', #e26060);
 

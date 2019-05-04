@@ -1,13 +1,5 @@
 @import '../../utils/helpers';
 
 @mixin jar-theme-radio($theme) {
-	.jar-radio {
-		&__circle {
-			border-color: lighten(map-get($theme, primary), 15%);
-		}
 
-		&__fill {
-			background: lighten(map-get($theme, primary), 15%);
-		}
-	}
 }

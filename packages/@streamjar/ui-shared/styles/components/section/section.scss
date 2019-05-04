@@ -1,4 +1,5 @@
 @import '../../utils/variables.scss';
+@import '../../utils/helpers.scss';
 
 .jar-section {
     display: block;
@@ -13,7 +14,6 @@
         display: block;
         padding: 0 $spacing-1x;
         padding-bottom: 5.5px;
-        color: $colour-white;
         font-weight: bold;
         font-size: 20px;
         text-transform: uppercase;
@@ -24,8 +24,8 @@
 		padding-right: $spacing-2x;
 		padding-top: $spacing-4x;
 		padding-bottom: $spacing-2x;
-		color: #FFF;
 		position: relative;
+		@include j-primary-color(color, text);
 	}
 
 	.jar-section__tabs .jar-section-action {

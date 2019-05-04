@@ -2,6 +2,7 @@
 @import './flex';
 @import './elements/element-styles';
 @import './components/component-styles';
+@import './utils/helpers';
 
 @include jar-flex-layout();
 
@@ -17,4 +18,68 @@
 
 .flex {
 	flex: 1 1 0%;
+}
+
+// fall back to dark theme.
+html {
+	--j-theme-background: #1d1d1d;
+	--j-theme-background-accent: #272727;
+
+	--j-theme-primary: #643688;
+	--j-theme-primary-text: #FFF;
+	--j-theme-gradient: linear-gradient(to bottom right, #693194 0%, #633884 100%);
+	--j-theme-headings: #FFF;
+	--j-theme-text: #FFF;
+
+	--j-theme-focus: #FFF;
+}
+
+.j-dark {
+	--j-theme-background: #1d1d1d;
+	--j-theme-background-accent: #272727;
+
+	--j-theme-primary: #643688;
+	--j-theme-primary-text: #FFF;
+	--j-theme-gradient: linear-gradient(to bottom right, #693194 0%, #633884 100%);
+	--j-theme-headings: #FFF;
+	--j-theme-text: #FFF;
+
+	--j-theme-focus: #FFF;
+}
+
+.j-light {
+	--j-theme-background: #ded8e3;
+	--j-theme-background-accent: #f1eef3;
+	--j-theme-background-inverse: #1f1f1f;
+
+	--j-theme-primary: #643688;
+	--j-theme-primary-text: #FFF;
+	--j-theme-gradient: linear-gradient(to bottom right, #693194 0%, #633884 100%);
+	--j-theme-headings: #4a216c;
+
+	--j-theme-text: #292929;
+
+	--j-theme-text-dark: rgba(#FFF, 0.9);
+	--j-theme-text-light: #030303;
+
+	--j-theme-focus: #643688;
+}
+
+
+.j-dark, .j-light {
+	.j-theme-bg-background {
+		@include j-primary-color(background-color, background);
+	}
+
+	.j-theme-bg-background-accent {
+		@include j-primary-color(background-color, background-accent);
+	}
+
+	.j-theme-bg-primary {
+		@include j-primary-color(background-color, primary);
+	}
+
+	.j-theme-bg-gradient {
+		@include j-primary-color(background, gradient);
+	}
 }

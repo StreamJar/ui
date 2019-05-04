@@ -90,7 +90,7 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 		const { children } = this.props;
 
 		return (
-			<div ref={this.menuRef} className="jar-menu layout-column" style={{...DEFAULT, ...CLASSES[state]}}>
+			<div ref={this.menuRef} className="jar-menu j-dark layout-column" style={{...DEFAULT, ...CLASSES[state]}}>
 				{children}
 			</div>
 		);

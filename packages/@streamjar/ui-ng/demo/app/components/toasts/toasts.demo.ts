@@ -53,7 +53,7 @@ export class ToastsDemoComponent {
 
 	public info() {
 		// Show for 5000 ms.
-		this.toasts.info('This is an informative toast', 5000);
+		this.toasts.info('This is an informative toast', 50000);
 	}
 
 	public success() {

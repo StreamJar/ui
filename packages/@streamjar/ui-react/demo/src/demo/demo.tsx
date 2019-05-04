@@ -29,7 +29,7 @@ export class Demo extends React.PureComponent<IDemoProps> {
 		const { name, components, examples } = this.props.config;
 
 		const docs = (
-			<div className="demo__section">
+			<div className="demo__section j-theme-bg-background-accent">
 				<h5> Documentation </h5>
 				{components.map(component =>  this.getTable(component))}
 			</div>
@@ -39,7 +39,7 @@ export class Demo extends React.PureComponent<IDemoProps> {
 			<div>
 				<h2 className="demo__name"> {name} </h2>
 
-				<div className="demo__section">
+				<div className="demo__section j-theme-bg-background-accent">
 					<h5> Example </h5>
 
 					{this.props.children}
@@ -47,7 +47,7 @@ export class Demo extends React.PureComponent<IDemoProps> {
 
 				{!!components.length && docs}
 
-				<div className="demo__section">
+				<div className="demo__section j-theme-bg-background-accent">
 					<h5> Code </h5>
 					<MonacoEditor
 						height={600}

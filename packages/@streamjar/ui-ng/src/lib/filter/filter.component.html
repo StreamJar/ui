@@ -1,7 +1,7 @@
 <button #anchor jarBtn icon="jar_filter" (click)="onClick()"> Filter </button>
 
 <ng-template #settings let-x="x" let-y="y">
-	<div class="jar-filter">
+	<div class="jar-filter j-dark">
 		<div class="jar-filter__settings" [style.top.px]="y" [style.right.px]="x" [style.width.px]="children.length * 202" fxLayout="row">
 			<ng-content></ng-content>
 		</div>

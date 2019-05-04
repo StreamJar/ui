@@ -2,7 +2,4 @@
 
 
 @mixin jar-theme-menu($theme) {
-	.jar-menu {
-		@include jar-gradient-bg($theme);
-	}
 }

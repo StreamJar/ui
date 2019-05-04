@@ -1,3 +1,5 @@
+@import '../../utils/variables.scss';
+
 .jar-tooltip {
 	opacity: 0;
 	z-index:10001;
@@ -9,4 +11,6 @@
     font-size: 14px;
 	user-select: none;
 	pointer-events: none;
+
+	@include j-primary-color(background-color, primary);
 }

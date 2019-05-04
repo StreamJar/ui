@@ -2,7 +2,4 @@
 @import '../../utils/helpers';
 
 @mixin jar-theme-filter($theme) {
-	.jar-filter .jar-filter__settings {
-		@include jar-gradient-bg($theme);
-	}
 }

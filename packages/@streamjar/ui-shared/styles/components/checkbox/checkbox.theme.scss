@@ -1,16 +1,4 @@
-@mixin jar-theme-checkbox($theme) {
-	@include jar-checkbox('primary', map-get($theme, gradient));
+@mixin jar-theme-checkbox() {
 }
 
 
-@mixin jar-checkbox($colour, $theme, $check: #FFF) {
-	.jar-checkbox[data-colour=#{$colour}] {
-		.jar-checkbox-inner.jar-checkbox-inner-checked {
-			background: $theme;
-		}
-
-		.jar-checkmark-path {
-			stroke: $check;
-		}
-	}
-}

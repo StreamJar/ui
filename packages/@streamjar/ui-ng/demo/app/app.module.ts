@@ -36,6 +36,7 @@ import { TooltipDemoComponent } from './components/tooltip/tooltip.demo';
 import { DemoComponent } from './demo/demo.component';
 import { DemoTableComponent } from './table/table.component';
 import { ColourDemoComponent } from './components/colour/colour.demo';
+import { ThemeToggleModule } from '../../src';
 
 @NgModule({
 	bootstrap: [AppComponent],
@@ -97,6 +98,7 @@ import { ColourDemoComponent } from './components/colour/colour.demo';
 		PopupModule,
 		SectionModule,
 		PatternModule,
+		ThemeToggleModule,
 		TooltipModule.forRoot(),
 		DialogModule.forRoot(),
 		ToastModule.forRoot(),

@@ -20,15 +20,15 @@ $radio-size: 20px;
 	&-focused {
 		.jar-radio__circle {
 			border: {
-				color: #FFF;
 				width: 2px;
 				style: solid;
 				radius: 50%;
 			}
+			@include j-primary-color(border-color, primary);
 		}
 
 		.jar-radio__fill {
-			background: #FFF;
+			@include j-primary-color(background, gradient);
 		}
 	}
 
@@ -58,6 +58,8 @@ $radio-size: 20px;
 		transition: border-color ease 280ms;
 		width: $radio-size;
 
+		@include j-primary-color(border-color, primary);
+
 		border: {
 			width: 2px;
 			style: solid;
@@ -84,7 +86,7 @@ $radio-size: 20px;
 
 	&__label {
 		line-height: $radio-size;
-		color: #FFF;
+		@include j-primary-color(color, text);
 		padding-left: 10px;
 		text-transform: uppercase;
 		font-size: 12px;

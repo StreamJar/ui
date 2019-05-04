@@ -59,7 +59,7 @@ export class Filter extends React.PureComponent<{}, IFilterState> {
 
 		const anchorEl = (
 			<Anchor width={width} el={anchor!} pull="end">
-				<div className="jar-filter" ref={this.ref}>
+				<div className="jar-filter j-dark" ref={this.ref}>
 					<div className="jar-filter__settings layout-row">
 						{children}
 					</div>

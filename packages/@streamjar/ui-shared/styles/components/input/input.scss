@@ -1,13 +1,19 @@
+@import '../../utils/helpers';
+
 .jar-input {
 	margin: 5px;
 	position: relative;
 	font-size: 16px;
 	border-radius: 3px;
-	color: #FFF;
+	@include j-primary-color(color, headings);
 	padding: 0px 5px;
+	border: 1px solid;
+	@include j-primary-color(border-color, primary);
 
 	&-focus {
-		border-color: rgba(#FFF, 1) !important;
+		background: rgba(0, 0, 0, 0.05);
+
+		@include j-primary-color(border-color, focus);
 	}
 
 	&-error {
@@ -24,12 +30,13 @@
 	}
 
 	.jar-input__container {
-		color: #FFF;
+		@include j-primary-color(color, text);
+
 		background: transparent;
 		padding: 9px 6px;
 
 		&::placeholder {
-			color: rgba(#FFF, 0.4);
+			color: rgba(green, 0.4);
 		}
 
 		&:focus {
@@ -46,8 +53,8 @@
 .jar-input-label {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.66);
+	font-size: 14px;
+	@include j-primary-color(color, headings);
 	padding-bottom: 10px;
     padding-top: 20px;
     display: block;
@@ -81,18 +88,20 @@
 		background: transparent;
 		padding: 9px 11px;
 		font-size: 16px;
-		background: rgba(0, 0, 0, 0.08);
-		color: #FFF;
+		@include j-primary-color(color, text);
 		border-radius: 3px;
 		resize: none;
+		@include j-primary-color(border-color, primary);
 
 		&::placeholder {
 			color: rgba(#FFF, 0.4);
 		}
 
 		&:focus {
+			background: rgba(0, 0, 0, 0.05);
 			outline: none;
-			border: 1px solid rgba(#FFF, 1);
+			border: 1px solid;
+			@include j-primary-color(border-color, focus);
 		}
 	}
 }
