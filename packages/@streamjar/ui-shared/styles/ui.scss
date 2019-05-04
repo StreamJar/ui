@@ -22,47 +22,50 @@
 
 // fall back to dark theme.
 html {
-	--j-theme-background: #1d1d1d;
-	--j-theme-background-accent: #272727;
+	--j-theme-background: 29, 29, 29;
+	--j-theme-background-accent: 39, 39, 39;
 
-	--j-theme-primary: #643688;
-	--j-theme-primary-text: #FFF;
+	--j-theme-primary: 100, 54, 136;
+	--j-theme-primary-text: 255, 255, 255;
 	--j-theme-gradient: linear-gradient(to bottom right, #693194 0%, #633884 100%);
-	--j-theme-headings: #FFF;
-	--j-theme-text: #FFF;
+	--j-theme-headings: 255, 255, 255;
+	--j-theme-text: 255, 255, 255;
 
-	--j-theme-focus: #FFF;
+	--j-theme-focus: 255, 255, 255;
+	--j-theme-transparent: 255, 255, 255;
 }
 
 .j-dark {
-	--j-theme-background: #1d1d1d;
-	--j-theme-background-accent: #272727;
+	--j-theme-background: 29, 29, 29;
+	--j-theme-background-accent: 39, 39, 39;
 
-	--j-theme-primary: #643688;
-	--j-theme-primary-text: #FFF;
+	--j-theme-primary: 100, 54, 136;
+	--j-theme-primary-text: 255, 255, 255;
 	--j-theme-gradient: linear-gradient(to bottom right, #693194 0%, #633884 100%);
-	--j-theme-headings: #FFF;
-	--j-theme-text: #FFF;
+	--j-theme-headings: 255, 255, 255;
+	--j-theme-text: 255, 255, 255;
 
-	--j-theme-focus: #FFF;
+	--j-theme-focus: 255, 255, 255;
+	--j-theme-transparent: 255, 255, 255;
 }
 
 .j-light {
-	--j-theme-background: #ded8e3;
-	--j-theme-background-accent: #f1eef3;
-	--j-theme-background-inverse: #1f1f1f;
+	--j-theme-background: 222, 216, 227;
+	--j-theme-background-accent: 241, 238, 243;
+	--j-theme-background-inverse: 31, 31, 31;
 
-	--j-theme-primary: #643688;
-	--j-theme-primary-text: #FFF;
+	--j-theme-primary: 100, 54, 136;
+	--j-theme-primary-text: 255, 255, 255;
 	--j-theme-gradient: linear-gradient(to bottom right, #693194 0%, #633884 100%);
-	--j-theme-headings: #4a216c;
+	--j-theme-headings: 74, 33, 108;
 
-	--j-theme-text: #292929;
+	--j-theme-text: 41, 41, 41;
 
-	--j-theme-text-dark: rgba(#FFF, 0.9);
-	--j-theme-text-light: #030303;
+	--j-theme-text-dark: 255, 255, 255;
+	--j-theme-text-light: 3, 3, 3;
 
-	--j-theme-focus: #643688;
+	--j-theme-focus: 100, 54, 136;
+	--j-theme-transparent: 0, 0, 0;
 }
 
 
@@ -82,4 +85,12 @@ html {
 	.j-theme-bg-gradient {
 		@include j-primary-color(background, gradient);
 	}
+}
+
+
+.j-container {
+	padding: 15px 20px;
+	margin-bottom: 20px;
+	background: #FFF;
+	border-radius: 4px;
 }

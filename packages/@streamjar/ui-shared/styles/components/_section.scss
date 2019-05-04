@@ -1,0 +1,34 @@
+@import '../utils/variables';
+@import '../utils/helpers';
+
+.jar-section {
+    display: block;
+    padding: $spacing-4x;
+    margin: $spacing-3x;
+
+	.jar-section-header {
+		padding: $spacing-2x;
+	}
+
+    .jar-section__title {
+        display: block;
+        padding: 0 $spacing-1x;
+        padding-bottom: 5.5px;
+        font-weight: bold;
+        font-size: 20px;
+        text-transform: uppercase;
+	}
+
+	.jar-section__content {
+		padding-left: $spacing-2x;
+		padding-right: $spacing-2x;
+		padding-top: $spacing-4x;
+		padding-bottom: $spacing-2x;
+		position: relative;
+		@include j-primary-color(color, text);
+	}
+
+	.jar-section__tabs .jar-section-action {
+		margin-bottom: -5px;
+	}
+}

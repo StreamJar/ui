@@ -1,0 +1,107 @@
+@import '../utils/helpers';
+
+.jar-input {
+	margin: 5px;
+	position: relative;
+	font-size: 16px;
+	border-radius: 3px;
+	@include j-primary-color(color, headings);
+	padding: 0px 5px;
+	border: 1px solid;
+	@include j-primary-color(border-color, primary);
+
+	&-focus {
+		background: rgba(0, 0, 0, 0.05);
+
+		@include j-primary-color(border-color, focus);
+	}
+
+	&-error {
+		.jar-input__error {
+			display: initial !important;
+			padding-left: 5px;
+		}
+
+		border-color: #8c3535 !important;
+
+		&.jar-input-focus {
+			border-color: #a95555 !important;
+		}
+	}
+
+	.jar-input__container {
+		@include j-primary-color(color, text);
+
+		background: transparent;
+		padding: 9px 6px;
+
+		&::placeholder {
+			@include j-primary-color(color, text, 0.3);
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	.jar-input__error {
+		color: #a95555;
+		display: none;
+	}
+}
+
+.jar-input-label {
+    text-transform: uppercase;
+    font-weight: 600;
+	font-size: 14px;
+	@include j-primary-color(color, headings);
+	padding-bottom: 10px;
+    padding-top: 20px;
+    display: block;
+    padding-left: 10px;
+}
+
+.jar-textarea {
+	padding: 5px;
+	position: relative;
+
+	&-error {
+		.jar-textarea__container {
+			border-color: #8c3535 !important;
+			padding-right: 20px !important;
+
+			&:focus {
+				border-color: #a95555 !important;
+			}
+		}
+
+		.jar-textarea__error {
+			position: absolute;
+			right: 10px;
+			top: 6px;
+			color: #a95555;
+			padding-left: 5px;
+		}
+	}
+
+	.jar-textarea__container {
+		background: transparent;
+		padding: 9px 11px;
+		font-size: 16px;
+		@include j-primary-color(color, text);
+		border-radius: 3px;
+		resize: none;
+		@include j-primary-color(border-color, primary);
+
+		&::placeholder {
+			color: rgba(#FFF, 0.4);
+		}
+
+		&:focus {
+			background: rgba(0, 0, 0, 0.05);
+			outline: none;
+			border: 1px solid;
+			@include j-primary-color(border-color, focus);
+		}
+	}
+}

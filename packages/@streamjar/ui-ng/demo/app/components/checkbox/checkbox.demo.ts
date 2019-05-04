@@ -4,6 +4,7 @@ import { IDemoConfig } from '../../demo/demo.component';
 
 const html = `
 <jar-checkbox label="a"> Checkbox </jar-checkbox>
+<jar-checkbox colour="accent" label="a"> Accent </jar-checkbox>
 <jar-checkbox colour="success" label="a"> Success </jar-checkbox>
 <jar-checkbox colour="danger" label="a"> Dangerous </jar-checkbox>
 <jar-checkbox no-ripple label="a"> No Ripple </jar-checkbox>

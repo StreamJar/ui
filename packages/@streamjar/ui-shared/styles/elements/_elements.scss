@@ -1,0 +1,77 @@
+@import '../utils/helpers';
+
+h1, h2, h3, h4, h5 {
+	text-transform: uppercase;
+	font-weight: bold;
+	@include j-primary-color(color, headings);
+}
+
+h1 {
+	font-size: 2em;
+	text-transform: uppercase;
+	font-weight: bold;
+	@include j-primary-color(color, headings);
+}
+
+h2 {
+	font-size: 1.45em;
+}
+
+h3 {
+	font-size: 1.35em;
+}
+
+h4 {
+	font-size: 1.25em;
+}
+
+h5 {
+	font-size: 1.25em;
+	font-weight: 400;
+}
+
+
+p {
+	@include j-primary-color(color, text);
+	line-height: 1.4;
+	margin: 7.5px 0px;
+}
+
+.jar-list {
+	@include j-primary-color(color, text);
+	line-height: 1.5;
+	list-style: disc;
+	padding-left: 21px;
+}
+
+em {
+	font-style: italic;
+}
+
+strong {
+	font-weight: bold;
+}
+small {
+
+	font-size: 0.8em;
+}
+
+a {
+	font-weight: 600;
+	text-decoration: underline !important;
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+a:link,a:visited,a:hover,a:active {
+	text-decoration: none;
+}
+
+code {
+	font-family: monospace;
+	border: 1px dashed;
+	@include j-primary-color(border-color, transparent, 0.2);
+	@include j-primary-color(color, text);
+	padding: 2.5px 5px;
+}

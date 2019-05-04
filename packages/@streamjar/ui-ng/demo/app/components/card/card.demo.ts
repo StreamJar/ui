@@ -5,7 +5,7 @@ import { IDemoConfig } from '../../demo/demo.component';
 const html = `
 <jar-card [icon]="{ email: 'ethan@streamjar.tv' }">
 	<div class="jar-card-content">
-		<p> You've been invited to edit <strong> Ethan</strong> overlay? </p>
+		<p> You've been invited to edit <strong> Ethan</strong>'s overlay? </p>
 	</div>
 	<div class="jar-card-actions">
 		<button jarBtn raised colour="danger"> Deny </button>

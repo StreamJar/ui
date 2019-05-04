@@ -1,0 +1,24 @@
+@mixin jar-gradient-bg($theme: ()) {
+	background: map-get($theme, gradient);
+}
+
+@mixin jar-primary-bg($theme) {
+	background: map-get($theme, primary);
+}
+
+@mixin j-primary-color($prop, $pack, $opacity: 1) {
+	@if $pack == gradient {
+		#{$prop}: var(--j-theme-#{$pack});
+	} @else {
+		#{$prop}: rgba(var(--j-theme-#{$pack}), $opacity);
+	}
+	transition: 500ms ease-in-out color, 500ms ease-in-out background-color;
+}
+
+@mixin j-primary-color-static($prop, $pack, $opacity: 1) {
+	@if $pack == gradient {
+		#{$prop}: var(--j-theme-#{$pack});
+	} @else {
+		#{$prop}: rgba(var(--j-theme-#{$pack}), $opacity);
+	}
+}

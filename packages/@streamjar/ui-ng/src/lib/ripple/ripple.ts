@@ -32,7 +32,7 @@ export class MdRipple implements OnChanges, OnDestroy {
 	public speedFactor = 1;
 
 	@Input('mdRippleColor')
-	public color: string;
+	public color: string = 'rgba(var(--j-theme-transparent), 0.1)';
 
 	/** Whether foreground ripples should be visible outside the component's bounds. */
 	@Input('mdRippleUnbounded')

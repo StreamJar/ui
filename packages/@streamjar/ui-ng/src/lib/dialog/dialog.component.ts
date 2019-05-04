@@ -10,6 +10,7 @@ import {
 	Input,
 	ViewEncapsulation,
 	ChangeDetectionStrategy,
+	HostBinding,
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -156,6 +157,9 @@ export class JarDialogLoadableComponent {
 		'<button type="button" jarBtn round icon="close" (click)="dialog.close()"></button>',
 })
 export class JarDialogHeaderComponent {
+	@HostBinding('class.j-dark')
+	public dark: boolean = true;
+
 	constructor(public dialog: DialogRefService) {}
 
 }

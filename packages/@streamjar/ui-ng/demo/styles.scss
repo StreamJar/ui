@@ -1,6 +1,1 @@
 @import '~@streamjar/ui-shared/styles/ui';
-@import '~@streamjar/ui-shared/styles/theme';
-
-@import './theme';
-
-@include jar-theme($theme);

@@ -1,0 +1,22 @@
+@import '../utils/variables';
+@import '../utils/helpers';
+
+::-webkit-scrollbar {
+	width: 12px;
+	background: transparent;
+	cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+	@include j-primary-color(background, transparent, 0.2);
+}
+
+::-moz-selection {
+	@include j-primary-color(background, transparent, 0.4);
+}
+::selection {
+	@include j-primary-color(background, transparent, 0.4);
+}
+::-webkit-scrollbar-corner {
+	background: transparent;
+}

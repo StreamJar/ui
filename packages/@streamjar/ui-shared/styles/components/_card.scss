@@ -1,0 +1,31 @@
+@import '../utils/variables';
+@import '../utils/helpers';
+.jar-card {
+    // border: 1px solid rgba(59, 12, 94, 0.25);
+	@include j-primary-color(background, background-accent);
+	padding: $spacing-3x;
+	margin: $spacing-2x;
+	min-height: 80px;
+	position: relative;
+	border-radius: 4px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, .10), 0 5px 15px rgba(0, 0, 0, .01);
+
+	.jar-card__avatar {
+		display: inline-flex;
+	}
+
+	&-footer {
+		padding-top: $spacing-2x;
+		margin-bottom: -$spacing-2x;
+	}
+
+	.jar-card__inner {
+		width: 100%;
+	}
+
+	.jar-card__content {
+		width: 100%;
+		padding: 0 $spacing-3x;
+		overflow: hidden;
+	}
+}

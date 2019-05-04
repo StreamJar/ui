@@ -1,0 +1,14 @@
+@import '../utils/helpers';
+
+.jar-tag {
+	display: inline-block;
+	text-transform: uppercase;
+	padding: 5px;
+	margin-right: 5px;
+	font-weight: bold;
+	@include j-primary-color(color, primary-text);
+	@include j-primary-color(background, gradient);
+	border-radius: 5px;
+	margin-top: 10px;
+	font-size: 12px;
+}

@@ -1,11 +1,9 @@
 @import '~@streamjar/ui-shared/styles/utils/helpers';
 
 
-@import '../../theme';
-
 table {
     width: 100%;
-    color: #FFF;
+	@include j-primary-color(color, text);
     text-align: left;
 }
 
@@ -41,8 +39,8 @@ table {
         text-transform: uppercase;
         font-size: 12px;
 		margin-bottom: 10px;
-
-		@include jar-gradient-bg($theme);
+		color: #FFF;
+		@include j-primary-color(background, gradient);
     }
 
     tbody td {
@@ -51,7 +49,7 @@ table {
     }
 
     tbody tr:hover td {
-        background: rgba(#FFF, .1);
+		@include j-primary-color(background, transparent, 0.1);
     }
 
     .tag-input {

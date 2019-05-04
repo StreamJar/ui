@@ -1,0 +1,8 @@
+@import '../utils/helpers';
+
+.jar-avatar {
+	border-radius: 50%;
+	border: 1px solid;
+
+	@include j-primary-color(border-color, transparent, 0.2);
+}

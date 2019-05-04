@@ -5,7 +5,7 @@ import { icons } from '../../icons.generated';
 
 
 const html = `
-<jar-icon style="color: #FFF;" icon="star"></jar-icon>
+<jar-icon icon="star"></jar-icon>
 <jar-icon icon="jar_filter"></jar-icon>
 `
 

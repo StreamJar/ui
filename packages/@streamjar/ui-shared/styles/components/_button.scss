@@ -1,0 +1,151 @@
+$buttonHeight: 36px;
+
+[jarBtn], .jarBtn {
+	display: inline-block;
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+	text-decoration: none !important;
+	margin: 5px;
+
+    &:focus {
+		.jar-button:not(.jar-button-disabled) {
+
+			border: 2px solid;
+			@include j-primary-color(border-color, transparent, 0.3);
+		}
+
+        outline: none;
+    }
+}
+
+.jar-button {
+    text-transform: uppercase;
+    position: relative;
+    font-weight: bold;
+    border-radius: 3px;
+    overflow: hidden;
+    padding: 0 16px;
+    min-height: $buttonHeight;
+    line-height: $buttonHeight;
+    text-decoration: none;
+	user-select: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: 2px solid transparent;
+
+    &-disabled {
+        cursor: not-allowed;
+    }
+
+    &-custom {
+        padding: 0;
+        border-radius: 0;
+        text-transform: initial;
+
+        &.jar-button-disabled {
+            cursor: not-allowed;
+            opacity: 0.3;
+        }
+
+	}
+
+	&-icon {
+		border-radius: 50%;
+		width: 40px;
+		height: 40px;
+		padding: 0px 6px;
+	}
+
+	.right {
+		.jar-button__text-hasIcon {
+			margin-left: 0;
+			margin-right: 5px;
+		}
+	}
+
+    .jar-button__text {
+		&:empty {
+			margin: 0;
+		}
+
+		&-hasIcon {
+			margin-left: 5px;
+		}
+
+        display: inline-block;
+	}
+
+	jar-icon, .jar-icon {
+		height: 36px;
+	}
+}
+
+@mixin jar-button($colour, $theme) {
+    .jar-button[data-colour=#{$colour}]:not(.jar-button-raised) {
+        color: $theme;
+
+        &:focus, &:active, &:hover {
+			@include j-primary-color(background, transparent, 0.1);
+        }
+    }
+
+    .jar-button:not(.jar-button-raised).jar-button-disabled {
+		@include j-primary-color(color, transparent, 0.5);
+    }
+}
+
+@mixin jar-raised-button($colour, $background, $theme) {
+    .jar-button[data-colour=#{$colour}].jar-button-raised {
+        background: $background;
+		color: $theme;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, .10), 0 5px 15px rgba(0, 0, 0, .01);
+
+        &.jar-button-disabled {
+			@include j-primary-color(color, transparent, 0.5);
+			@include j-primary-color(background, transparent, 0.1);
+        }
+    }
+}
+
+@include jar-button('primary', #{"rgb(var(--j-theme-text))"});
+@include jar-button('accent', #{"rgb(var(--j-theme-primary))"});
+@include jar-button('success', #67af25);
+@include jar-button('danger', #e26060);
+
+@include jar-button('platform-mixer', $platformMixer);
+@include jar-button('platform-twitch', $platformTwitch);
+@include jar-button('platform-smashcast', $platformSmashcast);
+@include jar-button('platform-youtube', $platformYoutube);
+@include jar-button('platform-discord', $platformDiscord);
+@include jar-button('platform-paypal', $platformPayPal);
+@include jar-button('platform-stripe', $platformStripe);
+@include jar-button('platform-gamewisp', $platformGamewisp);
+@include jar-button('platform-twitter', $platformTwitter);
+@include jar-button('platform-patreon', $platformPatreon);
+@include jar-button('platform-extralife', $platformExtralife);
+@include jar-button('platform-tiltify', $platformTiltify);
+@include jar-button('platform-spotify', $platformSpotify);
+
+@include jar-raised-button('primary', var(--j-theme-gradient), #FFF);
+@include jar-raised-button('accent', #FFF, #000);
+@include jar-raised-button('success', #67af25, #FFF);
+@include jar-raised-button('danger', #d22a2a, #FFF);
+
+
+@include jar-raised-button('platform-mixer', $platformMixer, #FFF);
+@include jar-raised-button('platform-twitch', $platformTwitch, #FFF);
+@include jar-raised-button('platform-smashcast', $platformSmashcast, #FFF);
+@include jar-raised-button('platform-youtube', $platformYoutube, #FFF);
+@include jar-raised-button('platform-discord', $platformDiscord, #FFF);
+@include jar-raised-button('platform-paypal', $platformPayPal, #FFF);
+@include jar-raised-button('platform-stripe', $platformStripe, #FFF);
+@include jar-raised-button('platform-gamewisp', $platformGamewisp, #FFF);
+@include jar-raised-button('platform-twitter', $platformTwitter, #FFF);
+@include jar-raised-button('platform-patreon', $platformPatreon, #FFF);
+@include jar-raised-button('platform-extralife', $platformExtralife, #FFF);
+@include jar-raised-button('platform-tiltify', $platformTiltify, #FFF);
+@include jar-raised-button('platform-spotify', $platformSpotify, #FFF);
+
