@@ -21,7 +21,7 @@ a.jar-typography-unmarked {
 	font-weight: inherit;
 }
 
-.jar-truncate {
+.j-truncate {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -34,3 +34,49 @@ a.jar-typography-unmarked {
     padding-right: 2.5%;
     margin: 0 auto;
 }
+
+
+.j-muted {
+	@include j-primary-color(color, text, 0.35);
+
+	a {
+		@include j-primary-color(color, headings, 0.35);
+	}
+}
+
+.j-text-xs {
+	font-size: .75rem;
+}
+
+.j-text-sm {
+	font-size: .875rem;
+}
+
+.j-text-base {
+	font-size: 1rem;
+}
+
+.j-text-lg {
+	font-size: 1.125rem;
+}
+
+.j-text-xl {
+	font-size: 1.25rem;
+}
+
+.j-text-2xl {
+	font-size: 1.5rem;
+}
+
+.j-text-3xl {
+	font-size: 1.875rem;
+}
+
+.j-text-4xl {
+	font-size: 2.25rem;
+}
+
+.j-text-5xl {
+	font-size: 3rem;
+}
+

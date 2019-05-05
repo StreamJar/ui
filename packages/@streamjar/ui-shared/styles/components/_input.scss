@@ -94,7 +94,7 @@
 		@include j-primary-color(border-color, primary);
 
 		&::placeholder {
-			color: rgba(#FFF, 0.4);
+			@include j-primary-color(color, text, 0.3);
 		}
 
 		&:focus {

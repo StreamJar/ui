@@ -38,6 +38,7 @@ html {
 .j-dark {
 	--j-theme-background: 29, 29, 29;
 	--j-theme-background-accent: 39, 39, 39;
+	--j-theme-background-accent-2: 31, 31, 31;
 
 	--j-theme-primary: 100, 54, 136;
 	--j-theme-primary-text: 255, 255, 255;
@@ -52,6 +53,7 @@ html {
 .j-light {
 	--j-theme-background: 222, 216, 227;
 	--j-theme-background-accent: 241, 238, 243;
+	--j-theme-background-accent-2: 249, 249, 249;
 	--j-theme-background-inverse: 31, 31, 31;
 
 	--j-theme-primary: 100, 54, 136;
@@ -78,6 +80,10 @@ html {
 		@include j-primary-color(background-color, background-accent);
 	}
 
+	.j-theme-bg-background-accent-2 {
+		@include j-primary-color(background-color, background-accent-2);
+	}
+
 	.j-theme-bg-primary {
 		@include j-primary-color(background-color, primary);
 	}
@@ -85,12 +91,16 @@ html {
 	.j-theme-bg-gradient {
 		@include j-primary-color(background, gradient);
 	}
+
+	.j-theme-bg-focus {
+		@include j-primary-color(background, focus);
+	}
 }
 
 
 .j-container {
 	padding: 15px 20px;
 	margin-bottom: 20px;
-	background: #FFF;
+	@include j-primary-color(background-color, background-accent);
 	border-radius: 4px;
 }
