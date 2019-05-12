@@ -2,14 +2,18 @@
 @import '../utils/helpers';
 
 .jar-popup {
-	width: 100vw;
-	height: 100vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 
 	.jar-popup__container {
 		width: 100%;
 		max-width: 400px !important;
 		@include j-primary-color(background, gradient);
 		padding: 30px;
+		margin: 10px;
 
 		&-tagline {
 			opacity: 0.5;
