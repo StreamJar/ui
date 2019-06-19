@@ -26,7 +26,7 @@ export class JarRadioComponent implements OnDestroy {
 	@HostBinding('attr.tabIndex')
 	public tabIndex = 0;
 
-	@ViewChild('input')
+	@ViewChild('input', { static: true })
 	public input: ElementRef;
 
 	public name: string;

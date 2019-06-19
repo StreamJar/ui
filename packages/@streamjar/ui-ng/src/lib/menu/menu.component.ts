@@ -30,7 +30,7 @@ import {
 	templateUrl: './menu.component.html',
 })
 export class JarMenuComponent {
-	@ViewChild('templateRef')
+	@ViewChild('templateRef', { static: true })
 	public templateRef: TemplateRef<any>;
 
 	@Input()

@@ -13,7 +13,7 @@ export class JarFileInputComponent {
 	@Input()
 	public accept = '';
 
-	@ViewChild('input')
+	@ViewChild('input', { static: true })
 	private input: ElementRef;
 
 	private onTouch = (val?: string) => undefined;

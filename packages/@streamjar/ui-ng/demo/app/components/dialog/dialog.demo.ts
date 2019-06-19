@@ -182,7 +182,7 @@ export class DialogDemoComponent {
 
 }
 
-const TIMEOUT = 1000;
+const TIMEOUT = 1000000;
 
 @Component({
 	selector: 'jar-demo-dialog-stateful',
@@ -200,7 +200,7 @@ const TIMEOUT = 1000;
 })
 export class StatefulComponent {
 
-	@ViewChild('dialog')
+	@ViewChild('dialog', { static: true })
 	private dialog: JarDialogLoadableComponent;
 
 	public username: string;

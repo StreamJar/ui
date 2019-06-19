@@ -58,7 +58,7 @@ export class JarInputComponent implements ControlValueAccessor, OnInit {
 	@Input()
 	public validationErrors: { [key: string]: string } = {};
 
-	@ViewChild('el')
+	@ViewChild('el', { static: true })
 	public el;
 
 	public onChange = (val?: string) => undefined;

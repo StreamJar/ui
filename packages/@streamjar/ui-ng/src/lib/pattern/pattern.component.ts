@@ -18,7 +18,7 @@ declare var Elastic: any;
 	templateUrl: './pattern.component.html',
 })
 export class PatternComponent implements OnInit {
-	@ViewChild('svg')
+	@ViewChild('svg', { static: true })
 	private svg;
 
 	private tlConfig = {

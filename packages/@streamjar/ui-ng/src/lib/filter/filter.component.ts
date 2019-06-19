@@ -22,10 +22,10 @@ import { JarFilterSectionComponent } from './filter-section.component';
 export class JarFilterComponent implements OnDestroy {
 	private ref: EmbeddedViewRef<any>;
 
-	@ViewChild('settings')
+	@ViewChild('settings', { static: true })
 	private template;
 
-	@ViewChild('anchor', { read: ElementRef })
+	@ViewChild('anchor', { read: ElementRef, static: true })
 	private anchor: ElementRef;
 
 	@ContentChildren(JarFilterSectionComponent)
