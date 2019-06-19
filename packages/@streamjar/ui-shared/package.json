@@ -4,8 +4,8 @@
 	"author": "Luke Thompson <luke@streamjar.tv>",
 	"license": "MIT",
 	"dependencies": {
-		"@material/animation": "^0.39.0",
-		"@material/ripple": "^0.39.3",
-		"@types/material__ripple": "^0.35.0"
+		"@material/animation": "^1.0.0",
+		"@material/ripple": "^2.3.0",
+		"@types/material__ripple": "^0.35.2"
 	}
 }

@@ -79,7 +79,7 @@ export class Menu extends React.Component<{}, { anchor: HTMLButtonElement | null
 		this.state = { anchor: null };
 	}
 
-	public onChange(e?: React.MouseEvent<HTMLButtonElement>): void {
+	public onChange(e?: any): void {
 		if (e) {
 			const target = e.currentTarget;
 
