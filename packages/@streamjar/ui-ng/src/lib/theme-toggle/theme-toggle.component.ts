@@ -44,7 +44,7 @@ export class JarThemeToggleComponent {
 			} else if (body.className.includes('j-light')) {
 				body.setAttribute('class', body.className.replace('j-light', 'j-dark'));
 				this.isLight$.next(false);
-				localStorage.setItem('@streamjar/ui.theme', 'light')
+				localStorage.setItem('@streamjar/ui.theme', 'dark')
 
 				if (!supress) {
 					this.toast.info(`Spooky. It's dark!`);
