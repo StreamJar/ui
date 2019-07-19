@@ -23,6 +23,11 @@ export class TooltipDemo extends React.Component {
 				default: 'center',
 				type: `'start' | 'center' | 'end'`,
 				description: 'Where to place to tooltip on the position anchor ',
+			}, {
+				name: 'enabled',
+				default: 'true',
+				type: `boolean`,
+				description: 'If we should disable the tooltip',
 			}],
 		}],
 		examples: `
@@ -38,6 +43,7 @@ export class TooltipDemo extends React.Component {
 <Tooltip position="bottom" pull="start" message="Lots of tips" />
 <Tooltip position="bottom" pull="center" message="Lots of tips" />
 <Tooltip position="bottom" pull="end" message="Lots of tips" />
+<Tooltip position="bottom" pull="end" message="No tooltip" enabled={false} />
 		`,
 	};
 
@@ -78,6 +84,9 @@ export class TooltipDemo extends React.Component {
 					<div className="flex-20"><Tooltip position="bottom" pull="center" message="Lots of ti"><Button>bottom - center</Button></Tooltip></div>
 					<div className="flex-20"><Tooltip position="bottom" pull="end" message="Lots of tips"><Button>bottom - end</Button></Tooltip></div>
 					<div className="flex-20"></div>
+				</div>
+				<div className="flex-20">
+					<Tooltip position="bottom" pull="end" message="Lots of tips" enabled={false}><Button>disabled</Button></Tooltip>
 				</div>
 			</Demo>
 		);

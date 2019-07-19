@@ -16,6 +16,9 @@ export class TooltipDirective implements OnDestroy {
 	@Input('jarTooltipPos')
 	public position: position = 'top';
 
+	@Input('jarTooltipEnabled')
+	public enabled: boolean = true;
+
 	private self: TooltipRefService;
 
 	constructor(private viewContainerRef: ViewContainerRef, private tooltipService: TooltipService, private host: ElementRef) {
@@ -23,7 +26,9 @@ export class TooltipDirective implements OnDestroy {
 
 	@HostListener('mouseenter')
 	public show(): void {
-		this.self = this.tooltipService.createTooltip(this.tooltip, this.position, this.host, this.viewContainerRef);
+		if (this.canShow()) {
+			this.self = this.tooltipService.createTooltip(this.tooltip, this.position, this.host, this.viewContainerRef);
+		}
 	}
 
 	@HostListener('mouseleave')
@@ -31,5 +36,9 @@ export class TooltipDirective implements OnDestroy {
 		if (this.self && this.self.isAlive()) {
 			this.self.destroy();
 		}
+	}
+
+	private canShow(): boolean {
+		return !!this.tooltip && this.enabled;
 	}
 }
