@@ -1,6 +1,6 @@
 {
 	"name": "@streamjar/ui-react",
-	"version": "3.1.1",
+	"version": "3.1.2",
 	"author": "Luke Thompson <luke@streamjar.tv>",
 	"license": "MIT",
 	"main": "dist/index.js",
@@ -13,7 +13,7 @@
 	},
 	"dependencies": {
 		"@material/ripple": "^2.3.0",
-		"@streamjar/ui-shared": "^3.1.1",
+		"@streamjar/ui-shared": "^3.1.2",
 		"@types/classnames": "^2.2.8",
 		"@types/material__ripple": "^0.35.2",
 		"@types/react": "^16.4.13",
