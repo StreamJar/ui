@@ -16,7 +16,7 @@ export interface IPlatformsState {
 export class Platforms extends React.PureComponent<IPlatformsProps, IPlatformsState> {
 	public static defaultProps: Partial<IPlatformsProps> = {
 		onChange: () => { /* */ },
-		supported: ['mixer', 'twitch', 'smashcast'],
+		supported: ['mixer', 'twitch', 'smashcast', 'dlive', 'picarto'],
 	};
 
 	constructor(props: IPlatformsProps) {
@@ -74,6 +74,8 @@ export class Platforms extends React.PureComponent<IPlatformsProps, IPlatformsSt
 					{supported!.includes('mixer') && this.getPlatform('mixer', 'Mixer')}
 					{supported!.includes('twitch') && this.getPlatform('twitch', 'Twitch')}
 					{supported!.includes('smashcast') && this.getPlatform('smashcast', 'Smashcast')}
+					{supported!.includes('dlive') && this.getPlatform('dlive', 'DLive')}
+					{supported!.includes('picarto') && this.getPlatform('picarto', 'Picarto')}
 				</div>
 			</React.Fragment>
 		);

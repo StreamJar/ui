@@ -19,7 +19,7 @@ export class PlatformsDemoComponent {
             name: 'supported',
             type: ITableType.INPUT,
             inType: 'string[]',
-            defaultValue: "['mixer', 'twitch', 'smashcast']",
+            defaultValue: "['mixer', 'twitch', 'smashcast', 'dlive', 'picarto']",
             description: 'A list of platforms that can be selected.'
         }],
         name: 'Platforms',

@@ -91,6 +91,8 @@ export class ButtonDemo extends React.Component {
 	<Button raised={true} colour="platform-twitch"> Twitch </Button>
 	<Button raised={true} colour="platform-smashcast"> Smashcast </Button>
 	<Button raised={true} colour="platform-youtube"> YouTube </Button>
+	<Button raised={true} colour="platform-dlive"> DLive </Button>
+	<Button raised={true} colour="platform-picarto"> Picarto </Button>
 	<Button raised={true} colour="platform-discord"> Discord </Button>
 	<Button raised={true} colour="platform-paypal"> PayPal </Button>
 	<Button raised={true} colour="platform-stripe"> Stripe </Button>
@@ -139,6 +141,8 @@ export class ButtonDemo extends React.Component {
 					<Button raised={true} colour="platform-smashcast"> Smashcast </Button>
 					<Button raised={true} colour="platform-youtube"> YouTube </Button>
 					<Button raised={true} colour="platform-discord"> Discord </Button>
+					<Button raised={true} colour="platform-dlive"> DLive </Button>
+					<Button raised={true} colour="platform-picarto"> Picarto </Button>
 					<Button raised={true} colour="platform-paypal"> PayPal </Button>
 					<Button raised={true} colour="platform-stripe"> Stripe </Button>
 					<Button raised={true} colour="platform-gamewisp"> Gamewisp </Button>

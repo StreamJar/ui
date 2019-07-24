@@ -119,6 +119,8 @@ $buttonHeight: 36px;
 @include jar-button('platform-twitch', $platformTwitch);
 @include jar-button('platform-smashcast', $platformSmashcast);
 @include jar-button('platform-youtube', $platformYoutube);
+@include jar-button('platform-picarto', $platformPicarto);
+@include jar-button('platform-dlive', $platformDlive);
 @include jar-button('platform-discord', $platformDiscord);
 @include jar-button('platform-paypal', $platformPayPal);
 @include jar-button('platform-stripe', $platformStripe);
@@ -128,6 +130,7 @@ $buttonHeight: 36px;
 @include jar-button('platform-extralife', $platformExtralife);
 @include jar-button('platform-tiltify', $platformTiltify);
 @include jar-button('platform-spotify', $platformSpotify);
+
 
 @include jar-raised-button('primary', var(--j-theme-gradient), #FFF);
 @include jar-raised-button('accent', #FFF, #000);
@@ -139,6 +142,8 @@ $buttonHeight: 36px;
 @include jar-raised-button('platform-twitch', $platformTwitch, #FFF);
 @include jar-raised-button('platform-smashcast', $platformSmashcast, #FFF);
 @include jar-raised-button('platform-youtube', $platformYoutube, #FFF);
+@include jar-raised-button('platform-picarto', $platformPicarto, #FFF);
+@include jar-raised-button('platform-dlive', $platformDlive, #000);
 @include jar-raised-button('platform-discord', $platformDiscord, #FFF);
 @include jar-raised-button('platform-paypal', $platformPayPal, #FFF);
 @include jar-raised-button('platform-stripe', $platformStripe, #FFF);
@@ -148,4 +153,5 @@ $buttonHeight: 36px;
 @include jar-raised-button('platform-extralife', $platformExtralife, #FFF);
 @include jar-raised-button('platform-tiltify', $platformTiltify, #FFF);
 @include jar-raised-button('platform-spotify', $platformSpotify, #FFF);
+
 

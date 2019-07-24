@@ -10,12 +10,12 @@ export class PlatformsDemo extends React.Component<{}, { anchor: HTMLButtonEleme
 			name: 'Platforms',
 			props: [{
 				name: 'supported',
-				default: `['smashcast', 'twitch', 'mixer]`,
+				default: `['smashcast', 'twitch', 'mixer', 'picarto', 'dlive']`,
 				description: 'Platforms that are supported under this account',
 				type: 'string[]',
 			}, {
 				name: 'value',
-				default: `['smashcast', 'twitch', 'mixer]`,
+				default: `['smashcast', 'twitch', 'mixer', 'picarto', 'dlive']`,
 				description: 'Current value',
 				type: 'string[]',
 			}, {
