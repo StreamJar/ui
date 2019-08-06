@@ -87,6 +87,8 @@ export class JarInputComponent implements ControlValueAccessor, OnInit {
 
 	public writeValue(obj: any): void {
 		this.internalValue = obj;
+		this.onChange(this.internalValue);
+
 		this.cd.detectChanges();
 	}
 
@@ -119,7 +121,7 @@ export class JarInputComponent implements ControlValueAccessor, OnInit {
 	}
 
 	private parseErrors(): void {
-		if (!this.control || !this.control.errors) {
+		if (!this.control || !this.control.errors || this.control.valid) {
 			this.error$.next('');
 
 			return;
@@ -138,6 +140,7 @@ export class JarInputComponent implements ControlValueAccessor, OnInit {
 
 	public focus(isFocus: boolean): void {
 		this.focus$.next(isFocus);
+		this.parseErrors();
 	}
 }
 
