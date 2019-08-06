@@ -88,6 +88,7 @@ export class JarInputComponent implements ControlValueAccessor, OnInit {
 	public writeValue(obj: any): void {
 		this.internalValue = obj;
 		this.onChange(this.internalValue);
+		this.parseErrors();
 
 		this.cd.detectChanges();
 	}
