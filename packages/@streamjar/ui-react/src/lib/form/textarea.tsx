@@ -74,7 +74,7 @@ export class Textarea extends React.PureComponent<ITextareaProps, ITextareaState
 			value,
 		};
 
-		const error =  (
+		const error = (
 			<div className="jar-textarea__error" style={{ paddingTop: 5 }}>
 				<Tooltip message={state.getMessage(name!)} position="top"><Icon icon="error_outline"></Icon></Tooltip>
 			</div>
@@ -85,9 +85,10 @@ export class Textarea extends React.PureComponent<ITextareaProps, ITextareaState
 				{title && <InputLabel>{title}</InputLabel>}
 
 				<div className={`jar-textarea layout-column ${errored ? 'jar-textarea-error' : ''}`}>
-					{resize && <TextareaAutosize {...teProps} />}
-					{!resize && <textarea {...teProps} />}
+					{resize && <TextareaAutosize tabIndex={0} {...teProps} />}
+					{!resize && <textarea tabIndex={0} {...teProps} />}
 					{errored && error}
+					{errored && <div className="jar-textarea__touchable-error"> {state.getMessage(name!)} </div>}
 				</div>
 			</React.Fragment>
 		);

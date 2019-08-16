@@ -101,3 +101,42 @@ $radio-size: 20px;
 		visibility: hidden;
 	}
 }
+
+.j-touchable .jar-radio {
+	.jar-radio__fill {
+		animation: none;
+		width: 24px;
+		height: 24px;
+	}
+
+	.jar-radio__circle {
+		animation: none;
+		width: 24px;
+		height: 24px;
+		border-width: 4px;
+	}
+
+	.jar-radio__inner {
+		animation: none;
+		width: 24px;
+		height: 24px;
+	}
+
+	.jar-radio__label {
+		line-height: 24px;
+	}
+
+	&-focused {
+		.jar-radio__circle {
+			@include j-primary-color-static(border-color, touchable-outline);
+		}
+
+		.jar-radio__fill {
+			@include j-primary-color-static(background-color, touchable-outline);
+		}
+	}
+		.jar-checkbox-inner {
+			// @include j-primary-color-static(color, primary-text);
+			// @include j-primary-color-static(background-color, touchable-bg);
+		}
+}

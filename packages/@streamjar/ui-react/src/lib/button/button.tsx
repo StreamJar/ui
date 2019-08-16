@@ -64,7 +64,7 @@ export class Button extends React.PureComponent<IButtonProps> {
 		const content: string = classnames({ 'jar-button__text': true, 'jar-button__text-hasIcon': !!icon });
 
 		return (
-			<button type={type} className="jarBtn" onClick={onClick} disabled={isDisabled}>
+			<button tabIndex={0} type={type as any} className="jarBtn" onClick={onClick} disabled={isDisabled}>
 				<div className={parent} data-colour={colour}>
 					{!isDisabled && <Ripple />}
 

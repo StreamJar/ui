@@ -118,3 +118,25 @@ $checkbox-height: 24px;
 @include jar-checkbox('platform-spotify', $platformSpotify);
 @include jar-checkbox('platform-extralife', $platformExtralife);
 @include jar-checkbox('platform-tiltify', $platformTiltify);
+
+.j-touchable .jar-checkbox {
+	.jar-checkbox-inner {
+		transition: none;
+		border-width: 4px;
+		width: $checkbox-height + 4px;
+		height: $checkbox-height + 4px;
+	}
+	.jar-checkbox-label {
+		line-height: $checkbox-height + 4px;
+	}
+
+    &:focus {
+		.jar-checkbox-inner {
+			@include j-primary-color-static(color, primary-text);
+			@include j-primary-color-static(background-color, touchable-bg);
+			@include j-primary-color-static(border-color, touchable-outline);
+		}
+
+        outline: none;
+    }
+}

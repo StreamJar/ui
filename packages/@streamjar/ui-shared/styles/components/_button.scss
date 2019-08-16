@@ -149,3 +149,20 @@ $buttonHeight: 36px;
 @include jar-raised-button('platform-tiltify', $platformTiltify, #FFF);
 @include jar-raised-button('platform-spotify', $platformSpotify, #FFF);
 
+
+.j-touchable [jarBtn], .j-touchable .jarBtn {
+	.jar-button:not(.jar-button-disabled) {
+		transition: none;
+		border: 4px solid transparent;
+	}
+
+    &:focus {
+		.jar-button:not(.jar-button-disabled) {
+			@include j-primary-color-static(color, primary-text);
+			@include j-primary-color-static(background-color, touchable-bg);
+			@include j-primary-color-static(border-color, touchable-outline);
+		}
+
+        outline: none;
+    }
+}

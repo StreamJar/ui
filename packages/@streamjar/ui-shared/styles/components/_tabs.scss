@@ -29,8 +29,24 @@
 	@include j-primary-color(color, headings);
 
 	&--disabled {
-		opacity: 0.5;
+		@include j-primary-color(color, headings, 0.2);
 		cursor: not-allowed;
 		filter: grayscale(1);
+	}
+
+	&:not(.jar-tab--active) {
+		@include j-primary-color(color, headings, 0.6);
+	}
+}
+
+.j-touchable .jar-tab {
+	border: 4px solid transparent;
+
+	&:focus {
+		outline: none;
+		border: 4px solid;
+		@include j-primary-color-static(color, primary-text);
+		@include j-primary-color(background, touchable-bg);
+		@include j-primary-color(border-color, touchable-outline);
 	}
 }

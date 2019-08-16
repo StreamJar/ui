@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Transition } from 'react-transition-group';
+import { FocusTrap, ArcScope, Button as Buttons, ArcEvent, FocusExclude } from '@mixer/arcade-machine-react';
 
 import { Portal } from '../outlet/portal';
 import { Button } from '../button';
@@ -89,7 +90,7 @@ const DEFAULT: React.CSSProperties = {
 	transition: `${ANIMATION}ms cubic-bezier(0.25, 0.8, 0.25, 1)`,
 };
 
-const CLASSES: { [key: string]: React.CSSProperties} = {
+const CLASSES: { [key: string]: React.CSSProperties } = {
 	entered: { transform: 'translateY(0) scale(1)' },
 	entering: { transform: 'translateY(0) scale(0.9)' },
 	exiting: { transform: 'translateY(0) scale(0.9)' },
@@ -100,8 +101,8 @@ const OVERLAY_BASE: React.CSSProperties = {
 	transition: `${ANIMATION}ms cubic-bezier(0.25, 0.8, 0.25, 1)`,
 };
 
-const OVERLAY_CLASSES: { [key: string]: React.CSSProperties} = {
-	entered: { opacity: 1},
+const OVERLAY_CLASSES: { [key: string]: React.CSSProperties } = {
+	entered: { opacity: 1 },
 	entering: { opacity: 1 },
 	exiting: { opacity: 0 },
 };
@@ -116,7 +117,7 @@ export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDi
 	public abstract initialState(): S;
 
 	public dialogDidOpen() { /* */ }
-	public dialogWillClose()  { /* */ }
+	public dialogWillClose() { /* */ }
 
 	public componentDidUpdate(prev: IDialogProps & P) {
 		if (prev.show !== this.props.show) {
@@ -155,7 +156,7 @@ export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDi
 
 		this.initState = data.state;
 
-		this.state = { jarOpen: this.props.show || false, jarDialog: data, ...(this.initialState() as any)};
+		this.state = { jarOpen: this.props.show || false, jarDialog: data, ...(this.initialState() as any) };
 	}
 
 	public close(data: object | null = null): void {
@@ -180,12 +181,18 @@ export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDi
 		setTimeout(() => {
 
 			this.props.onClose(data);
-		},         ANIMATION);
+		}, ANIMATION);
 	}
 
 	public closeBackdrop = (event: React.MouseEvent<HTMLDivElement>): void => {
 		if (event.currentTarget === event.target) {
 			this.close(null);
+		}
+	}
+
+	public handleBack = (evt: ArcEvent): void => {
+		if (evt.event === Buttons.Back) {
+			this.close();
 		}
 	}
 
@@ -221,17 +228,23 @@ export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDi
 
 		return (
 			<Portal>
-				<div className="jar-dialog-target" style={{position: 'relative', zIndex: 10000 }}>
-					<div className="jar-overlay layout-column layout-align-center-center"
-						onClick={this.closeBackdrop}
-						style={{...OVERLAY_BASE, ...OVERLAY_CLASSES[state]}}>
-						<div className="jar-dialog layout-column" style={{...(jarDialog as any), ...DEFAULT, ...CLASSES[state]}}>
-							{jarDialog.state === DialogStatus.LOADING && overlay}
+				<FocusTrap>
+					<ArcScope onButton={this.handleBack}>
+						<FocusExclude active={jarDialog.state === DialogStatus.LOADING}>
+							<div className="jar-dialog-target" style={{ position: 'relative', zIndex: 10000 }}>
+								<div className="jar-overlay layout-column layout-align-center-center"
+									onClick={this.closeBackdrop}
+									style={{ ...OVERLAY_BASE, ...OVERLAY_CLASSES[state] }}>
+									<div className="jar-dialog layout-column" style={{ ...(jarDialog as any), ...DEFAULT, ...CLASSES[state] }}>
+										{jarDialog.state === DialogStatus.LOADING && overlay}
 
-							{dialog}
-						</div>
-					</div>
-				</div>
+										{dialog}
+									</div>
+								</div>
+							</div>
+						</FocusExclude>
+					</ArcScope>
+				</FocusTrap>
 			</Portal>
 		);
 	}
@@ -240,7 +253,7 @@ export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDi
 		const { jarOpen } = this.state;
 
 		return (
-			<Transition in={jarOpen} appear={true} unmountOnExit={true} timeout={{ exit: 200, enter: 0}} children={this.getDialog} />
+			<Transition in={jarOpen} appear={true} unmountOnExit={true} timeout={{ exit: 200, enter: 0 }} children={this.getDialog} />
 		);
 	}
 

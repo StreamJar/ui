@@ -16,7 +16,7 @@ const DEFAULT: React.CSSProperties = {
 	transition: '300ms cubic-bezier(0.25, 0.8, 0.25, 1)',
 };
 
-const CLASSES: { [key: string]: React.CSSProperties} = {
+const CLASSES: { [key: string]: React.CSSProperties } = {
 	entered: { opacity: 1, transform: 'translateY(0%) scale(1)' },
 	entering: { opacity: 1, transform: 'translateY(0%) scale(1)' },
 	exiting: { opacity: 0, transform: 'translateY(50%) scale(1)' },
@@ -49,7 +49,9 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 		const ref: HTMLElement = ReactDOM.findDOMNode(this) as any;
 
 		ref.addEventListener('mouseover', this.mouseOver);
+		ref.addEventListener('focus', this.mouseOver);
 		ref.addEventListener('mouseleave', this.mouseLeave);
+		ref.addEventListener('blur', this.mouseLeave);
 
 		this.childRef = ref;
 	}
@@ -92,7 +94,7 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 	private getTooltip = (state: string): JSX.Element => {
 		const { message } = this.props;
 
-		return <div className="jar-tooltip" style={{ ...DEFAULT, ...CLASSES[state]}}> {message} </div>;
+		return <div className="jar-tooltip" style={{ ...DEFAULT, ...CLASSES[state] }}> {message} </div>;
 	}
 
 	private mouseOver = (): void => {
@@ -113,6 +115,6 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 			this.setState({
 				anchor: null,
 			});
-		},         100);
+		}, 100);
 	}
 }

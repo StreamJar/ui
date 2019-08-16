@@ -10,6 +10,10 @@
 	border: 1px solid;
 	@include j-primary-color(border-color, primary);
 
+	&__touchable-error {
+		display: none;
+	}
+
 	&-focus {
 		background: rgba(0, 0, 0, 0.05);
 
@@ -65,6 +69,10 @@
 	padding: 5px;
 	position: relative;
 
+	&__touchable-error {
+		display: none;
+	}
+
 	&-error {
 		.jar-textarea__container {
 			border-color: #8c3535 !important;
@@ -102,6 +110,76 @@
 			outline: none;
 			border: 1px solid;
 			@include j-primary-color(border-color, focus);
+		}
+	}
+}
+
+
+.j-touchable .jar-input{
+	border-width: 4px;
+	@include j-primary-color-static(border-color, focus, 0.2);
+	transition: none;
+
+	input, textarea {
+		transition: none;
+	}
+
+	&__touchable-error {
+		position: absolute;
+		right: 8px;
+		bottom: 9px;
+		background: #8c3535;
+		padding: 2px 4px;
+		font-size: 14px;
+		display: initial;
+		color: #FFF;
+	}
+
+	&-focus {
+		transition: none;
+		input, textarea {
+			transition: none;
+			color: #FFF;
+		}
+		@include j-primary-color-static(border-color, touchable-outline);
+		@include j-primary-color-static(background-color, touchable-bg);
+	}
+}
+
+.j-touchable .jar-textarea {
+	&__error {
+		@include j-primary-color(color, focus);
+	}
+
+	&__touchable-error {
+		position: absolute;
+		right: 8px;
+		bottom: 9px;
+		background: #8c3535;
+		padding: 2px 4px;
+		font-size: 14px;
+		color: #FFF;
+		display: initial;
+	}
+
+	&-error {
+		.jar-textarea__container:focus  {
+			background: #8c3535 !important;
+
+		}
+	}
+
+	.jar-textarea__container  {
+		border-width: 4px;
+		@include j-primary-color-static(border-color, focus, 0.2);
+		transition: none;
+
+		&:focus {
+			transition: none;
+			color: #FFF;
+
+			@include j-primary-color-static(border-color, touchable-outline);
+			@include j-primary-color-static(background-color, touchable-bg);
 		}
 	}
 }

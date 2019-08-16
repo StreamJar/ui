@@ -112,7 +112,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 
 		this.to = setTimeout(() => {
 			this.props.onSearch(text);
-		},                   200) as any;
+		}, 200) as any;
 	}
 
 	public render(): JSX.Element {
@@ -155,7 +155,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 			<React.Fragment>
 				{title && <InputLabel>{title}</InputLabel>}
 
-				<div className={classes} onClick={this.toggleDropdown}>
+				<div className={classes} onClick={this.toggleDropdown} tabIndex={0}>
 					<div className={wrapper}>
 						{this.getValidItems()}
 					</div>
@@ -172,7 +172,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 							{search && searchAsOption && <Button icon="add" round={true} onClick={this.addItem} />}
 						</div>
 						{search && searching && <Spinner size={25} />}
-						{search && !searching && !childs.length && <p style={{textAlign: 'center', fontWeight: 'bold', paddingTop: 5}}> No results </p>}
+						{search && !searching && !childs.length && <p style={{ textAlign: 'center', fontWeight: 'bold', paddingTop: 5 }}> No results </p>}
 					</div>
 
 					{!searching && childs}
@@ -222,7 +222,7 @@ export class SelectItem extends React.PureComponent<ISelectItemProps> {
 		const active = (values || []).includes(value);
 
 		return (
-			<div className="jar-select-item" onClick={this.props.onClick}>
+			<div className="jar-select-item" onClick={this.props.onClick} tabIndex={0}>
 				<Ripple />
 
 				<div className="jar-select-item__container layout-row">

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FocusTrap, ArcEvent, Button as Buttons, ArcScope } from '@mixer/arcade-machine-react';
 
 import { Button } from '../button';
 import { Anchor } from '../outlet/anchor';
@@ -51,6 +52,12 @@ export class Filter extends React.PureComponent<{}, IFilterState> {
 		this.setState({ anchor: null });
 	}
 
+	public handleBack = (evt: ArcEvent): void => {
+		if (evt.event === Buttons.Back) {
+			this.close();
+		}
+	}
+
 	public render(): JSX.Element {
 		const { children } = this.props;
 		const { anchor } = this.state;
@@ -59,11 +66,15 @@ export class Filter extends React.PureComponent<{}, IFilterState> {
 
 		const anchorEl = (
 			<Anchor width={width} el={anchor!} pull="end">
-				<div className="jar-filter j-dark" ref={this.ref}>
-					<div className="jar-filter__settings layout-row">
-						{children}
-					</div>
-				</div>
+				<FocusTrap>
+					<ArcScope onButton={this.handleBack}>
+						<div className="jar-filter j-dark" ref={this.ref}>
+							<div className="jar-filter__settings layout-row">
+								{children}
+							</div>
+						</div>
+					</ArcScope>
+				</FocusTrap>
 			</Anchor>
 		);
 

@@ -1,27 +1,32 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+
 import { Ripple } from '../ripple';
 
 export interface ITabProps {
 	value: string | boolean | number;
 	disabled?: boolean;
+	active?: boolean;
+	onClick?(name: string | boolean | number): void;
 	onChange?(): void;
 }
 
 export class Tab extends React.PureComponent<ITabProps> {
 	public static defaultProps: Partial<ITabProps> = {
 		disabled: false,
+		active: false,
 		onChange: () => { /* */ },
 	};
 
 	public render(): JSX.Element {
-		const { children, disabled } = this.props;
+		const { children, disabled, active } = this.props;
 
 		const classes: string = classNames('jar-tab', {
 			'jar-tab--disabled': disabled,
+			'jar-tab--active': active,
 		});
 
-		return <div className={classes} onClick={this.click}> <Ripple enabled={!disabled} /> {children} </div>;
+		return <div tabIndex={0} className={classes} onClick={this.click}> <Ripple enabled={!disabled} /> {children} </div>;
 	}
 
 	private click = (): void => {
@@ -30,6 +35,10 @@ export class Tab extends React.PureComponent<ITabProps> {
 		}
 
 		this.props.onChange!();
+
+		if (this.props.onClick) {
+			this.props.onClick(this.props.value);
+		}
 	}
 }
 
@@ -105,7 +114,7 @@ export class Tabs extends React.PureComponent<ITabsProps, ITabsState> {
 		this.valueIndex = new Map();
 
 		const children = React.Children.map(this.props.children, (child: any, index: number) => {
-			const item = child as React.ReactElement<ITabsProps & { children: string }> | null;
+			const item = child as React.ReactElement<ITabProps & { children: string }> | null;
 
 			if (child.type !== Tab || !item) {
 				return item;
@@ -115,6 +124,7 @@ export class Tabs extends React.PureComponent<ITabsProps, ITabsState> {
 
 			return React.cloneElement(item, {
 				...item.props,
+				active: item.props.value === this.state.value,
 				onChange: () => { this.selectTab(item.props.value); },
 			});
 		});

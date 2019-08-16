@@ -130,7 +130,7 @@ export class Input extends React.PureComponent<IInputProps, IInputState> {
 			'layout-row': true,
 		});
 
-		const error =  (
+		const error = (
 			<div className="jar-input__error" style={{ paddingTop: 5 }}>
 				<Tooltip message={state.getMessage(name)} position="top"><Icon icon="error_outline"></Icon></Tooltip>
 			</div>
@@ -160,9 +160,10 @@ export class Input extends React.PureComponent<IInputProps, IInputState> {
 						onFocus={this.focus}
 						onBlur={this.blur}
 						tabIndex={0}
-						/>
+					/>
 
 					{errored && error}
+					{errored && <div className="jar-input__touchable-error"> {state.getMessage(name)} </div>}
 					{suffix && <div style={suffixStyles}> {suffix} </div>}
 				</div>
 			</React.Fragment>

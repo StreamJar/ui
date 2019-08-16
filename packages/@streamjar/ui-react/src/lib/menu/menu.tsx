@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Transition } from 'react-transition-group';
 
 import { Anchor } from '../outlet/anchor';
+import { FocusTrap, ArcScope, ArcEvent, Button as Buttons } from '@mixer/arcade-machine-react';
 
 export interface IMenuProps {
 	width?: number;
@@ -22,7 +23,7 @@ const DEFAULT: React.CSSProperties = {
 	transition: '200ms ease-in-out',
 };
 
-const CLASSES: { [key: string]: React.CSSProperties} = {
+const CLASSES: { [key: string]: React.CSSProperties } = {
 	entered: { opacity: 1, marginTop: 0 },
 	entering: { opacity: 1, marginTop: 0 },
 	exiting: { opacity: 0, marginTop: -30 },
@@ -66,7 +67,7 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 	}
 
 	public close = (event: MouseEvent | null): void => {
-		if (event && this.menuRef.current && this.menuRef.current!.contains(event.target as any) && this.props.supportContentClick) {
+		if (event && this.menuRef.current && this.menuRef.current.contains(event.target as any) && this.props.supportContentClick) {
 			return;
 		}
 
@@ -83,15 +84,25 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 			this.setState({ anchor: null });
 			this.props.onClose(event);
 			this.componentWillUnmount();
-		},         100);
+		}, 100);
+	}
+
+	public handleBack = (evt: ArcEvent): void => {
+		if (evt.event === Buttons.Back) {
+			this.close(null);
+		}
 	}
 
 	public renderMenu = (state: string): JSX.Element => {
 		const { children } = this.props;
 
 		return (
-			<div ref={this.menuRef} className="jar-menu j-dark layout-column" style={{...DEFAULT, ...CLASSES[state]}}>
-				{children}
+			<div ref={this.menuRef} className="jar-menu j-dark layout-column" style={{ ...DEFAULT, ...CLASSES[state] }}>
+				<FocusTrap>
+					<ArcScope onButton={this.handleBack}>
+						{children}
+					</ArcScope>
+				</FocusTrap>
 			</div>
 		);
 	}

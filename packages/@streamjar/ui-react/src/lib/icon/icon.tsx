@@ -19,10 +19,17 @@ export class Icon extends React.PureComponent<IIconProps> {
 			icon = icon.replace('jar_', '');
 		}
 
+		if (icon.startsWith('fa_')) {
+			family = 'fa';
+			icon = icon.replace('fa_', '');
+		}
+
 		if (family === 'material') {
 			container = <i className="material-icons">{icon}</i>;
+		} else if (family === 'fa') {
+			container = <div className="jar-icons"><InlineSVG cacheRequests={true} uniquifyIDs={true} src={`/assets/icons/fa/${icon}.svg`}></InlineSVG></div>;
 		} else {
-			container = <div className="jar-icons"><InlineSVG src={`/assets/icons/${icon}.svg`}></InlineSVG></div> ;
+			container = <div className="jar-icons"><InlineSVG cacheRequests={true} uniquifyIDs={true} src={`/assets/icons/${icon}.svg`}></InlineSVG></div>;
 		}
 
 		return <div className="jar-icon" style={{ color: colour }}>{container}</div>;
