@@ -1,0 +1,30 @@
+@import '~@streamjar/ui-shared/styles/ui';
+
+#story-root {
+	padding: 0px 45px;
+}
+
+.info-table {
+	color: #FFF;
+
+	thead {
+		th {
+			padding: 10px;
+			border-color: transparent;
+			color: #FFF !important;
+		}
+
+		font-weight: bold;
+		background: #643688;
+	}
+
+	tbody tr td {
+		padding: 10px;
+		border-color: rgba(#FFF, 0.1);
+		color: #FFF;
+	}
+}
+
+#root pre {
+	background-color: #cbcbcb !important;
+}
