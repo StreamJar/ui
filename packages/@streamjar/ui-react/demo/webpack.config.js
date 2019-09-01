@@ -38,7 +38,9 @@ module.exports = {
 					{
 						loader: 'sass-loader',
 						options: {
-							includePaths: glob.sync('../node_modules').map((d) => path.join(__dirname, d)),
+							sassOptions: {
+								includePaths: glob.sync('../node_modules').map((d) => path.join(__dirname, d)),
+							}
 						}
 					},
 				],
