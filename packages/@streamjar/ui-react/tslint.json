@@ -3,6 +3,7 @@
 	"rules": {
 		"mocha-no-side-effect-code": false,
 		"newline-per-chained-call": false,
+		"no-single-line-block-comment": false,
 		"indent": [
 			true,
 			"tabs"

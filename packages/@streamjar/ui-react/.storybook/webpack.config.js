@@ -2,19 +2,20 @@ const glob = require('glob');
 const path = require('path');
 
 module.exports = ({ config }) => {
+	// TS Loader
 	config.module.rules.push({
-	  test: /\.(ts|tsx)$/,
-	  use: [
-		{
-		  loader: require.resolve('awesome-typescript-loader'),
-		},
-		// Optional
-		{
-		  loader: require.resolve('react-docgen-typescript-loader'),
-		},
-	  ],
+		test: /\.(ts|tsx)$/,
+		use: [
+			{
+				loader: require.resolve('awesome-typescript-loader'),
+			},
+			{
+				loader: require.resolve('react-docgen-typescript-loader'),
+			},
+		],
 	});
 
+	// CSS Loader
 	config.module.rules.push({
 		test: /\.scss$/,
 		use: [
@@ -34,7 +35,8 @@ module.exports = ({ config }) => {
 			},
 		],
 	})
+
 	config.resolve.extensions.push('.ts', '.tsx', '.scss');
 
 	return config;
-  };
+};

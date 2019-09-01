@@ -1,11 +1,22 @@
 import * as React from 'react';
-import { storiesOf } from '@storybook/react';
 import { Spinner } from './Spinner';
 
-storiesOf('Components/Spinner', module)
-	.add('standard spinner', () => (
-		<Spinner />
-	))
-	.add('custom size', () => (
-		<Spinner size={100}/>
-	));
+export default {
+	title: 'StreamJar UI|Components/Spinner',
+	parameters: {
+		component: Spinner,
+	},
+};
+
+export const SimpleSpinner = () => {
+	return <Spinner />;
+};
+
+export const CustomSize = () => {
+	return (
+		<>
+			<Spinner size={100} />
+			<Spinner size={10} />
+		</>
+	);
+};

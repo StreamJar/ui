@@ -23,5 +23,8 @@
 	],
 	"exclude": [
 		"./src/lib/**/*"
-	]
+	],
+	"awesomeTypescriptLoaderOptions": {
+		"ignoreDiagnostics": [7005]
+	  }
 }

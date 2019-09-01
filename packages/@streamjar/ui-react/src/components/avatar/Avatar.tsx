@@ -4,7 +4,9 @@ import { Md5 } from 'ts-md5';
 export type IAvatarValue = string | { email?: string; avatar?: string } | undefined;
 
 export interface IAvatarProps {
+	/** Size of the avatar */
 	size?: number;
+	/** A link to the avatar or an object with their email _or_ profile avatar */
 	data?: IAvatarValue;
 }
 
@@ -26,6 +28,9 @@ export function fetchAvatar(data: IAvatarValue): string {
 	return '/assets/noavatar.png';
 }
 
+/**
+ * Display a StreamJar avatar from various sources
+ */
 export const Avatar: React.FC<IAvatarProps> = ({ size = 60 , data }: IAvatarProps) => {
 	const avatar: string = fetchAvatar(data);
 

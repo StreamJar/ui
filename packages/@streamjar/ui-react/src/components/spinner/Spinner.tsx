@@ -1,9 +1,15 @@
 import * as React from 'react';
 export interface ISpinnerProps {
-	size?: number;
+	/**
+	 * aaa
+	 */
+	size?: number; // @default 50
 }
 
-export const Spinner: React.FC<ISpinnerProps> = ({ size = 50 }: ISpinnerProps) => {
+/**
+ * Display a forever loading spinner.
+ */
+export const Spinner: React.FC<ISpinnerProps> = React.memo(({ size = 50 }: ISpinnerProps) => {
 	return (
 		<div className="jar-spinner-outer" style={{ width: `${size}px`, height: `${size}px` }}>
 			<div className="jar-spinner" style={{ width: `${size}px`, height: `${size}px` }}>
@@ -13,4 +19,4 @@ export const Spinner: React.FC<ISpinnerProps> = ({ size = 50 }: ISpinnerProps) =
 			</div>
 		</div>
 	);
-}
+});

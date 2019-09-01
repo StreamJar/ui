@@ -1,62 +1,47 @@
 import { configure, addParameters, addDecorator } from '@storybook/react';
-import { themes, create } from '@storybook/theming';
+import { create } from '@storybook/theming';
+import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks';
+import { withA11y } from '@storybook/addon-a11y';
+import * as React from 'react';
 import './styles.scss';
-import { withInfo } from '@storybook/addon-info';
-
-// automatically import all files ending in *.stories.js
-const req = require.context('../src', true, /\.story\.tsx$/);
-
-function loadStories() {
-	req.keys().forEach(filename => req(filename));
-}
 
 const theme = create({
 	base: 'dark',
 
-	// UI
 	appBg: '#643688',
+	appContentBg: '#272727',
+	appBorderColor: '#ffffff2e',
 
+	textInverseColor: 'red',
 	brandTitle: 'StreamJar UI',
 	brandUrl: 'https://streamjar.tv',
-
 })
 
+// Setup themeing
 addParameters({
 	options: {
 		showPanel: false,
+		isToolshown: true,
 		theme,
 	},
-})
+	docs: {
+		container: DocsContainer,
+		page: DocsPage,
+	},
+});
 
-addDecorator(withInfo({
-	inline: true, styles: {
-		infoBody: {
-			border: 'none',
-			backgroundColor: 'transparent',
-			paddingBottom: 0,
-		},
-		propTableHead: {
-			marginTop: 30,
-			marginBottom: 10,
-			fontSize: 15
-		},
-		header: {
-			h1: {
-				opacity: 0.5,
-				fontSize: 12,
-			},
-			h2: {
-			}
-		},
-		source: {
-			h1: {
-				fontSize: 16,
-			}
-		},
-		tagStyle: {
-			color: 'red'
-		}
-	}
-}));
+// Setup a11y pluginx
+addDecorator(withA11y);
 
-configure(loadStories, module);
+// Setup Jar container
+addDecorator(story => (
+	<>
+		<div className="jar">
+			<div className="j-dark">
+				{story()}
+			</div>
+		</div>
+	</>
+));
+
+configure(require.context('../src', true, /\.story\.(tsx|mdx)$/), module);
