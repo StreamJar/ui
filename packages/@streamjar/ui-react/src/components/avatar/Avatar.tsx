@@ -31,7 +31,7 @@ export function fetchAvatar(data: IAvatarValue): string {
 /**
  * Display a StreamJar avatar from various sources
  */
-export const Avatar: React.FC<IAvatarProps> = ({ size = 60 , data }: IAvatarProps) => {
+export const Avatar: React.FC<IAvatarProps> = ({ size, data }: IAvatarProps) => {
 	const avatar: string = fetchAvatar(data);
 
 	return (
@@ -39,4 +39,8 @@ export const Avatar: React.FC<IAvatarProps> = ({ size = 60 , data }: IAvatarProp
 			<img alt="Avatar" className="jar-avatar" src={avatar} width={`${size}px`} height={`${size}px`} />
 		</div>
 	);
+};
+
+Avatar.defaultProps = {
+	size: 60,
 };

@@ -24,6 +24,7 @@
 		"missing-jsdoc": false,
 		"completed-docs": false,
 		"no-any": false,
+		"no-null-keyword": false,
 		"no-relative-imports": false,
 		"jsx-self-close": false,
 		"typedef": [

@@ -1,5 +1,9 @@
+@import '~@streamjar/ui-shared/styles/components/ripple';
 
 .jar {
+	font-family: "Open Sans", sans-serif !important;
+
+	@import '~@material/animation/functions';
 	@import '~@streamjar/ui-shared/styles/ui';
 
 	.material-icons {

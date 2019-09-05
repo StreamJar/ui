@@ -29,7 +29,7 @@ module.exports = ({ config }) => {
 				loader: 'sass-loader',
 				options: {
 					sassOptions: {
-						includePaths: glob.sync('../node_modules').map((d) => path.join(__dirname, d)),
+						includePaths: glob.sync(path.join(__dirname, '../node_modules')),
 					}
 				}
 			},

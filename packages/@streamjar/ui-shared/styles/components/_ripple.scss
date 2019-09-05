@@ -18,5 +18,21 @@
 		@include mdc-ripple-radius-unbounded;
 	}
 
-	// @include mdc-states-base-color(var(--j-theme-transparent));
+	@include mdc-ripple-surface;
+	@include mdc-ripple-radius-bounded;
+	@include mdc-states-hover-opacity(.05);
+	@include mdc-states-focus-opacity(.05);
+	@include mdc-states-press-opacity(.15);
+
+}
+
+
+// We have to define themes manually here since material/ripple implodes
+// when we give it CSS variables :(
+.j-dark .jar-ripple {
+	@include mdc-states-base-color(rgb(255, 255, 255));
+}
+
+.j-light .jar-ripple {
+	@include mdc-states-base-color(rgb(0, 0, 0));
 }
