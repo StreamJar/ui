@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Transition } from 'react-transition-group';
-
-import { Anchor } from '../../components/anchor/Anchor';
 import { FocusTrap, ArcScope, ArcEvent, Button as Buttons } from '@mixer/arcade-machine-react';
+
+import { Anchor } from '../anchor/Anchor';
 
 export interface IMenuProps {
 	width?: number;
@@ -84,7 +84,7 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 			this.setState({ anchor: null });
 			this.props.onClose(event);
 			this.componentWillUnmount();
-		}, 100);
+		},         100);
 	}
 
 	public handleBack = (evt: ArcEvent): void => {

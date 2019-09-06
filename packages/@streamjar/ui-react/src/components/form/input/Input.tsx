@@ -23,7 +23,7 @@ export interface IInputProps<T extends string | number | string[] = string> exte
 	suffixComponent?: JSX.Element;
 
 	/** Title of the input */
-	title: string;
+	title?: string;
 
 	/** The input value */
 	value?: T;
