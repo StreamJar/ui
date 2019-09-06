@@ -65,7 +65,7 @@ export class JarSelectComponent implements ControlValueAccessor, OnDestroy, OnIn
 	@ViewChild('menu', { static: true })
 	public menu: JarMenuComponent;
 
-	@ViewChild('filterRef', { read: ElementRef, static: true })
+	@ViewChild('filterRef', { static: true, read: ElementRef })
 	public filterRef: ElementRef<JarInputComponent>;
 
 	@Input()

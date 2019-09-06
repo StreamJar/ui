@@ -7,6 +7,7 @@ import { Anchor } from '../outlet/anchor';
 export interface ITooltipProps {
 	position?: string;
 	message: string;
+	enabled?: boolean;
 	pull?: string;
 }
 
@@ -66,6 +67,10 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 	}
 
 	public render(): JSX.Element {
+		if (this.props.enabled === false) {
+			return <>{this.props.children}</>;
+		}
+
 		const { position, pull } = this.props;
 		const { anchor, hide } = this.state;
 
@@ -91,13 +96,13 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 		);
 	}
 
-	private getTooltip = (state: string): JSX.Element => {
+	private readonly getTooltip = (state: string): JSX.Element => {
 		const { message } = this.props;
 
 		return <div className="jar-tooltip" style={{ ...DEFAULT, ...CLASSES[state] }}> {message} </div>;
 	}
 
-	private mouseOver = (): void => {
+	private readonly mouseOver = (): void => {
 		if (this.childRef) {
 			this.setState({
 				anchor: this.childRef,
@@ -106,7 +111,7 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 		}
 	}
 
-	private mouseLeave = (): void => {
+	private readonly mouseLeave = (): void => {
 		this.setState({
 			hide: true,
 		});

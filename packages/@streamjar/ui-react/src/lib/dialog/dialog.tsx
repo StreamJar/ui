@@ -107,7 +107,7 @@ const OVERLAY_CLASSES: { [key: string]: React.CSSProperties } = {
 	exiting: { opacity: 0 },
 };
 
-export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDialogProps & P, IDialogState & S> {
+export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<P & IDialogProps, IDialogState & S> {
 	public initState?: DialogStatus;
 
 	constructor(props: IDialogProps & P) {
@@ -122,7 +122,7 @@ export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDi
 	public componentDidUpdate(prev: IDialogProps & P) {
 		if (prev.show !== this.props.show) {
 			this.setState({
-				jarOpen: this.props.show,
+				jarOpen: this.props.show as any,
 			});
 
 			if (this.props.show) {
@@ -165,7 +165,7 @@ export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<IDi
 		}
 
 		this.setState({
-			jarOpen: false,
+			jarOpen: false as any,
 		});
 
 		this.dialogWillClose();

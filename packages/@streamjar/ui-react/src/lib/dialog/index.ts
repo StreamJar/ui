@@ -1,1 +1,1 @@
-export { BaseDialog, DialogStatus, DialogHeader, DialogContent, DialogFooter } from './dialog';
+export { BaseDialog, DialogStatus, DialogHeader, DialogContent, DialogFooter, IDialogProps, IDialogState } from './dialog';

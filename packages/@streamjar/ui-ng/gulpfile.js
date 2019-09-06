@@ -2,7 +2,6 @@
 
 const gulp = require('gulp');
 const del = require('del');
-const runSequence = require('run-sequence');
 const sass = require('node-sass');
 const inlineTemplate = require('gulp-inline-ng2-template');
 const exec = require('child_process').exec;
@@ -27,23 +26,6 @@ const scssProcessor = (stylePath, ext, styleFile, cb) => {
 gulp.task('clean', (cb) => {
 	del(['./dist']).then(() => cb());
 });
-
-/**
- * Build UI!
- */
-gulp.task('build', (cb) => {
-	runSequence(
-		'clean',
-		'build:clean',
-		'build:inline',
-		'build:setup',
-		'build:compile',
-		'build:copy-compiled',
-		'build:clean',
-		cb
-	);
-});
-
 
 /**
  * Inline all our templates and styles into the typescript components
@@ -93,3 +75,16 @@ gulp.task('build:copy-compiled', () => {
 gulp.task('build:clean', (cb) => {
 	del(['./.build-stage']).then(() => cb());
 });
+
+/**
+ * Build UI!
+ */
+gulp.task('build', gulp.series(
+	'clean',
+	'build:clean',
+	'build:inline',
+	'build:setup',
+	'build:compile',
+	'build:copy-compiled',
+	'build:clean',
+));

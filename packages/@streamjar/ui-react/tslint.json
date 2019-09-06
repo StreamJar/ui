@@ -23,6 +23,7 @@
 		"linebreak-style": false,
 		"missing-jsdoc": false,
 		"completed-docs": false,
+		"no-null-keyword": false,
 		"no-any": false,
 		"no-null-keyword": false,
 		"no-relative-imports": false,

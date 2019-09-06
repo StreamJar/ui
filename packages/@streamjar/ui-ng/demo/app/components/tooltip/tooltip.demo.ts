@@ -7,6 +7,7 @@ const html = `
 <button jarBtn jarTooltip="Testing" jarTooltipPos="left"> Tooltip Left! </button>
 <button jarBtn jarTooltip="Testing" jarTooltipPos="right"> Tooltip Right! </button>
 <button jarBtn jarTooltip="Testing" jarTooltipPos="bottom"> Tooltip Bottom! </button>
+<button jarBtn jarTooltip="Testing" jarTooltipPos="bottom" [jarTooltipEnabled]="false"> No Tooltip! </button>
 `
 
 @Component({
@@ -29,6 +30,12 @@ export class TooltipDemoComponent {
             inType: `'top' | 'bottom' | 'left' | 'right'`,
             defaultValue: 'top',
             description: 'Position of the tooltip.'
+        }, {
+            name: 'jarTooltipEnabled',
+            type: ITableType.INPUT,
+            inType: `boolean`,
+            defaultValue: 'true',
+            description: 'Whether to render the tooltip.'
         }],
         name: 'Tooltips',
         component: '[jarTooltip]',

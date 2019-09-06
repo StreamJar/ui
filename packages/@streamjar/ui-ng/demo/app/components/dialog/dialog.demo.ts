@@ -182,7 +182,7 @@ export class DialogDemoComponent {
 
 }
 
-const TIMEOUT = 1000;
+const TIMEOUT = 1000000;
 
 @Component({
 	selector: 'jar-demo-dialog-stateful',

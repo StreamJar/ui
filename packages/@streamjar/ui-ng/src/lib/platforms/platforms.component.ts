@@ -16,7 +16,7 @@ export const JAR_CHECKBOX_CONTROL_VALUE_ACCESSOR: any = {
 	templateUrl: './platforms.component.html',
 })
 export class PlatformsComponent implements ControlValueAccessor, OnInit, OnDestroy {
-	public static platforms = ['mixer', 'twitch', 'smashcast']
+	public static platforms = ['mixer', 'twitch', 'smashcast', 'dlive', 'picarto']
 	public all$ = new BehaviorSubject(true);
 	public value$ = new BehaviorSubject([...PlatformsComponent.platforms]);
 	public remainingCount = 0;

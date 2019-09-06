@@ -26,6 +26,7 @@
     "@types/react-event-listener": "^0.4.9",
     "@types/react-inlinesvg": "^0.8.1",
     "@types/react-transition-group": "^4.2.2",
+	"react-beautiful-dnd": "^11.0.4",
     "@types/storybook__react": "^4.0.2",
     "@types/yup": "^0.26.23",
     "classnames": "^2.2.6",
@@ -60,6 +61,7 @@
     "@storybook/theming": "^5.2.0-rc.1",
     "@types/jest": "^24.0.18",
     "@types/react-monaco-editor": "^0.16.0",
+	"@types/react-beautiful-dnd": "^11.0.2",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
@@ -81,5 +83,10 @@
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0"
+  },
+  "repository" : {
+	"type" : "git",
+	"url": "ssh://git@github.com/streamjar/ui.git"
   }
+
 }

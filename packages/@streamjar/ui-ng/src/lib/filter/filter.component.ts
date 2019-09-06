@@ -25,7 +25,7 @@ export class JarFilterComponent implements OnDestroy {
 	@ViewChild('settings', { static: true })
 	private template;
 
-	@ViewChild('anchor', { read: ElementRef, static: true  })
+	@ViewChild('anchor', { read: ElementRef, static: true })
 	private anchor: ElementRef;
 
 	@ContentChildren(JarFilterSectionComponent)
