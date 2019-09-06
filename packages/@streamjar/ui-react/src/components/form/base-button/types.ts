@@ -1,3 +1,5 @@
+import { JAR_VALID_THEMES } from '../../../constants';
+
 export interface IBaseButtonProps {
 	/** Whether the button is raised up visually */
 	raised?: boolean;
@@ -21,7 +23,7 @@ export interface IBaseButtonProps {
 	/**
 	 * The colour theme of the button
 	 */
-	colour?: 'primary' | 'accent' | 'danger' | 'success';
+	colour?: JAR_VALID_THEMES;
 
 	/**
 	 * Whether to position the given icon on the roght

@@ -15,7 +15,6 @@ describe('Input', () => {
 
 		const input = mount(<Input title="Test Number" onChange={fn} />);
 
-		console.log(input.debug());
 		input.find('input').simulate('change', { target: { value: 'test'} });
 
 		expect(fn).toHaveBeenCalled();

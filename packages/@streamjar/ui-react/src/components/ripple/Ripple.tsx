@@ -10,7 +10,7 @@ export interface IRippleProps {
 	enabled?: boolean;
 
 	/** An alternate element to respond to click actions */
-	listenTo?(): React.RefObject<HTMLDivElement>;
+	listenTo?: React.RefObject<HTMLDivElement>;
 }
 
 /**
@@ -33,22 +33,25 @@ export const Ripple: React.FC<IRippleProps> = ({ enabled, unbounded, listenTo }:
 			setTimeout(() => {
 				// If listenTo is defined, add event listeners
 				if (listenTo) {
-					const ref = listenTo();
 
-					if (!ref || !ref.current) {
+					if (!listenTo || !listenTo.current) {
 						return;
 					}
 
-					ref.current.addEventListener('mousedown', () => {
+					listenTo.current.addEventListener('mousedown', () => {
 						if (!enabled) {
 							return;
 						}
 
-						ripple!.activate();
+						if (ripple) {
+							ripple.activate();
+						}
 					});
 
-					ref.current.addEventListener('mouseup', () => {
-						ripple!.deactivate();
+					listenTo.current.addEventListener('mouseup', () => {
+						if (ripple) {
+							ripple.deactivate();
+						}
 					});
 				}
 			});
