@@ -33,10 +33,10 @@ export const Textarea: React.FC<ITextareaProps> = (props: ITextareaProps) => {
 
 	// Handle change event
 	const change = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		setTextareaValue(e.currentTarget.value);
+		setTextareaValue(e.target.value);
 
 		if (onChange) {
-			onChange(e.currentTarget.value);
+			onChange(e.target.value);
 		}
 	};
 
@@ -56,6 +56,7 @@ export const Textarea: React.FC<ITextareaProps> = (props: ITextareaProps) => {
 };
 
 Textarea.defaultProps = {
+	value: '',
 	onChange: () => { /* */ },
 	resize: false,
 };

@@ -11,7 +11,7 @@ export default {
 export const NormalTextarea = () => {
 	return (
 		<>
-			<Textarea name="meaning" title="description" />
+			<Textarea name="meaning" title="description" onChange={console.log} />
 		</>
 	);
 };

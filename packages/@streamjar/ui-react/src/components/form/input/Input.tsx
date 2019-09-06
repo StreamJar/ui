@@ -49,10 +49,10 @@ export const Input: React.FC<IInputProps> = (props: IInputProps) => {
 
 	// Handle change event
 	const change = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setInputValue(e.currentTarget.value);
+		setInputValue(e.target.value);
 
 		if (onChange) {
-			onChange(e.currentTarget.value);
+			onChange(e.target.value);
 		}
 	};
 
@@ -102,5 +102,6 @@ export const Input: React.FC<IInputProps> = (props: IInputProps) => {
 };
 
 Input.defaultProps = {
+	value: '',
 	onChange: () => { /* */ },
 };
