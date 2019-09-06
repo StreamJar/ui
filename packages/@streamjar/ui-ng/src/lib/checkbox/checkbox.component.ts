@@ -34,7 +34,7 @@ export class JarCheckboxComponent implements ControlValueAccessor, OnDestroy {
 	public wasClicked = false;
 	public subscriptions: Subscription[] = [];
 
-	@ViewChild('input')
+	@ViewChild('input', { static: true })
 	public checkbox: ElementRef;
 
 	@HostBinding('attr.tabIndex')

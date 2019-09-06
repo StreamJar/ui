@@ -62,10 +62,10 @@ export class JarSelectComponent implements ControlValueAccessor, OnDestroy, OnIn
 	public onTouch = (val?: any) => undefined;
 	public subscriptions: Subscription[] = [];
 
-	@ViewChild('menu')
+	@ViewChild('menu', { static: true })
 	public menu: JarMenuComponent;
 
-	@ViewChild('filterRef', { read: ElementRef })
+	@ViewChild('filterRef', { read: ElementRef, static: true })
 	public filterRef: ElementRef<JarInputComponent>;
 
 	@Input()

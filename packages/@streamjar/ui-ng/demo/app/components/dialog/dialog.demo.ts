@@ -48,7 +48,7 @@ const TIMEOUT = 1000;
 })
 export class StatefulComponent {
 
-	@ViewChild('dialog')
+	@ViewChild('dialog', { static: true })
 	private dialog: JarDialogLoadableComponent;
 
 	public username: string;
@@ -200,7 +200,7 @@ const TIMEOUT = 1000;
 })
 export class StatefulComponent {
 
-	@ViewChild('dialog')
+	@ViewChild('dialog', { static: true })
 	private dialog: JarDialogLoadableComponent;
 
 	public username: string;

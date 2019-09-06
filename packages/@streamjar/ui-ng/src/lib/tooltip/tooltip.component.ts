@@ -29,7 +29,7 @@ export class TooltipComponent implements OnDestroy {
 
 	public subscriptions: Subscription[] = [];
 
-	@ViewChild('el')
+	@ViewChild('el', { static: true })
 	public el;
 
 	constructor(public ref: TooltipRefService) {
