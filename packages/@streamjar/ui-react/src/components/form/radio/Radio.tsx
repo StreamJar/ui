@@ -6,14 +6,15 @@ import { JAR_VALID_THEMES } from '../../../constants';
 export type OmittedRadioProps =
 	'className' | 'name' | 'type' | 'checked' | 'aria-checked';
 
-export interface IRadioProps<T extends string | number = string> extends
-	Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, OmittedRadioProps> {
-
+export interface IRadioProps<T extends string | number = string> {
 	/** The theme to display */
 	colour?: JAR_VALID_THEMES;
 
 	/** Value of the radio button */
 	value: T;
+
+	/** When this radio changes */
+	onChange?(value: boolean): void;
 }
 
 /** A single radio button */
@@ -23,7 +24,7 @@ export const Radio: React.FC<React.PropsWithChildren<IRadioProps>> =
 			value,
 			children,
 			colour,
-			...altProps // tslint:disable-line
+			onChange,
 		} = props;
 
 		const radioCtx = React.useContext(RadioGroupContext);
@@ -32,6 +33,12 @@ export const Radio: React.FC<React.PropsWithChildren<IRadioProps>> =
 		const isChecked = radioCtx.value === value;
 		const rippleRef = React.useRef<HTMLDivElement>(null);
 		const radioRef = React.useRef<HTMLInputElement>(null);
+
+		React.useEffect(() => {
+			if (onChange) {
+				onChange(isChecked);
+			}
+		},              [isChecked]);
 
 		// Handle click event
 		const click = () => {
@@ -43,28 +50,16 @@ export const Radio: React.FC<React.PropsWithChildren<IRadioProps>> =
 		// Handle focus event
 		const focus = (e: React.FocusEvent<HTMLInputElement>) => {
 			setRadioFocus(true);
-
-			if (altProps.onFocus) {
-				altProps.onFocus(e);
-			}
 		};
 
 		// Handle focus event
 		const blur = (e: React.FocusEvent<HTMLInputElement>) => {
 			setRadioFocus(false);
-
-			if (altProps.onBlur) {
-				altProps.onBlur(e);
-			}
 		};
 
 		// Handle change event
 		const change = (e: React.ChangeEvent<HTMLInputElement>) => {
 			radioCtx.onChange(e);
-
-			if (altProps.onChange) {
-				altProps.onChange(e);
-			}
 		};
 
 		const classes = classNames('jar-radio layout-row', {
@@ -91,7 +86,6 @@ export const Radio: React.FC<React.PropsWithChildren<IRadioProps>> =
 				</div>
 
 				<input
-					{...altProps}
 					ref={radioRef}
 					type="radio"
 					className="jar-radio__input"

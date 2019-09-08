@@ -6,8 +6,7 @@ import { JAR_VALID_THEMES } from '../../../constants';
 export type OmittedCheckboxProps =
 	'className' | 'name' | 'type' | 'checked' | 'aria-checked' | 'value' | 'onChange';
 
-export interface ICheckboxProps extends
-	Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, OmittedCheckboxProps> {
+export interface ICheckboxProps {
 
 	/** The checkbox colour scheme */
 	colour?: JAR_VALID_THEMES;
@@ -17,6 +16,9 @@ export interface ICheckboxProps extends
 
 	/** The value of the checkbox */
 	value?: boolean;
+
+	/** Whether the checkbox is disabled */
+	disabled?: boolean;
 
 	/** Handle the value changing */
 	onChange?(value: boolean): void;
@@ -44,8 +46,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<ICheckboxProps>> = (prop
 		'jar-checkbox-focused': checkboxFocus,
 	});
 
-	const inner: string = classNames({
-		'jar-checkbox-inner': true,
+	const inner: string = classNames('jar-checkbox-inner', {
 		'jar-checkbox-inner-checked': checkboxValue,
 	});
 
@@ -54,19 +55,11 @@ export const Checkbox: React.FC<React.PropsWithChildren<ICheckboxProps>> = (prop
 	// Handle focus event
 	const focus = (e: React.FocusEvent<HTMLInputElement>) => {
 		setCheckboxFocus(true);
-
-		if (altProps.onFocus) {
-			altProps.onFocus(e);
-		}
 	};
 
 	// Handle focus event
 	const blur = (e: React.FocusEvent<HTMLInputElement>) => {
 		setCheckboxFocus(false);
-
-		if (altProps.onBlur) {
-			altProps.onBlur(e);
-		}
 	};
 
 	// Handle change event
@@ -96,8 +89,6 @@ export const Checkbox: React.FC<React.PropsWithChildren<ICheckboxProps>> = (prop
 			tabIndex={0}>
 
 			<div className={inner}>
-				{(!noRipple && !disabled) && rippleContainer}
-
 				{/* tslint:disable-next-line */}
 				<input
 					{...altProps}
@@ -110,6 +101,8 @@ export const Checkbox: React.FC<React.PropsWithChildren<ICheckboxProps>> = (prop
 					disabled={disabled}
 					onFocus={focus}
 					onChange={change} />
+
+				{(!noRipple && !disabled) && rippleContainer}
 
 				<svg version="1.1" className="jar-checkmark" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" xmlSpace="preserve">
 					<path className="jar-checkmark-path" fill="none" stroke="white" d="M4.1,12.7 9,17.6 20.3,6.3" />

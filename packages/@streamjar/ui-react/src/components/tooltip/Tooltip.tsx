@@ -3,12 +3,13 @@ import * as ReactDOM from 'react-dom';
 import { Transition } from 'react-transition-group';
 
 import { Anchor } from '../anchor/Anchor';
+import { IAnchorSide, IAnchorType } from '../../common/positioner';
 
 export interface ITooltipProps {
-	position?: string;
+	position?: IAnchorType;
 	message: string;
 	enabled?: boolean;
-	pull?: string;
+	pull?: IAnchorSide;
 }
 
 const DEFAULT: React.CSSProperties = {

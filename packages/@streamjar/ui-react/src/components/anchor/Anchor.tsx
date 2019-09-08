@@ -8,8 +8,8 @@ import { IAnchorSide } from '../../common/positioner';
 
 export interface IAnchorProps {
 	width: number;
-	position: string; // top left bottom right
-	pull: string; // start | center | end of item
+	position: IAnchorType; // top left bottom right
+	pull: IAnchorSide; // start | center | end of item
 	el: HTMLElement;
 	offset: number;
 	anchorWidth: boolean;
