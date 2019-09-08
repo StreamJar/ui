@@ -1,59 +1,70 @@
 import * as React from 'react';
 
 export interface ISliderProps {
+	/** Whether the slider is disabled */
 	disabled?: boolean;
-	max?: number;
+
+	/** The minimum value */
 	min?: number;
+
+	/** The maximum value */
+	max?: number;
+
+	/** The step value */
 	step?: number;
+
+	/** The value of the slider */
 	value?: number;
-	onChange(value: number): void;
+
+	/** The event handler for the slider */
+	onChange?(value: number): void;
 }
 
-export interface ISliderState {
-	value: number;
-}
+/**
+ * Display a range slider
+ */
+export const Slider: React.FC<ISliderProps> = (props: ISliderProps) => {
+	const {
+		min,
+		max,
+		value,
+		step,
+		disabled,
+		onChange,
+	} = props;
 
-export class Slider extends React.PureComponent<ISliderProps, ISliderState> {
-	public static defaultProps: Partial<ISliderProps> = {
-		disabled: false,
-		max: 100,
-		min: 0,
-		step: 1,
+	const [sliderValue, setSliderValue] = React.useState(value);
+
+	const change = (e: React.ChangeEvent<HTMLInputElement>): void => {
+		setSliderValue(+e.target.value);
+
+		if (onChange) {
+			onChange(+e.target.value);
+		}
 	};
 
-	constructor(props: ISliderProps) {
-		super(props);
+	return (
+		<div className="jar-slider">
+			<input
+				className="jar-slider__input"
+				type="range"
+				aria-valuemin={min}
+				aria-valuemax={max}
+				aria-valuenow={sliderValue}
+				min={min}
+				max={max}
+				step={step}
+				disabled={disabled}
+				value={sliderValue}
+				onChange={change} />
+		</div>
+	);
+};
 
-		this.state = { value: this.props.value || 0};
-	}
-
-	public onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-		this.setState({
-			value: +e.currentTarget.value,
-		});
-
-		this.props.onChange(+e.currentTarget.value);
-	}
-
-	public render(): JSX.Element {
-		const { min, max, step, disabled } = this.props;
-		const { value } = this.state;
-
-		return (
-			<div className="jar-slider">
-				<input
-					className="jar-slider__input"
-					type="range"
-					aria-valuemin={min}
-					aria-valuemax={max}
-					aria-valuenow={value}
-					min={min}
-					max={max}
-					step={step}
-					disabled={disabled}
-					value={value}
-					onChange={this.onChange} />
-			</div>
-		);
-	}
-}
+Slider.defaultProps = {
+	value: 0,
+	disabled: false,
+	max: 100,
+	min: 0,
+	step: 1,
+};
