@@ -3,7 +3,8 @@ module.exports = {
 	  "<rootDir>/src"
 	],
 	"transform": {
-	  "^.+\\.tsx?$": "ts-jest"
+	  "^.+\\.tsx?$": "ts-jest",
+	  "^.+\\.ts?$": "ts-jest"
 	},
 	"setupFilesAfterEnv": ["jest-extended", "./setup-jest.js"]
   }

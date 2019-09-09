@@ -1,4 +1,4 @@
-const ROOT_OUTLET_REF = Symbol('jar-root-outlet');
+export const ROOT_OUTLET_REF = Symbol('@streamjar/ui-react.root-outlet');
 
 /**
  * Get a reference to the root outlet element

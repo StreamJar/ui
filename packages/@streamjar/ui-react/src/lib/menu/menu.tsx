@@ -84,7 +84,7 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 			this.setState({ anchor: null });
 			this.props.onClose(event);
 			this.componentWillUnmount();
-		}, 100);
+		},         100);
 	}
 
 	public handleBack = (evt: ArcEvent): void => {
@@ -113,7 +113,7 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 
 		if (anchor) {
 			return (
-				<Anchor el={anchor} width={width} anchorWidth={anchorWidth}>
+				<Anchor anchorTo={anchor} width={width} matchAnchorHeight={anchorWidth}>
 					<Transition in={!hide} appear={true} timeout={500} children={this.renderMenu} />
 				</Anchor>
 			);

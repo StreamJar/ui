@@ -65,7 +65,7 @@ export class Filter extends React.PureComponent<{}, IFilterState> {
 		const width: number = React.Children.count(children) * 202;
 
 		const anchorEl = (
-			<Anchor width={width} el={anchor!} pull="end">
+			<Anchor width={width} anchorTo={anchor!} pull="end">
 				<FocusTrap>
 					<ArcScope onButton={this.handleBack}>
 						<div className="jar-filter j-dark" ref={this.ref}>

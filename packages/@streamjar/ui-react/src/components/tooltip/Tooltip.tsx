@@ -77,12 +77,13 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 
 		const pos = position ? position : 'bottom';
 		const pullTo = pull ? pull : 'center';
+		const axis = ['left', 'right'].includes(pos) ? 'horizontal' : 'vertical';
 
 		let anchorEl = <React.Fragment></React.Fragment>;
 
 		if (anchor) {
 			anchorEl = (
-				<Anchor el={anchor} position={pos} pull={pullTo} offset={7}>
+				<Anchor anchorTo={anchor} pull={pullTo} axis={axis} offset={7}>
 					<Transition in={!hide} appear={true} timeout={300} children={this.getTooltip} />
 				</Anchor>
 			);

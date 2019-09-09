@@ -2,17 +2,39 @@ import * as React from 'react';
 import { default as EventListener } from 'react-event-listener';
 
 import { Portal } from '../portal/portal';
-import { position } from '../../common/positioner';
-import { IAnchorType } from '../../common/positioner';
-import { IAnchorSide } from '../../common/positioner';
+import { position, pickBestPosition, IAnchorSide, IAnchorType } from '../../common/positioner';
 
 export interface IAnchorProps {
-	width: number;
-	position: IAnchorType; // top left bottom right
-	pull: IAnchorSide; // start | center | end of item
-	el: HTMLElement;
-	offset: number;
-	anchorWidth: boolean;
+	/**
+	 * Predefine the item size
+	 */
+	width?: number;
+
+	/**
+	 * Predefine the item size
+	 */
+	height?: number;
+
+	/** What axis we're on  */
+	axis?: 'vertical' | 'horizontal';
+
+	/** Where to pull on alternate axis */
+	pull?: IAnchorSide; // start | center | end of item
+
+	/** What we're anchoring to */
+	anchorTo: HTMLElement;
+
+	/** Set the anchor offset around the target */
+	offset?: number;
+
+	/** Set the anchor bounds around the page. */
+	pageOffset?: number;
+
+	/** Force anchor to be same size as anchor */
+	matchAnchorWidth?: boolean;
+
+	/** Force anchor to be same size as anchor */
+	matchAnchorHeight?: boolean;
 }
 
 export interface IAnchorState {
@@ -21,14 +43,17 @@ export interface IAnchorState {
 		height?: number;
 		top?: number;
 		left?: number;
+		maxHeight?: number;
+		maxWidth?: number;
 	};
 }
 
 export class Anchor extends React.PureComponent<IAnchorProps, IAnchorState> {
 	public static defaultProps: Partial<IAnchorProps> = {
-		offset: 0,
-		position: 'bottom',
+		offset: 5,
+		pageOffset: 5,
 		pull: 'center',
+		axis: 'vertical',
 	};
 
 	public anchorRef: React.RefObject<HTMLDivElement>;
@@ -48,54 +73,50 @@ export class Anchor extends React.PureComponent<IAnchorProps, IAnchorState> {
 		this.setPosition();
 	}
 
-	public calculateWidth(): { width: number; left: number; top: number; height: number } {
+	public calculateWidth(): {
+		left: number;
+		top: number;
+		width: number | undefined;
+		height: number | undefined;
+		maxWidth: number | undefined;
+		maxHeight: number | undefined;
+	} {
+		let modifiedWidth: number | undefined;
+		let modifiedHeight: number | undefined;
 		let itemWidth = this.props.width ? this.props.width : this.anchorRef.current!.getBoundingClientRect().width;
-		let itemHeight = this.anchorRef.current!.getBoundingClientRect().height;
+		let itemHeight = this.props.height ? this.props.height : this.anchorRef.current!.getBoundingClientRect().height;
 
-		if (this.props.anchorWidth) {
-			itemWidth = this.props.el.getBoundingClientRect().width;
+		if (this.props.matchAnchorWidth) {
+			itemWidth = this.props.anchorTo.getBoundingClientRect().width;
+			modifiedWidth = this.props.anchorTo.getBoundingClientRect().width;
 		}
 
-		const windowWidth = document.documentElement.clientWidth;
-		const windowHeight = document.documentElement.clientHeight;
-
-		let { left, top } = position(this.props.position, this.props.pull, this.props.el.getBoundingClientRect(), {
-			height: itemHeight,
-			width: itemWidth,
-		},                           this.props.offset);
-
-		// If item is larger than window, 100%
-		if (itemWidth >= windowWidth) {
-			itemWidth = windowWidth - this.props.offset - this.props.offset;
-			left = this.props.offset;
+		if (this.props.matchAnchorHeight) {
+			itemHeight = this.props.anchorTo.getBoundingClientRect().height;
+			modifiedHeight = this.props.anchorTo.getBoundingClientRect().height;
 		}
 
-		if (itemHeight >= windowHeight) {
-			itemHeight = windowHeight - this.props.offset - this.props.offset;
-			top = this.props.offset;
-		}
+		const anchorBounds = this.props.anchorTo.getBoundingClientRect();
+		let { left, top, maxWidth, maxHeight } = position( // tslint:disable-line
+			this.props.axis!,
+			this.props.pull!,
+			anchorBounds, {
+				height: itemHeight,
+				width: itemWidth,
+			},
+			this.props.offset!,
+			this.props.pageOffset!,
+			{
+				width: document.documentElement.clientWidth,
+				height: document.documentElement.clientHeight,
+			},
+		);
 
-		if (left + itemWidth >= windowWidth) {
-			left = windowWidth - this.props.offset - itemWidth;
-		}
-
-		if (top + itemHeight >= windowHeight) {
-			top = windowHeight - this.props.offset - itemHeight;
-		}
-
-		if (top < 0) {
-			top = this.props.offset;
-		}
-
-		if (left < 0) {
-			left = this.props.offset;
-		}
-
-		return { width: itemWidth, height: itemHeight, left, top };
+		return { width: modifiedWidth, height: modifiedHeight, left, top, maxWidth, maxHeight };
 	}
 
 	public setPosition = (): void => {
-		const { width, left, top, height } = this.calculateWidth();
+		const { width, left, top, height, maxWidth, maxHeight } = this.calculateWidth();
 
 		if (this.anchorRef.current) {
 			this.setState({
@@ -104,6 +125,8 @@ export class Anchor extends React.PureComponent<IAnchorProps, IAnchorState> {
 					top: Math.floor(top),
 					width,
 					height,
+					maxWidth,
+					maxHeight,
 				},
 			});
 		}
@@ -114,7 +137,7 @@ export class Anchor extends React.PureComponent<IAnchorProps, IAnchorState> {
 
 		return (
 			<Portal>
-				<div className="anchor" style={{ position: 'fixed', ...location, zIndex: 100000 }} ref={this.anchorRef}>
+				<div className="anchor" style={{ position: 'fixed', ...location, zIndex: 100000, overflow: 'hidden' }} ref={this.anchorRef}>
 					{this.props.children}
 				</div>
 

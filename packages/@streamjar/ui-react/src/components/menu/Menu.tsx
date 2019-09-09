@@ -4,11 +4,14 @@ import { FocusTrap, ArcScope, ArcEvent, Button as Buttons } from '@mixer/arcade-
 
 import { Anchor } from '../anchor/Anchor';
 
-export interface IMenuProps {
+export interface IMenuCustomisableProps {
 	width?: number;
-	anchor: HTMLElement | null;
 	anchorWidth?: boolean;
 	supportContentClick?: boolean;
+}
+
+export interface IMenuProps extends IMenuCustomisableProps {
+	anchor: HTMLElement | null;
 	onClose(event: MouseEvent | null): void;
 }
 
@@ -28,6 +31,17 @@ const CLASSES: { [key: string]: React.CSSProperties } = {
 	entering: { opacity: 1, marginTop: 0 },
 	exiting: { opacity: 0, marginTop: -30 },
 };
+
+/** Menu Hook */
+export function useMenu(props: IMenuCustomisableProps = {}) {
+	const [target, setTarget] = React.useState<HTMLElement | null>(null);
+
+	const openBtn = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+		setTarget(e.target as HTMLElement);
+	};
+
+	return { onMenuOpen: openBtn, menuProps: { ...props, anchor: target, onClose: () => { setTarget(null); } } };
+}
 
 export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 	public static defaultProps: Partial<IMenuProps> = {
@@ -98,11 +112,11 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 
 		return (
 			<div ref={this.menuRef} className="jar-menu j-dark layout-column" style={{ ...DEFAULT, ...CLASSES[state] }}>
-				<FocusTrap>
-					<ArcScope onButton={this.handleBack}>
+				{/* <FocusTrap> */}
+					{/* <ArcScope onButton={this.handleBack}> */}
 						{children}
-					</ArcScope>
-				</FocusTrap>
+					{/* </ArcScope> */}
+				{/* </FocusTrap> */}
 			</div>
 		);
 	}
@@ -113,7 +127,7 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 
 		if (anchor) {
 			return (
-				<Anchor el={anchor} width={width} anchorWidth={anchorWidth}>
+				<Anchor anchorTo={anchor} width={width} axis="vertical" pull="center" matchAnchorWidth={anchorWidth}>
 					<Transition in={!hide} appear={true} timeout={500} children={this.renderMenu} />
 				</Anchor>
 			);
