@@ -4,7 +4,7 @@ import { FocusTrap, ArcScope, Button as Buttons, ArcEvent, FocusExclude } from '
 
 import { Spinner } from '../spinner';
 import { Button } from '../form/button/Button';
-import { Portal } from '../portal/portal';
+import { Portal } from '../portal/Portal';
 
 // tslint:disable max-classes-per-file
 

@@ -107,6 +107,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 	}
 
 	public search = (text: string) => {
+		console.log(text);
 		this.setState({ search: text });
 		clearTimeout(this.to!);
 
@@ -117,7 +118,7 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 
 	public render(): JSX.Element {
 		const { children, multiple, title, search, searching, searchAsOption } = this.props;
-		const { anchor, value } = this.state;
+		const { anchor, value, search: searchText } = this.state;
 
 		const classes = classnames({
 			'jar-select': true,
@@ -165,10 +166,10 @@ export class Select extends React.PureComponent<ISelectProps, ISelectState> {
 					</div>
 				</div>
 
-				<Menu anchor={anchor} anchorWidth={true} supportContentClick={true} onClose={this.onClose}>
+				<Menu anchor={anchor} anchorWidth={true} supportContentClick={true} height={400} onClose={this.onClose}>
 					<div ref={this.inputRef}>
 						<div className="layout-row">
-							{search && <div className="flex"><Input name="search" placeholder="Search" onChange={this.search} /></div>}
+							{search && <div className="flex"><Input name="search" value={searchText} placeholder="Search" onChange={this.search} /></div>}
 							{search && searchAsOption && <Button icon="add" round={true} onClick={this.addItem} />}
 						</div>
 						{search && searching && <Spinner size={25} />}

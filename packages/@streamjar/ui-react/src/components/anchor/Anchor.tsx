@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { default as EventListener } from 'react-event-listener';
 
-import { Portal } from '../portal/portal';
+import { Portal } from '../portal/Portal';
 import { position, pickBestPosition, IAnchorSide, IAnchorType } from '../../common/positioner';
 import ReactResizeDetector from 'react-resize-detector';
 
@@ -120,7 +120,6 @@ export const Anchor: React.FC<React.PropsWithChildren<IAnchorProps>> = (props: R
 	};
 
 	const setPosition = (a?: any) => {
-		console.info('resizing!');
 		setLocation(calculatePosition(a));
 	};
 
