@@ -10,7 +10,6 @@ export default {
 };
 
 export const SimpleMenu = React.createElement(() => {
-	const [magic] = React.useState(null);
 	const { menuProps, onMenuOpen} = useMenu();
 
 	return (

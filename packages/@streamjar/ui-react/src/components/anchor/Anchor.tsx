@@ -75,13 +75,12 @@ export const Anchor: React.FC<React.PropsWithChildren<IAnchorProps>> = (props: R
 		if (anchorRef.current!.firstElementChild) {
 			targetChild = anchorRef.current!.firstElementChild as any;
 		}
-		console.log(anchorRef.current!.clientHeight);
+
 		let modifiedWidth: number | undefined;
 		let modifiedHeight: number | undefined;
 		let itemWidth = width ? width : targetChild.scrollWidth;
 		let itemHeight = height ? height : targetChild.scrollHeight;
 
-		console.log(anchorRef.current!);
 		if (matchAnchorWidth) {
 			itemWidth = anchorTo.getBoundingClientRect().width;
 			modifiedWidth = anchorTo.getBoundingClientRect().width;

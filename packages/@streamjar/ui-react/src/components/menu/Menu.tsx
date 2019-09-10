@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Transition } from 'react-transition-group';
-import { FocusTrap, ArcScope, ArcEvent, Button as Buttons } from '@mixer/arcade-machine-react';
 
 import { Anchor } from '../anchor/Anchor';
 
@@ -44,96 +43,77 @@ export function useMenu(props: IMenuCustomisableProps = {}) {
 	return { onMenuOpen: openBtn, menuProps: { ...props, anchor: target, onClose: () => { setTarget(null); } } };
 }
 
-export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
-	public static defaultProps: Partial<IMenuProps> = {
-		onClose: () => { /* */ },
-		supportContentClick: false,
-		width: 165,
-	};
+export const Menu: React.FC<React.PropsWithChildren<IMenuProps>> = (props: React.PropsWithChildren<IMenuProps>) => {
+	const {
+		width,
+		anchorWidth,
+		height,
+		children,
+		anchor: sourceAnchor,
+		supportContentClick,
+		onClose,
+	} = props;
 
-	public menuRef: React.RefObject<HTMLDivElement>;
+	const [anchor, setAnchor] = React.useState<HTMLElement | null>(null);
+	const menu = React.useRef<HTMLDivElement | null>(null);
+	const [visible, setVisible] = React.useState(false);
 
-	constructor(props: IMenuProps) {
-		super(props);
-
-		this.state = { hide: false, anchor: null };
-		this.menuRef = React.createRef();
-	}
-
-	public componentDidUpdate(prev: IMenuProps): void {
-		if (this.props.anchor && prev.anchor !== this.props.anchor) {
-			this.setState({
-				anchor: this.props.anchor,
-				hide: false,
-			});
-		}
-
-		if (this.props.anchor) {
-			document.addEventListener('click', this.close, { capture: true });
-		}
-
-		if (this.props.anchor === null && this.state.anchor !== null) {
-			this.close(null);
-		}
-	}
-
-	public componentWillUnmount(): void {
-		document.removeEventListener('click', this.close, { capture: true });
-	}
-
-	public close = (event: MouseEvent | null): void => {
-		if (event && this.menuRef.current && this.menuRef.current.contains(event.target as any) && this.props.supportContentClick) {
+	const close = (event: MouseEvent | null) => {
+		if (event && menu.current && menu.current.contains(event.target as any) && supportContentClick) {
 			return;
 		}
 
-		if (event && (!this.menuRef.current || !this.menuRef.current.contains(event.target as any))) {
+		if (event && (!menu.current || !menu.current.contains(event.target as any))) {
 			event.stopPropagation();
 			event.preventDefault();
 		}
 
-		this.setState({
-			hide: true,
-		});
+		setVisible(false);
 
 		setTimeout(() => {
-			this.setState({ anchor: null });
-			this.props.onClose(event);
-			this.componentWillUnmount();
+			setAnchor(null);
+
+			if (onClose) {
+				onClose(event);
+			}
 		},         100);
-	}
+	};
 
-	public handleBack = (evt: ArcEvent): void => {
-		if (evt.event === Buttons.Back) {
-			this.close(null);
+	React.useEffect(() => {
+		if (sourceAnchor) {
+			document.addEventListener('click', close, { capture: true });
+			setAnchor(sourceAnchor);
+			setVisible(true);
+		} else if (anchor && !sourceAnchor) {
+			close(null);
 		}
-	}
 
-	public renderMenu = (state: string): JSX.Element => {
-		const { children } = this.props;
+		return () => {
+			document.removeEventListener('click', close, { capture: true });
+		};
+	},              [sourceAnchor]);
 
+	const renderMenu = (state: string): JSX.Element => {
 		return (
-			<div ref={this.menuRef} className="jar-menu j-dark layout-column" style={{ ...DEFAULT, ...CLASSES[state] }}>
-				{/* <FocusTrap> */}
-					{/* <ArcScope onButton={this.handleBack}> */}
-						{children}
-					{/* </ArcScope> */}
-				{/* </FocusTrap> */}
+			<div ref={menu} className="jar-menu j-dark layout-column" style={{ ...DEFAULT, ...CLASSES[state] }}>
+				{children}
 			</div>
+		);
+	};
+
+	if (anchor) {
+		return (
+			<Anchor anchorTo={anchor} width={width} height={height} axis="vertical" pull="center" matchAnchorWidth={anchorWidth}>
+				<Transition in={visible} appear={true} timeout={500} children={renderMenu} />
+			</Anchor>
 		);
 	}
 
-	public render(): JSX.Element | null {
-		const { width, anchorWidth, height } = this.props;
-		const { anchor, hide } = this.state;
+	return (null);
+};
 
-		if (anchor) {
-			return (
-				<Anchor anchorTo={anchor} width={width} height={height} axis="vertical" pull="center" matchAnchorWidth={anchorWidth}>
-					<Transition in={!hide} appear={true} timeout={500} children={this.renderMenu} />
-				</Anchor>
-			);
-		}
-
-		return (null);
-	}
-}
+Menu.defaultProps = {
+	onClose: () => { /* */ },
+	supportContentClick: false,
+	width: 165,
+};
