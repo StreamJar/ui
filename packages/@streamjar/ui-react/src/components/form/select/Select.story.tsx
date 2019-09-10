@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Select, SelectItem } from './Select';
+import { Select } from './Select';
+import { SelectItem } from './SelectItem';
 
 export default {
 	title: 'StreamJar UI|Components/Form/Select',
@@ -33,6 +34,18 @@ export const MultiSelectMenu = React.createElement(() => {
 			<SelectItem name="c" value="c"></SelectItem>
 			<SelectItem name="d" value="d"></SelectItem>
 		</Select>
+	);
+});
+
+export const TouchableSelect = React.createElement(() => {
+	return (
+		<div className="j-touchable">
+			<Select multiple={true} onChange={console.log}>
+				<SelectItem name="b" value="b"></SelectItem>
+				<SelectItem name="c" value="c"></SelectItem>
+				<SelectItem name="d" value="d"></SelectItem>
+			</Select>
+		</div>
 	);
 });
 

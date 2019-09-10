@@ -1,1 +1,2 @@
-export { Select, SelectItem, ISelectProps } from './Select';
+export { Select, ISelectProps } from './Select';
+export { SelectItem, ISelectItemProps } from './SelectItem';

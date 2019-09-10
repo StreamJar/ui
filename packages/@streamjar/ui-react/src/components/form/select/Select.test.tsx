@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { Select, SelectItem } from './Select';
+
+import { Select } from './Select';
+import { SelectItem } from './SelectItem';
 
 describe('Select', () => {
 	it('renders a select', () => {
@@ -40,11 +42,42 @@ describe('Select', () => {
 
 		select.find('.jar-select').simulate('click');
 
-		expect(select.find('.jar-select__option').text()).toBe('two');
+		expect(select.find('.jar-select__option').text().trim()).toBe('two');
 	});
 
-	it.todo('handles focus');
-	it.todo('handles blur');
+	test('handles focus', () => {
+		const fn = jest.fn();
+
+		const select = mount((
+			<Select title="select" value="two">
+				<SelectItem name="one" value="one" />
+				<SelectItem name="two" value="two" />
+			</Select>
+		));
+		select.find('.jar-select').simulate('focus');
+
+		expect(select.find('.jar-select').hasClass('jar-select-focus')).toBe(true);
+		expect(fn).toHaveBeenCalled();
+	});
+
+	test('handles blur', () => {
+		const fn = jest.fn();
+
+		const select = mount((
+			<Select title="select" value="two">
+				<SelectItem name="one" value="one" />
+				<SelectItem name="two" value="two" />
+			</Select>
+		));
+
+		select.find('.jar-select').simulate('focus');
+		expect(select.find('.jar-select').hasClass('jar-select-focus')).toBe(true);
+
+		select.find('.jar-select').simulate('blur');
+		expect(select.find('.jar-select').hasClass('jar-select-focus')).toBe(false);
+
+		expect(fn).toHaveBeenCalled();
+	});
 
 	it('selects a value', () => {
 		const fn = jest.fn();
@@ -58,13 +91,13 @@ describe('Select', () => {
 
 		// Open drop down
 		select.find('.jar-select').simulate('click');
-		expect(select.find('.jar-select__option').text()).toBe('two');
+		expect(select.find('.jar-select__option').text().trim()).toBe('two');
 
 		// Select 'one'
 		select.find('.jar-select-item').at(0).simulate('click');
 
 		// check it's ok
-		expect(select.find('.jar-select__option').text()).toBe('one');
+		expect(select.find('.jar-select__option').text().trim()).toBe('one');
 		expect(fn).toBeCalledWith('one');
 	});
 

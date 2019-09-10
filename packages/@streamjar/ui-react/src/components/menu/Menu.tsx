@@ -36,11 +36,13 @@ const CLASSES: { [key: string]: React.CSSProperties } = {
 export function useMenu(props: IMenuCustomisableProps = {}) {
 	const [target, setTarget] = React.useState<HTMLElement | null>(null);
 
-	const openBtn = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
-		setTarget(e.target as HTMLElement);
+	const openBtn = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement | HTMLDivElement>) => {
+		setTarget(e.currentTarget as HTMLElement);
 	};
 
-	return { onMenuOpen: openBtn, menuProps: { ...props, anchor: target, onClose: () => { setTarget(null); } } };
+	const closeMenu = () => { setTarget(null); };
+
+	return { onMenuOpen: openBtn, closeMenu, menuProps: { ...props, anchor: target, onClose: closeMenu } };
 }
 
 export const Menu: React.FC<React.PropsWithChildren<IMenuProps>> = (props: React.PropsWithChildren<IMenuProps>) => {
