@@ -83,7 +83,7 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 
 		if (anchor) {
 			anchorEl = (
-				<Anchor anchorTo={anchor} pull={pullTo} axis={axis} offset={7}>
+				<Anchor anchorTo={anchor} pull={pullTo} axis={axis} offset={7} handleOverflow={false}>
 					<Transition in={!hide} appear={true} timeout={300} children={this.getTooltip} />
 				</Anchor>
 			);

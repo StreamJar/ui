@@ -46,7 +46,7 @@ const positionTests: IPositionTest[] = [
 			pageOffset: 5,
 			window: { width: 200, height: 200 },
 		},
-		expect: { left: 5, maxHeight: 130, top: 65 },
+		expect: { left: 5, maxHeight: 100, top: 65 },
 	},
 
 	{
@@ -67,7 +67,7 @@ const positionTests: IPositionTest[] = [
 	},
 
 	{
-		name: 'space at bottom',
+		name: 'space at right',
 		test: {
 			axis: 'horizontal',
 			pull: 'center',
@@ -97,7 +97,7 @@ const positionTests: IPositionTest[] = [
 			pageOffset: 5,
 			window: { width: 200, height: 200 },
 		},
-		expect: { left: 65, maxHeight: 80, top: 5 },
+		expect: { left: 65, maxHeight: 80, bottom: 115 },
 	},
 
 	{
@@ -114,7 +114,7 @@ const positionTests: IPositionTest[] = [
 			pageOffset: 5,
 			window: { width: 200, height: 200 },
 		},
-		expect: { top: 65, maxWidth: 80, left: 5 },
+		expect: { top: 65, maxWidth: 80, right: 115 },
 	},
 ];
 

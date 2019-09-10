@@ -17,8 +17,10 @@ export interface ITarget {
 }
 
 export interface IPosition {
-	top: number;
-	left: number;
+	top?: number;
+	bottom?: number;
+	left?: number;
+	right?: number;
 	maxWidth?: number;
 	maxHeight?: number;
 }
@@ -103,8 +105,8 @@ export const position = (
 		case 'top': {
 			return {
 				left: Math.max(pageOffset, pullTo(pull, anchor.left, anchor.right, floatingTarget.width)),
-				top: Math.max(pageOffset, anchor.top - offset - floatingTarget.height),
-				maxHeight: anchor.top - pageOffset - offset,
+				bottom: window.height - anchor.top + offset,
+				maxHeight: Math.min(floatingTarget.height, anchor.top - pageOffset - offset),
 			};
 		}
 
@@ -112,13 +114,13 @@ export const position = (
 			return {
 				left: Math.max(pageOffset, pullTo(pull, anchor.left, anchor.right, floatingTarget.width)),
 				top: Math.max(pageOffset, anchor.bottom + offset),
-				maxHeight: window.height - anchor.bottom - pageOffset - offset,
+				maxHeight: Math.min(floatingTarget.height, window.height - anchor.bottom - pageOffset - offset),
 			};
 		}
 
 		case 'left': {
 			return {
-				left: Math.max(pageOffset, anchor.left - floatingTarget.width - offset),
+				right: window.width - anchor.left + offset,
 				top: Math.max(pageOffset, pullTo(pull, anchor.top, anchor.bottom, floatingTarget.height)),
 				maxWidth: anchor.left - pageOffset - offset,
 			};

@@ -6,6 +6,7 @@ import { Anchor } from '../anchor/Anchor';
 
 export interface IMenuCustomisableProps {
 	width?: number;
+	height?: number;
 	anchorWidth?: boolean;
 	supportContentClick?: boolean;
 }
@@ -122,12 +123,12 @@ export class Menu extends React.PureComponent<IMenuProps, IMenuState> {
 	}
 
 	public render(): JSX.Element | null {
-		const { width, anchorWidth } = this.props;
+		const { width, anchorWidth, height } = this.props;
 		const { anchor, hide } = this.state;
 
 		if (anchor) {
 			return (
-				<Anchor anchorTo={anchor} width={width} axis="vertical" pull="center" matchAnchorWidth={anchorWidth}>
+				<Anchor anchorTo={anchor} width={width} height={height} axis="vertical" pull="center" matchAnchorWidth={anchorWidth}>
 					<Transition in={!hide} appear={true} timeout={500} children={this.renderMenu} />
 				</Anchor>
 			);

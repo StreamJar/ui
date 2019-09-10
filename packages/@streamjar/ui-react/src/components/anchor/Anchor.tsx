@@ -3,22 +3,19 @@ import { default as EventListener } from 'react-event-listener';
 
 import { Portal } from '../portal/portal';
 import { position, pickBestPosition, IAnchorSide, IAnchorType } from '../../common/positioner';
+import ReactResizeDetector from 'react-resize-detector';
 
 export interface IAnchorProps {
-	/**
-	 * Predefine the item size
-	 */
+	/** Force an item width */
 	width?: number;
 
-	/**
-	 * Predefine the item size
-	 */
+	/** Force an item height */
 	height?: number;
 
-	/** What axis we're on  */
+	/** The axis to anchor on  */
 	axis?: 'vertical' | 'horizontal';
 
-	/** Where to pull on alternate axis */
+	/** Where to pull on the oposing axis */
 	pull?: IAnchorSide; // start | center | end of item
 
 	/** What we're anchoring to */
@@ -35,6 +32,9 @@ export interface IAnchorProps {
 
 	/** Force anchor to be same size as anchor */
 	matchAnchorHeight?: boolean;
+
+	/** Whether we should handle overflowing content */
+	handleOverflow?: boolean;
 }
 
 export interface IAnchorState {
@@ -48,101 +48,111 @@ export interface IAnchorState {
 	};
 }
 
-export class Anchor extends React.PureComponent<IAnchorProps, IAnchorState> {
-	public static defaultProps: Partial<IAnchorProps> = {
-		offset: 5,
-		pageOffset: 5,
-		pull: 'center',
-		axis: 'vertical',
-	};
+/**
+ * Anchor an element to another element
+ */
+export const Anchor: React.FC<React.PropsWithChildren<IAnchorProps>> = (props: React.PropsWithChildren<IAnchorProps>) => {
+	const {
+		width,
+		height,
+		anchorTo,
+		matchAnchorHeight,
+		matchAnchorWidth,
+		axis,
+		pull,
+		offset,
+		pageOffset,
+		children,
+		handleOverflow,
+	} = props;
 
-	public anchorRef: React.RefObject<HTMLDivElement>;
+	const anchorRef = React.useRef<HTMLDivElement>(null);
+	const [location, setLocation] = React.useState<React.CSSProperties>({});
 
-	constructor(props: IAnchorProps) {
-		super(props);
+	const calculatePosition = (dynSize?: { width: number; height: number}) => {
+		let targetChild = anchorRef.current!;
 
-		this.anchorRef = React.createRef();
-
-		this.state = {
-			location: {
-			},
-		};
-	}
-
-	public componentDidMount(): void {
-		this.setPosition();
-	}
-
-	public calculateWidth(): {
-		left: number;
-		top: number;
-		width: number | undefined;
-		height: number | undefined;
-		maxWidth: number | undefined;
-		maxHeight: number | undefined;
-	} {
+		if (anchorRef.current!.firstElementChild) {
+			targetChild = anchorRef.current!.firstElementChild as any;
+		}
+		console.log(anchorRef.current!.clientHeight);
 		let modifiedWidth: number | undefined;
 		let modifiedHeight: number | undefined;
-		let itemWidth = this.props.width ? this.props.width : this.anchorRef.current!.getBoundingClientRect().width;
-		let itemHeight = this.props.height ? this.props.height : this.anchorRef.current!.getBoundingClientRect().height;
+		let itemWidth = width ? width : targetChild.scrollWidth;
+		let itemHeight = height ? height : targetChild.scrollHeight;
 
-		if (this.props.matchAnchorWidth) {
-			itemWidth = this.props.anchorTo.getBoundingClientRect().width;
-			modifiedWidth = this.props.anchorTo.getBoundingClientRect().width;
+		console.log(anchorRef.current!);
+		if (matchAnchorWidth) {
+			itemWidth = anchorTo.getBoundingClientRect().width;
+			modifiedWidth = anchorTo.getBoundingClientRect().width;
 		}
 
-		if (this.props.matchAnchorHeight) {
-			itemHeight = this.props.anchorTo.getBoundingClientRect().height;
-			modifiedHeight = this.props.anchorTo.getBoundingClientRect().height;
+		if (matchAnchorHeight) {
+			itemHeight = anchorTo.getBoundingClientRect().height;
+			modifiedHeight = anchorTo.getBoundingClientRect().height;
 		}
 
-		const anchorBounds = this.props.anchorTo.getBoundingClientRect();
-		let { left, top, maxWidth, maxHeight } = position( // tslint:disable-line
-			this.props.axis!,
-			this.props.pull!,
+		const anchorBounds = anchorTo.getBoundingClientRect();
+		let { left, top, right, bottom, maxWidth, maxHeight } = position( // tslint:disable-line
+			axis!,
+			pull!,
 			anchorBounds, {
 				height: itemHeight,
 				width: itemWidth,
 			},
-			this.props.offset!,
-			this.props.pageOffset!,
+			offset!,
+			pageOffset!,
 			{
 				width: document.documentElement.clientWidth,
 				height: document.documentElement.clientHeight,
 			},
 		);
 
-		return { width: modifiedWidth, height: modifiedHeight, left, top, maxWidth, maxHeight };
-	}
+		return {
+			width: modifiedWidth,
+			height: modifiedHeight,
+			left,
+			right,
+			bottom,
+			top,
+			maxWidth,
+			maxHeight,
+		};
+	};
 
-	public setPosition = (): void => {
-		const { width, left, top, height, maxWidth, maxHeight } = this.calculateWidth();
+	const setPosition = (a?: any) => {
+		console.info('resizing!');
+		setLocation(calculatePosition(a));
+	};
 
-		if (this.anchorRef.current) {
-			this.setState({
-				location: {
-					left: Math.floor(left),
-					top: Math.floor(top),
-					width,
-					height,
-					maxWidth,
-					maxHeight,
-				},
-			});
-		}
-	}
+	React.useEffect(() => {
+		setPosition();
 
-	public render(): JSX.Element {
-		const { location } = this.state;
+		// When the box isn't drawn, we need to wait
+		requestAnimationFrame(() => {
+			setPosition();
+		});
+	},              []);
 
-		return (
-			<Portal>
-				<div className="anchor" style={{ position: 'fixed', ...location, zIndex: 100000, overflow: 'hidden' }} ref={this.anchorRef}>
-					{this.props.children}
-				</div>
+	const overflow = handleOverflow ? 'auto' : 'hidden';
 
-				<EventListener target={window} onResize={this.setPosition} onScroll={this.setPosition} />
-			</Portal>
-		);
-	}
-}
+	return (
+		<Portal>
+			<div className="anchor" style={{position: 'fixed', ...location, zIndex: 100000, overflow }} ref={anchorRef}>
+				<ReactResizeDetector onResize={setPosition}>
+					{() => children}
+				</ReactResizeDetector>
+			</div>
+
+			<EventListener target={window} onResize={setPosition} onScroll={setPosition} />
+		</Portal>
+	);
+};
+
+Anchor.defaultProps = {
+	offset: 5,
+	pageOffset: 5,
+	axis: 'vertical',
+	pull: 'center',
+	handleOverflow: true,
+};
