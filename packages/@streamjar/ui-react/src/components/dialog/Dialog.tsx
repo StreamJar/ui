@@ -1,261 +1,93 @@
 import * as React from 'react';
-import { Transition } from 'react-transition-group';
-import { FocusTrap, ArcScope, Button as Buttons, ArcEvent, FocusExclude } from '@mixer/arcade-machine-react';
+import { DialogWrapper, IDialogProps, IDialogConfig } from './DialogWrapper';
+import { IDialogStatus, DialogContext } from './DialogContext';
 
-import { Spinner } from '../spinner';
-import { Button } from '../form/button/Button';
-import { Portal } from '../portal/Portal';
+export const ANIMATION = 400;
 
-// tslint:disable max-classes-per-file
+// Props that get internally passed
+export interface IDialogChildProps {
+	dialogState: IDialogStatus;
 
-export interface IDialogHeaderProps {
-	onClose?(): void;
+	setDialogState(state: IDialogStatus): void;
+	closeDialog(data: any): void;
 }
 
-export class DialogHeader extends React.PureComponent<IDialogHeaderProps> {
-	public static defaultProps = {
-		onClose: () => { /* */ },
+// Props that can be passed to a dialog component inline
+export interface IDialogLocalProps {
+	onClose?(data: any): any;
+}
+
+/**
+ * HOC for rendering a dialog
+ *
+ * @param Component The component to wrap
+ */
+export const withDialog: <P extends object>(Component: React.ComponentType<P>, p?: IDialogConfig) =>
+	(props: P & IDialogProps & IDialogLocalProps) => JSX.Element =
+		<P extends object>(Component: React.ComponentType<P>, p: IDialogConfig = {}) =>
+			(props: P & IDialogProps & IDialogLocalProps) => {
+				const {
+					// Dialog Config
+					loadingByDefault,
+					height,
+					width,
+					maxWidth,
+					minWidth,
+
+					// Dialog State
+					dialogOpen,
+					dialogState,
+					setDialogState,
+					internalDialogClose,
+
+					// Local prop
+					onClose,
+
+					// Components Props
+					...componentProps // tslint:disable-line
+				} = { ...props, ...p};
+
+				const internalClose = (data: any) => {
+					internalDialogClose(data);
+
+					setTimeout(() => {
+						if (onClose) {
+							onClose(data);
+						}
+					},         ANIMATION);
+				};
+
+				return (
+					<DialogWrapper
+						loadingByDefault={loadingByDefault}
+						height={height}
+						width={width}
+						maxWidth={maxWidth}
+						minWidth={minWidth}
+						dialogOpen={dialogOpen}
+						dialogState={dialogState}
+						setDialogState={setDialogState}
+						internalDialogClose={internalClose}>
+
+						<DialogContext.Provider value={{ dialogState, setDialogState, closeDialog: internalClose }}>
+							<Component {...(componentProps as P)} />
+						</DialogContext.Provider>
+					</DialogWrapper>
+				);
+			};
+
+export function useDialog(props: IDialogConfig): { dialogProps: IDialogProps; openDialog(): void } {
+	const [state, setState] = React.useState<IDialogStatus>(IDialogStatus.LOADED);
+	const [open, setOpen] = React.useState<boolean>(false);
+
+	return {
+		openDialog: () => { setOpen(true); },
+		dialogProps: {
+			...props,
+			dialogState: state,
+			setDialogState: setState,
+			dialogOpen: open,
+			internalDialogClose() { setOpen(false); },
+		},
 	};
-
-	public render(): JSX.Element {
-		const { children, onClose } = this.props;
-
-		return (
-			<div className="jar-dialog-header" style={{ flexShrink: 0 }}>
-				<h5 className="jar-dialog-header__title layout-row layout-align-between-center">
-					{children}
-				</h5>
-
-				<span className="flex"></span>
-
-				<Button round={true} raised={true} icon="close" onClick={onClose}></Button>
-			</div>
-		);
-
-	}
-}
-
-export class DialogContent extends React.PureComponent {
-	public render(): JSX.Element {
-		const { children } = this.props;
-
-		return (
-			<div style={{ flex: 1, padding: '15px 25px 10px', overflow: 'auto' }}>
-				{children}
-			</div>
-		);
-	}
-}
-
-export class DialogFooter extends React.PureComponent {
-	public render(): JSX.Element {
-		const { children } = this.props;
-
-		return (
-			<div className="layout-row layout-align-end-center" style={{ padding: '20px 25px' }}>
-				{children}
-			</div>
-		);
-	}
-}
-
-export interface IDialogProps {
-	state?: object;
-	show: boolean;
-	onClose(data: object | null): void;
-}
-
-export interface IDialogConfig {
-	width?: string;
-	height?: string;
-	minWidth?: string;
-	maxWidth?: string;
-	state: DialogStatus;
-}
-
-export enum DialogStatus {
-	LOADING,
-	LOADED,
-}
-
-export interface IDialogState {
-	jarDialog: IDialogConfig;
-	jarOpen: boolean;
-}
-
-const ANIMATION = 400;
-
-const DEFAULT: React.CSSProperties = {
-	transform: 'translateY(25%) scale(0.9)',
-	transition: `${ANIMATION}ms cubic-bezier(0.25, 0.8, 0.25, 1)`,
-};
-
-const CLASSES: { [key: string]: React.CSSProperties } = {
-	entered: { transform: 'translateY(0) scale(1)' },
-	entering: { transform: 'translateY(0) scale(0.9)' },
-	exiting: { transform: 'translateY(0) scale(0.9)' },
-};
-
-const OVERLAY_BASE: React.CSSProperties = {
-	opacity: 0,
-	transition: `${ANIMATION}ms cubic-bezier(0.25, 0.8, 0.25, 1)`,
-};
-
-const OVERLAY_CLASSES: { [key: string]: React.CSSProperties } = {
-	entered: { opacity: 1 },
-	entering: { opacity: 1 },
-	exiting: { opacity: 0 },
-};
-
-export abstract class BaseDialog<P = {}, S = {}> extends React.PureComponent<P & IDialogProps, IDialogState & S> {
-	public initState?: DialogStatus;
-
-	constructor(props: IDialogProps & P) {
-		super(props);
-	}
-
-	public abstract initialState(): S;
-
-	public dialogDidOpen() { /* */ }
-	public dialogWillClose() { /* */ }
-
-	public componentDidUpdate(prev: IDialogProps & P) {
-		if (prev.show !== this.props.show) {
-			this.setState({
-				jarOpen: this.props.show as any,
-			});
-
-			if (this.props.show) {
-				this.dialogDidOpen();
-			}
-		}
-	}
-
-	public loading(): void {
-		this.setState(state => ({
-			jarDialog: {
-				...(state.jarDialog as any),
-				state: DialogStatus.LOADED,
-			},
-		}));
-	}
-
-	public loaded() {
-		this.setState(state => ({
-			jarDialog: {
-				...(state.jarDialog as any),
-				state: DialogStatus.LOADED,
-			},
-		}));
-	}
-
-	public setupDialog(data: IDialogConfig): void {
-		if (this.state !== undefined) {
-			console.error('Calls to setupDialog() are forbidden post-init');
-		}
-
-		this.initState = data.state;
-
-		this.state = { jarOpen: this.props.show || false, jarDialog: data, ...(this.initialState() as any) };
-	}
-
-	public close(data: object | null = null): void {
-		if (!this.state.jarOpen) {
-			return;
-		}
-
-		this.setState({
-			jarOpen: false as any,
-		});
-
-		this.dialogWillClose();
-
-		this.setState(state => ({
-			jarDialog: {
-				...(state.jarDialog as any),
-				state: this.initState,
-			},
-			...(this.initialState() as any),
-		}));
-
-		setTimeout(() => {
-
-			this.props.onClose(data);
-		},         ANIMATION);
-	}
-
-	public closeBackdrop = (event: React.MouseEvent<HTMLDivElement>): void => {
-		if (event.currentTarget === event.target) {
-			this.close(null);
-		}
-	}
-
-	public handleBack = (evt: ArcEvent): void => {
-		if (evt.event === Buttons.Back) {
-			this.close();
-		}
-	}
-
-	public getDialog = (state: string): JSX.Element => {
-		if (this.props.show === false) {
-			return <React.Fragment />;
-		}
-
-		const { jarDialog } = this.state;
-
-		let dialog = this.renderDialog();
-
-		// we could use a provider here.. ooooor we could mutate some childs children. sorry.
-		if (dialog.type === React.Fragment) {
-			const childProps = React.Children.map(dialog.props.children, (child: any) => {
-				const item = child as React.ReactElement<IDialogHeaderProps & { children: string }> | null;
-
-				if (child.type !== DialogHeader || !item) {
-					return child;
-				}
-
-				return React.cloneElement(item, { ...item.props, onClose: () => { this.close(null); } });
-			});
-
-			dialog = React.cloneElement(dialog, { children: childProps });
-		}
-
-		const overlay = (
-			<div className="jar-dialog__overlay layout-row layout-align-center-center">
-				<Spinner size={40} />
-			</div>
-		);
-
-		return (
-			<Portal>
-				<FocusTrap>
-					<ArcScope onButton={this.handleBack}>
-						<FocusExclude active={jarDialog.state === DialogStatus.LOADING}>
-							<div className="jar-dialog-target" style={{ position: 'relative', zIndex: 10000 }}>
-								<div className="jar-overlay layout-column layout-align-center-center"
-									onClick={this.closeBackdrop}
-									style={{ ...OVERLAY_BASE, ...OVERLAY_CLASSES[state] }}>
-									<div className="jar-dialog layout-column" style={{ ...(jarDialog as any), ...DEFAULT, ...CLASSES[state] }}>
-										{jarDialog.state === DialogStatus.LOADING && overlay}
-
-										{dialog}
-									</div>
-								</div>
-							</div>
-						</FocusExclude>
-					</ArcScope>
-				</FocusTrap>
-			</Portal>
-		);
-	}
-
-	public render(): JSX.Element {
-		const { jarOpen } = this.state;
-
-		return (
-			<Transition in={jarOpen} appear={true} unmountOnExit={true} timeout={{ exit: 200, enter: 0 }} children={this.getDialog} />
-		);
-	}
-
-	protected abstract renderDialog(): JSX.Element;
 }
