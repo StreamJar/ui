@@ -1,20 +1,10 @@
 import * as React from 'react';
 import { Transition } from 'react-transition-group';
+import { TransitionStatus } from 'react-transition-group/Transition';
 
-import { IToast, Toaster } from './Toasts';
-import { Button } from '../form/button/Button';
+import { IToast } from './Toasts';
 import { JAR_VALID_THEMES } from '../../constants';
-
-export interface IToastProps {
-	toasts: Toaster;
-}
-
-export interface IToastState {
-	toasts: IToast[];
-	current: IToast | null;
-	focused: boolean;
-	isRemovingSoon: boolean;
-}
+import { Button } from '../form/button';
 
 const THEMES: { [key: string]: JAR_VALID_THEMES } = {
 	error: 'danger',
@@ -32,105 +22,60 @@ const ANIMATION = 500;
 
 const DEFAULTS: React.CSSProperties = {
 	opacity: 0,
-	transition: `all ${ANIMATION}ms cubic-bezier(0.25, 0.8, 0.25, 1)`,
+	transition: `all 250ms cubic-bezier(0.25, 0.8, 0.25, 1)`,
 };
 
 const TRANSITIONS: { [key: string]: React.CSSProperties } = {
 	entered:  { opacity: 1, transform: 'translateY(0%) scale(1)' },
-	entering:  { opacity: 0, transform: 'translateY(25%) scale(.5)' },
+	entering:  { opacity: 1, transform: 'translateY(0%) scale(1)' },
 	exiting:  { opacity: 0, transform: 'translateY(25%) scale(.5)' },
+	exited:  { opacity: 0, transform: 'translateY(25%) scale(.5)' },
 };
 
-export class Toast extends React.PureComponent<IToastProps, IToastState> {
-	public timeout?: any;
+export interface IToastProps {
+	toast: IToast;
+	depth: number;
+	closeToast(toast: IToast): void;
+}
 
-	constructor(props: IToastProps) {
-		super(props);
+export const Toast: React.FC<IToastProps> = (props: IToastProps) => {
+	const { toast, closeToast } = props;
+	const [iconFocus, setIconFocus] = React.useState(false);
+	const [visible, setVisible] = React.useState(false);
 
-		this.state = {
-			current: null,
-			focused: false,
-			isRemovingSoon: true,
-			toasts: [],
-		};
-	}
+	const icon: string = iconFocus ? 'delete' : ICONS[toast.type];
 
-	public componentDidMount(): void {
-		this.props.toasts.on((toast: IToast) => {
-			if (this.state.current) {
-				this.setState((state: IToastState) => ({ toasts: [...state.toasts, toast] }));
+	const close = () => { closeToast(toast); };
+	const focus = () => { setIconFocus(true); };
+	const blur = () => { setIconFocus(false); };
 
-				return;
-			}
-
-			this.showToast(toast);
-		});
-	}
-
-	public showToast = (toast: IToast): void => {
-		this.timeout = setTimeout(() => {
-			this.clearToast();
-		},                        toast.duration);
-
-		this.setState({ current: toast, isRemovingSoon: false  });
-	}
-
-	public clearToast = (): void => {
-		clearTimeout(this.timeout);
-
-		this.setState({ isRemovingSoon: true });
+	React.useEffect(() => {
+		setVisible(true);
 
 		setTimeout(() => {
-			this.setState({ current: null });
+			setVisible(false);
+		},         toast.duration);
 
-			if (this.state.toasts.length) {
-				this.showToast(this.state.toasts[0]);
+		setTimeout(() => {
+			close();
+		},         toast.duration + ANIMATION);
+	},              []);
 
-				this.setState(toasts => {
-					return {
-						toasts: toasts.toasts.slice(1),
-					};
-				});
-			}
-		},         ANIMATION);
-	}
-
-	public iconFocus = (): void => {
-		this.setState({ focused: true });
-	}
-
-	public iconLostFocus = (): void => {
-		this.setState({ focused: false });
-	}
-
-	public render(): JSX.Element {
-		const { isRemovingSoon } = this.state;
-
-		return (
-			<div className="jar-toasts">
-				<Transition in={!isRemovingSoon} timeout={ANIMATION} children={this.getToast} />
-			</div>
-		);
-	}
-
-	private readonly getToast = (state: string): JSX.Element => {
-		const { current } = this.state;
-
-		const icon: string = this.state.focused || !current ? 'delete' : ICONS[current.type];
-
-		if (!current) {
-			return <React.Fragment />;
-		}
-
+	const getToast = (state: TransitionStatus) => {
 		return (
 			<div className="jar-toast" style={{...DEFAULTS, ...TRANSITIONS[state]}}>
 				<div className="layout-row layout-align-center-center">
-					<div onMouseEnter={this.iconFocus} onMouseLeave={this.iconLostFocus}>
-						<Button onClick={this.clearToast} round={true} raised={true} colour={THEMES[current.type]} icon={icon}></Button>
+					<div onMouseEnter={focus} onMouseLeave={blur}>
+						<Button onClick={close} round={true} raised={true} colour={THEMES[toast.type]} icon={icon} />
 					</div>
-					<div className="jar-toast__status"> {current.message} </div>
+
+					<div className="jar-toast__status"> {toast.message} </div>
 				</div>
 			</div>
 		);
-	}
-}
+	};
+
+	return (
+		<Transition in={visible} timeout={ANIMATION} children={getToast} />
+	);
+};

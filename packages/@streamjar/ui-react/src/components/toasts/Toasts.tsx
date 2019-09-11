@@ -2,30 +2,58 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import { getOutletRef } from '../../common/outlet';
-import { Toast } from './Toast';
+import { Toaster } from './Toaster';
 
-export type ToastType = 'success' | 'error' | 'info';
+export enum ToastType {
+	SUCCESS = 'success',
+	ERROR = 'error',
+	INFO = 'info',
+}
 
 export interface IToast {
+	requestedAt: Date;
 	type: ToastType;
 	duration: number;
 	message: string;
 }
 
-export class Toaster {
-	public outlet?: any;
-	public listeners: ((toast: IToast) => void)[] = [];
+export class ToastsFactory {
+	public outlet = false;
+	private listeners: ((toast: IToast) => void)[] = [];
 
+	/**
+	 * Listen for a tamp
+	 *
+	 * @param fn listen fn
+	 */
 	public on(fn: (toast: IToast) => void): void {
 		this.listeners = [...this.listeners, fn];
 	}
 
+	public off(fn: (toast: IToast) => void): void {
+		this.listeners = this.listeners.filter(i => i !== fn);
+	}
+
+	/**
+	 * Show a toast
+	 *
+	 * @param toast Toast
+	 */
 	public show(toast: IToast): void {
 		if (!this.outlet) {
-			this.outlet = ReactDOM.render(
-				<Toast toasts={this} />,
+			this.outlet = true;
+
+			ReactDOM.render(
+				<Toaster initToast={toast} />,
 				getOutletRef(),
+				() => {
+					this.listeners.forEach(listener => {
+						listener(toast);
+					});
+				},
 			);
+
+			return;
 		}
 
 		this.listeners.forEach(listener => {
@@ -33,17 +61,36 @@ export class Toaster {
 		});
 	}
 
+	/**
+	 * Display an informational toast
+	 *
+	 * @param message Message to display
+	 * @param duration How long to display for
+	 */
+
 	public info(message: string, duration = 3000): void {
-		this.show({type: 'info', message, duration});
+		this.show({ type: ToastType.INFO, message, duration, requestedAt: new Date() });
 	}
 
+	/**
+	 * Display an success toast
+	 *
+	 * @param message Message to display
+	 * @param duration How long to display for
+	 */
 	public success(message: string, duration = 2000): void {
-		this.show({type: 'success', message, duration});
+		this.show({ type: ToastType.SUCCESS, message, duration, requestedAt: new Date() });
 	}
 
+	/**
+	 * Display an error toast
+	 *
+	 * @param message Message to display
+	 * @param duration How long to display for
+	 */
 	public error(message: string, duration = 5000): void {
-		this.show({type: 'error', message, duration});
+		this.show({ type: ToastType.ERROR, message, duration, requestedAt: new Date() });
 	}
 }
 
-export const toasts = new Toaster();
+export const Toasts = new ToastsFactory();

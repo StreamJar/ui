@@ -95,7 +95,6 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 		let anchorEl = <React.Fragment></React.Fragment>;
 
 		if (anchor) {
-			console.log('rendering anchor');
 			anchorEl = (
 				<Anchor anchorTo={anchor} pull={pull} axis={axis} offset={7} handleOverflow={false}>
 					<Transition in={!hide} appear={true} timeout={300} children={this.getTooltip} />
