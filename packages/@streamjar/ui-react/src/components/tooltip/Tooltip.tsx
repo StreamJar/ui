@@ -3,12 +3,19 @@ import * as ReactDOM from 'react-dom';
 import { Transition } from 'react-transition-group';
 
 import { Anchor } from '../anchor/Anchor';
-import { IAnchorSide, IAnchorType } from '../../common/positioner';
+import { IAnchorSide } from '../../common/positioner';
 
 export interface ITooltipProps {
-	position?: IAnchorType;
+	/** Which axis to show the tooltip on */
+	axis?: 'horizontal' | 'vertical';
+
+	/** The message to display */
 	message: string;
+
+	/** Whether tooltips are enabled */
 	enabled?: boolean;
+
+	/** Where to pull the tooltip towards */
 	pull?: IAnchorSide;
 }
 
@@ -24,7 +31,15 @@ const CLASSES: { [key: string]: React.CSSProperties } = {
 	exiting: { opacity: 0, transform: 'translateY(50%) scale(1)' },
 };
 
+/**
+ * Display a tooltip based on focus/hover
+ */
 export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLElement | null; hide: boolean }> {
+	public static defaultProps = {
+		axis: 'vertical',
+		pull: 'center',
+	};
+
 	public childRef?: HTMLElement;
 
 	constructor(props: ITooltipProps) {
@@ -64,7 +79,9 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 		}
 
 		el.removeEventListener('mouseover', this.mouseOver);
+		el.removeEventListener('focus', this.mouseOver);
 		el.removeEventListener('mouseleave', this.mouseLeave);
+		el.removeEventListener('blur', this.mouseLeave);
 	}
 
 	public render(): JSX.Element {
@@ -72,18 +89,15 @@ export class Tooltip extends React.PureComponent<ITooltipProps, { anchor: HTMLEl
 			return <>{this.props.children}</>;
 		}
 
-		const { position, pull } = this.props;
+		const { axis, pull } = this.props;
 		const { anchor, hide } = this.state;
-
-		const pos = position ? position : 'bottom';
-		const pullTo = pull ? pull : 'center';
-		const axis = ['left', 'right'].includes(pos) ? 'horizontal' : 'vertical';
 
 		let anchorEl = <React.Fragment></React.Fragment>;
 
 		if (anchor) {
+			console.log('rendering anchor');
 			anchorEl = (
-				<Anchor anchorTo={anchor} pull={pullTo} axis={axis} offset={7} handleOverflow={false}>
+				<Anchor anchorTo={anchor} pull={pull} axis={axis} offset={7} handleOverflow={false}>
 					<Transition in={!hide} appear={true} timeout={300} children={this.getTooltip} />
 				</Anchor>
 			);
