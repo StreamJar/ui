@@ -12,6 +12,12 @@ export interface IAnchorProps {
 	/** Force an item height */
 	height?: number;
 
+	/** Force an max item width */
+	maxWidth?: number;
+
+	/** Force an max item height */
+	maxHeight?: number;
+
 	/** The axis to anchor on  */
 	axis?: 'vertical' | 'horizontal';
 
@@ -37,17 +43,6 @@ export interface IAnchorProps {
 	handleOverflow?: boolean;
 }
 
-export interface IAnchorState {
-	location: {
-		width?: number;
-		height?: number;
-		top?: number;
-		left?: number;
-		maxHeight?: number;
-		maxWidth?: number;
-	};
-}
-
 /**
  * Anchor an element to another element
  */
@@ -64,6 +59,8 @@ export const Anchor: React.FC<React.PropsWithChildren<IAnchorProps>> = (props: R
 		pageOffset,
 		children,
 		handleOverflow,
+		maxWidth: elMaxWidth,
+		maxHeight: elMaxHeight,
 	} = props;
 
 	const anchorRef = React.useRef<HTMLDivElement>(null);
@@ -76,8 +73,8 @@ export const Anchor: React.FC<React.PropsWithChildren<IAnchorProps>> = (props: R
 			targetChild = anchorRef.current!.firstElementChild as any;
 		}
 
-		let modifiedWidth: number | undefined;
-		let modifiedHeight: number | undefined;
+		let modifiedWidth: number | undefined = width ? width : undefined;
+		let modifiedHeight: number | undefined = height ? height : undefined;
 		let itemWidth = width ? width : targetChild.scrollWidth;
 		let itemHeight = height ? height : targetChild.scrollHeight;
 
@@ -114,8 +111,8 @@ export const Anchor: React.FC<React.PropsWithChildren<IAnchorProps>> = (props: R
 			right,
 			bottom,
 			top,
-			maxWidth,
-			maxHeight,
+			maxWidth: maxWidth ? Math.min(maxWidth, elMaxWidth!) : undefined,
+			maxHeight: maxHeight ? Math.min(maxHeight, elMaxHeight!) : undefined,
 		};
 	};
 
@@ -132,11 +129,11 @@ export const Anchor: React.FC<React.PropsWithChildren<IAnchorProps>> = (props: R
 		});
 	},              []);
 
-	const overflow = handleOverflow ? 'auto' : 'hidden';
+	const overflow = handleOverflow ? 'auto' : 'visible';
 
 	return (
 		<Portal>
-			<div className="anchor" style={{position: 'fixed', ...location, zIndex: 100000, overflow }} ref={anchorRef}>
+			<div className="jar-anchor" style={{position: 'fixed', ...location, zIndex: 100000, overflow }} ref={anchorRef}>
 				<ReactResizeDetector onResize={setPosition}>
 					{() => children}
 				</ReactResizeDetector>
@@ -153,4 +150,6 @@ Anchor.defaultProps = {
 	axis: 'vertical',
 	pull: 'center',
 	handleOverflow: true,
+	maxWidth: Infinity,
+	maxHeight: Infinity,
 };

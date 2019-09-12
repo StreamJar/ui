@@ -22,3 +22,17 @@ export const SimpleMenu = React.createElement(() => {
 		</div>
 	);
 });
+
+export const FixedWidthMenu = React.createElement(() => {
+	const { menuProps, onMenuOpen} = useMenu({ width: 500 });
+
+	return (
+		<div>
+			<Button raised={true} onClick={onMenuOpen}> menu </Button>
+
+			<Menu {...menuProps}>
+				<h2> I am menu </h2>
+			</Menu>
+		</div>
+	);
+});

@@ -61,7 +61,7 @@ export const Select: React.FC<React.PropsWithChildren<ISelectProps>> = (props: R
 		setValues(normaliseValues());
 	},              [value]);
 
-	const { onMenuOpen, menuProps, closeMenu } = useMenu({ anchorWidth: true, supportContentClick: true, height: 400 });
+	const { onMenuOpen, menuProps, closeMenu } = useMenu({ anchorWidth: true, supportContentClick: true, maxHeight: 400 });
 
 	const onClick = (val: ISelectValue) => {
 		let newVal: ISelectValue[] = [val];

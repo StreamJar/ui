@@ -7,6 +7,8 @@ import { IAnchorSide } from '../../common/positioner';
 export interface IMenuCustomisableProps {
 	width?: number;
 	height?: number;
+	maxWidth?: number;
+	maxHeight?: number;
 	anchorWidth?: boolean;
 	supportContentClick?: boolean;
 	padding?: boolean;
@@ -32,6 +34,7 @@ const DEFAULT: React.CSSProperties = {
 const CLASSES: { [key: string]: React.CSSProperties } = {
 	entered: { opacity: 1, marginTop: 0 },
 	entering: { opacity: 1, marginTop: 0 },
+	exited: { opacity: 0, marginTop: -30 },
 	exiting: { opacity: 0, marginTop: -30 },
 };
 
@@ -59,6 +62,8 @@ export const Menu: React.FC<React.PropsWithChildren<IMenuProps>> = (props: React
 		onClose,
 		padding,
 		pull,
+		maxWidth,
+		maxHeight,
 	} = props;
 
 	const [anchor, setAnchor] = React.useState<HTMLElement | null>(null);
@@ -102,17 +107,26 @@ export const Menu: React.FC<React.PropsWithChildren<IMenuProps>> = (props: React
 
 	const renderMenu = (state: string): JSX.Element => {
 		return (
-			<div ref={menu} className="jar-menu j-dark layout-column" style={{ ...DEFAULT, ...CLASSES[state], padding: !padding ? 0 : undefined }}>
-				{children}
-			</div>
+			<Anchor
+				handleOverflow={state === 'entered'}
+				anchorTo={anchor!}
+				width={width}
+				height={height}
+				axis="vertical"
+				pull={pull}
+				maxWidth={maxWidth}
+				maxHeight={maxHeight}
+				matchAnchorWidth={anchorWidth}>
+				<div ref={menu} className="jar-menu j-dark layout-column" style={{ ...DEFAULT, ...CLASSES[state], padding: !padding ? 0 : undefined }}>
+					{children}
+				</div>
+			</Anchor>
 		);
 	};
 
 	if (anchor) {
 		return (
-			<Anchor anchorTo={anchor} width={width} height={height} axis="vertical" pull={pull} matchAnchorWidth={anchorWidth}>
-				<Transition in={visible} appear={true} timeout={500} children={renderMenu} />
-			</Anchor>
+			<Transition in={visible} appear={true} timeout={500} children={renderMenu} />
 		);
 	}
 

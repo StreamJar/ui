@@ -6,12 +6,13 @@ import { getOutletRef, getRootOutlet } from '../../common/outlet';
 /** Portal a react element to another world! 👻 */
 export const Portal: React.FC<React.PropsWithChildren<{}>> = (props: React.PropsWithChildren<{}>) => {
 	const { children } = props;
-
-	const [ref] = React.useState(getOutletRef());
+	const ref = React.useMemo(() => getOutletRef(), []); // tslint:disable-line
 
 	React.useEffect(() => {
 		return () => {
-			getRootOutlet().removeChild(ref);
+			if (ref) {
+				getRootOutlet().removeChild(ref);
+			}
 		};
 	},              []);
 
