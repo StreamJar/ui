@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Transition } from 'react-transition-group';
 
 import { Anchor } from '../anchor/Anchor';
+import { IAnchorSide } from '../../common/positioner';
 
 export interface IMenuCustomisableProps {
 	width?: number;
@@ -9,6 +10,7 @@ export interface IMenuCustomisableProps {
 	anchorWidth?: boolean;
 	supportContentClick?: boolean;
 	padding?: boolean;
+	pull?: IAnchorSide;
 }
 
 export interface IMenuProps extends IMenuCustomisableProps {
@@ -56,6 +58,7 @@ export const Menu: React.FC<React.PropsWithChildren<IMenuProps>> = (props: React
 		supportContentClick,
 		onClose,
 		padding,
+		pull,
 	} = props;
 
 	const [anchor, setAnchor] = React.useState<HTMLElement | null>(null);
@@ -107,7 +110,7 @@ export const Menu: React.FC<React.PropsWithChildren<IMenuProps>> = (props: React
 
 	if (anchor) {
 		return (
-			<Anchor anchorTo={anchor} width={width} height={height} axis="vertical" pull="end" matchAnchorWidth={anchorWidth}>
+			<Anchor anchorTo={anchor} width={width} height={height} axis="vertical" pull={pull} matchAnchorWidth={anchorWidth}>
 				<Transition in={visible} appear={true} timeout={500} children={renderMenu} />
 			</Anchor>
 		);
@@ -119,6 +122,7 @@ export const Menu: React.FC<React.PropsWithChildren<IMenuProps>> = (props: React
 Menu.defaultProps = {
 	onClose: () => { /* */ },
 	supportContentClick: false,
+	pull: 'center',
 	width: 165,
 	padding: true,
 };

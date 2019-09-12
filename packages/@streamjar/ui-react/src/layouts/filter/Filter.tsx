@@ -7,6 +7,7 @@ export const Filter = (props: React.PropsWithChildren<{}>) => {
 	const { children } = props;
 
 	const { menuProps, onMenuOpen } = useMenu({
+		pull: 'end',
 		padding: false,
 		width: null!,
 		supportContentClick: true,

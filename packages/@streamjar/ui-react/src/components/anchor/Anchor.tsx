@@ -66,7 +66,6 @@ export const Anchor: React.FC<React.PropsWithChildren<IAnchorProps>> = (props: R
 		handleOverflow,
 	} = props;
 
-	console.log(props);
 	const anchorRef = React.useRef<HTMLDivElement>(null);
 	const [location, setLocation] = React.useState<React.CSSProperties>({});
 
@@ -81,8 +80,6 @@ export const Anchor: React.FC<React.PropsWithChildren<IAnchorProps>> = (props: R
 		let modifiedHeight: number | undefined;
 		let itemWidth = width ? width : targetChild.scrollWidth;
 		let itemHeight = height ? height : targetChild.scrollHeight;
-
-		console.log(itemWidth, itemHeight);
 
 		if (matchAnchorWidth) {
 			itemWidth = anchorTo.getBoundingClientRect().width;

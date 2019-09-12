@@ -9,7 +9,7 @@
     "lint": "tslint --project .",
     "icons": "node ./build/icons",
     "demo": "npm run icons && cd demo && webpack-dev-server --config webpack.config.js",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.prod.json",
     "test": "jest",
     "storybook": "start-storybook -s ./node_modules/@streamjar/ui-shared -p 6006",
     "build-storybook": "build-storybook"
