@@ -2,7 +2,7 @@
 
 <ng-template #settings let-x="x" let-y="y">
 	<div class="jar-filter j-dark">
-		<div class="jar-filter__settings" [style.top.px]="y" [style.right.px]="x" [style.width.px]="children.length * 202" fxLayout="row">
+		<div class="jar-filter__settings jar-filter__settings-ng" [style.top.px]="y" [style.right.px]="x" [style.width.px]="children.length * 202" fxLayout="row">
 			<ng-content></ng-content>
 		</div>
 	</div>

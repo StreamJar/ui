@@ -16,6 +16,9 @@
 }
 
 .jar-filter__settings {
+	&-ng {
+		position: fixed;
+	}
 	min-width: 200px;
 	@include j-primary-color(background, gradient);
 
