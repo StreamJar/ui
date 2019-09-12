@@ -17,9 +17,9 @@
             "scripthost"
         ],
         "jsx": "react"
-    },
-    "include": [
-        "./src/**/*"
+	},
+	"files": [
+		"src/index.ts"
 	],
 	"awesomeTypescriptLoaderOptions": {
 		"ignoreDiagnostics": [7005]
