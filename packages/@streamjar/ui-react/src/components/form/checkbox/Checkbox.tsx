@@ -78,6 +78,10 @@ export const Checkbox: React.FC<React.PropsWithChildren<ICheckboxProps>> = (prop
 		}
 	};
 
+	React.useEffect(() => {
+		setCheckboxValue(value);
+	},              [value]);
+
 	return (
 		<div
 			ref={checkboxContainerRef}

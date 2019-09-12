@@ -65,4 +65,14 @@ describe('Checkbox', () => {
 		expect(checkbox.find('.jar-checkbox-inner').hasClass('jar-checkbox-inner-checked')).toBe(true);
 		expect(fn).toBeCalledWith(true);
 	});
+
+	test('handles value externally changing', () => {
+		const fn = jest.fn();
+		const checkbox = mount(<Checkbox value={true} onChange={fn}>test</Checkbox>);
+		expect(checkbox.find('.jar-checkbox-inner').hasClass('jar-checkbox-inner-checked')).toBe(true);
+
+		checkbox.setProps({ value: false });
+
+		expect(checkbox.find('.jar-checkbox-inner').hasClass('jar-checkbox-inner-checked')).toBe(false);
+	});
 });

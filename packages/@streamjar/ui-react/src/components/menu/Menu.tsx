@@ -8,6 +8,7 @@ export interface IMenuCustomisableProps {
 	height?: number;
 	anchorWidth?: boolean;
 	supportContentClick?: boolean;
+	padding?: boolean;
 }
 
 export interface IMenuProps extends IMenuCustomisableProps {
@@ -54,6 +55,7 @@ export const Menu: React.FC<React.PropsWithChildren<IMenuProps>> = (props: React
 		anchor: sourceAnchor,
 		supportContentClick,
 		onClose,
+		padding,
 	} = props;
 
 	const [anchor, setAnchor] = React.useState<HTMLElement | null>(null);
@@ -97,7 +99,7 @@ export const Menu: React.FC<React.PropsWithChildren<IMenuProps>> = (props: React
 
 	const renderMenu = (state: string): JSX.Element => {
 		return (
-			<div ref={menu} className="jar-menu j-dark layout-column" style={{ ...DEFAULT, ...CLASSES[state] }}>
+			<div ref={menu} className="jar-menu j-dark layout-column" style={{ ...DEFAULT, ...CLASSES[state], padding: !padding ? 0 : undefined }}>
 				{children}
 			</div>
 		);
@@ -105,7 +107,7 @@ export const Menu: React.FC<React.PropsWithChildren<IMenuProps>> = (props: React
 
 	if (anchor) {
 		return (
-			<Anchor anchorTo={anchor} width={width} height={height} axis="vertical" pull="center" matchAnchorWidth={anchorWidth}>
+			<Anchor anchorTo={anchor} width={width} height={height} axis="vertical" pull="end" matchAnchorWidth={anchorWidth}>
 				<Transition in={visible} appear={true} timeout={500} children={renderMenu} />
 			</Anchor>
 		);
@@ -118,4 +120,5 @@ Menu.defaultProps = {
 	onClose: () => { /* */ },
 	supportContentClick: false,
 	width: 165,
+	padding: true,
 };

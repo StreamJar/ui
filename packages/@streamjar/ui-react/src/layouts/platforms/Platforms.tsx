@@ -1,110 +1,104 @@
 import * as React from 'react';
-import { Checkbox } from '../../components/form/checkbox/Checkbox';
-import { JAR_SUPPORTED_PLATFORMS } from '../../constants';
+import { Checkbox } from '../../components/form/checkbox';
+import { PlatformBrands, JAR_SUPPORTED_PLATFORMS } from '../../constants';
 
 export interface IPlatformsProps {
-	supported?: string[];
+	/** Enabled and configured platforms */
+	platforms: string[];
+
+	/** The current value */
 	value?: string[];
-	onChange(platforms: string[]): void;
+
+	/** The changed hook */
+	onChange?(platforms: string[]): void;
 }
 
-export interface IPlatformsState {
-	value: string[];
-	all: boolean;
-}
+export const Platforms: React.FC<IPlatformsProps> = (props: IPlatformsProps) => {
+	const { value, onChange, platforms } = props;
 
-export class Platforms extends React.PureComponent<IPlatformsProps, IPlatformsState> {
-	public static defaultProps: Partial<IPlatformsProps> = {
-		onChange: () => { /* */ },
-		supported: ['mixer', 'twitch', 'smashcast', 'dlive', 'picarto'],
+	const [all, setAll] = React.useState(true);
+	const [enabledPlatforms, setEnabledPlatforms] = React.useState(value || platforms);
+
+	React.useEffect(() => {
+		if (value) {
+			const val = value.filter(i => platforms.indexOf(i) !== -1);
+
+			setAll(val.length === platforms.length);
+			setEnabledPlatforms(val);
+
+			return;
+		}
+
+		setAll(true);
+		setEnabledPlatforms(platforms);
+	},              [value]);
+
+	const toggleAll = (v: boolean) => {
+		if (!v) {
+			setAll(false);
+		} else {
+			setAll(true);
+			setEnabledPlatforms(platforms);
+			onChange!(platforms);
+		}
 	};
 
-	constructor(props: IPlatformsProps) {
-		super(props);
+	const onChecked = (type: string): void =>  {
+		let val = [...enabledPlatforms, type];
 
-		this.state = this.handleProps();
-	}
-
-	public componentDidUpdate(prev: IPlatformsProps): void  {
-		if (prev.value !== this.props.value) {
-			this.setState(this.handleProps());
+		if (enabledPlatforms.includes(type)) {
+			val = enabledPlatforms.filter(i => i !== type);
 		}
-	}
 
-	public onChecked(type: string, value: boolean): void {
-		this.setState(state => {
-			let val = { value: [...state.value, type] };
+		onChange!(val);
+		setEnabledPlatforms(val);
+	};
 
-			if (state.value.includes(type)) {
-				val = { value: state.value.filter(i => i !== type) };
-			}
-
-			this.props.onChange(val.value);
-
-			return val;
-		});
-	}
-
-	public disableAll = (value: boolean = false): void => {
-		if (!value) {
-			this.setState({ all: false });
+	const disableAll = (val: boolean = false): void => {
+		if (!val) {
+			setAll(false);
 		} else {
-			this.props.onChange(this.props.supported!);
-
-			this.setState({
-				all: true,
-				value: this.props.supported!,
-			});
+			onChange!(platforms);
+			setAll(true);
+			setEnabledPlatforms(platforms);
 		}
-	}
+	};
 
-	public disableAllFalse = (): void => {
-		this.disableAll(false);
-	}
+	const disableAllFalse = (): void => {
+		disableAll(false);
+	};
 
-	public render(): JSX.Element {
-		const { supported } = this.props;
-		const { all } = this.state;
-
-		return (
-			<React.Fragment>
-				<Checkbox value={all} onChange={this.disableAll} colour="accent"> All </Checkbox>
-				<hr style={{ border: '1px solid rgb(105, 76, 127)'}} />
-				<div style={{ opacity: all ? 0.2 : 1 }}>
-					{supported!.includes('mixer') && this.getPlatform('mixer', 'Mixer')}
-					{supported!.includes('twitch') && this.getPlatform('twitch', 'Twitch')}
-					{supported!.includes('smashcast') && this.getPlatform('smashcast', 'Smashcast')}
-					{supported!.includes('dlive') && this.getPlatform('dlive', 'DLive')}
-					{supported!.includes('picarto') && this.getPlatform('picarto', 'Picarto')}
-				</div>
-			</React.Fragment>
-		);
-	}
-
-	private getPlatform(id: string, name: string): JSX.Element {
-		const { value } = this.state;
-		const last = value.length === 1;
+	const getPlatform = (name: string) => {
+		const brand = PlatformBrands.has(name) ? PlatformBrands.get(name) : name;
+		const last = enabledPlatforms.length === 1;
 
 		return (
-			<div onClick={this.disableAllFalse}>
+			<div key={name} onClick={disableAllFalse}>
 				<Checkbox
-					value={value.includes(id)}
-					colour={`platform-${id}` as JAR_SUPPORTED_PLATFORMS}
-					onChange={this.onChecked.bind(this, id)} // tslint:disable-line
-					disabled={value.includes(id) && last}>
-					{name}
+					value={enabledPlatforms.includes(name)}
+					colour={`platform-${name}` as JAR_SUPPORTED_PLATFORMS}
+					onChange={onChecked.bind(null, name)} // tslint:disable-line
+					disabled={enabledPlatforms.includes(name) && last}>
+					{brand}
 				</Checkbox>
 			</div>
 		);
-	}
+	};
 
-	private handleProps(): IPlatformsState {
-		if (this.props.value) {
-			const val = this.props.value.filter(i => this.props.supported!.indexOf(i) !== -1);
+	return (
+		<>
+			<Checkbox value={all} onChange={toggleAll} colour="accent"> All </Checkbox>
 
-			return { value: val, all: val.length === this.props.supported!.length };
-		} else {
-			return { value: this.props.supported!, all: true };
-		}
-	}
+			<hr style={{ border: '1px solid rgb(105, 76, 127)'}} />
+
+			<div style={{ opacity: all ? 0.2 : 1 }}>
+				{platforms.map(getPlatform)}
+			</div>
+		</>
+	);
+};
+
+Platforms.defaultProps = {
+	platforms: [],
+	onChange: () => { /* */ },
 }
