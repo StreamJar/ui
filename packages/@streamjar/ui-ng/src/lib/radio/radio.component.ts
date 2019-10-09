@@ -23,6 +23,11 @@ export class JarRadioComponent implements OnDestroy {
 	@Input()
 	public value: string;
 
+	@Input()
+	set disabled(value: boolean) {
+		this.disabled$.next(!(value === false));
+	}
+
 	@HostBinding('attr.tabIndex')
 	public tabIndex = 0;
 
@@ -30,6 +35,7 @@ export class JarRadioComponent implements OnDestroy {
 	public input: ElementRef;
 
 	public name: string;
+	public disabled$ = new BehaviorSubject(false);
 	public checked$ = new BehaviorSubject(false);
 	public focused: boolean;
 
@@ -50,6 +56,10 @@ export class JarRadioComponent implements OnDestroy {
 
 	@HostListener('focus')
 	public gainedFocus(): void {
+		if (this.disabled$.getValue()) {
+			return;
+		}
+
 		this.focused = true;
 	}
 
@@ -66,6 +76,10 @@ export class JarRadioComponent implements OnDestroy {
 	public onInputClick(e): boolean {
 		e.stopPropagation();
 
+		if (this.disabled$.getValue()) {
+			return;
+		}
+
 		this.radioGroup.value.next(this.value);
 		this.radioGroup.onChange(this.value);
 
@@ -73,6 +87,10 @@ export class JarRadioComponent implements OnDestroy {
 	}
 
 	public onInputChange(): void {
+		if (this.disabled$.getValue()) {
+			return;
+		}
+
 		this.radioGroup.value.next(this.value);
 		this.radioGroup.onChange(this.value);
 	}

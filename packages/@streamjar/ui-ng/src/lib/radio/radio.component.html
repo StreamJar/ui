@@ -1,17 +1,14 @@
-<div class="jar-radio" fxLayout="row" [class.jar-radio-checked]="checked$ | async" [class.jar-radio-focused]="focused" #label>
+<div class="jar-radio" fxLayout="row" [class.jar-radio-checked]="checked$ | async" [class.jar-radio-focused]="focused"
+	[class.jar-radio-disabled]="disabled$ | async" #label>
 	<div class="jar-radio__inner">
 		<div class="jar-radio__circle"></div>
 		<div class="jar-radio__fill"></div>
-		<div class="jar-radio__ripple" md-ripple [mdRippleTrigger]="label" [mdRippleCentered]="true"></div>
+		<div class="jar-radio__ripple" md-ripple [mdRippleTrigger]="label" [mdRippleCentered]="true"
+			[mdRippleDisabled]="disabled$ | async"></div>
 	</div>
 
-	<input #input type="radio"
-		class="jar-radio__input"
-		[checked]="checked$ | async"
-		[name]="name"
-		(change)="onInputChange()"
-		(click)="onInputClick($event)"
-		tabIndex="-1">
+	<input #input type="radio" class="jar-radio__input" [checked]="checked$ | async" [name]="name"
+		(change)="onInputChange()" (click)="onInputClick($event)" tabIndex="-1">
 
 	<div class="jar-radio__label">
 		<ng-content></ng-content>

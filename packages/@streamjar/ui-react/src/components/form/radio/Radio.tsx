@@ -13,6 +13,9 @@ export interface IRadioProps<T extends string | number = string> {
 	/** Value of the radio button */
 	value: T;
 
+	/** Whether the radio is disbled */
+	disabled?: boolean;
+
 	/** When this radio changes */
 	onChange?(value: boolean): void;
 }
@@ -24,6 +27,7 @@ export const Radio: React.FC<React.PropsWithChildren<IRadioProps>> =
 			value,
 			children,
 			colour,
+			disabled,
 			onChange,
 		} = props;
 
@@ -38,18 +42,20 @@ export const Radio: React.FC<React.PropsWithChildren<IRadioProps>> =
 			if (onChange) {
 				onChange(isChecked);
 			}
-		},              [isChecked]);
+		}, [isChecked]);
 
 		// Handle click event
 		const click = () => {
-			if (radioRef.current) {
+			if (radioRef.current && !disabled) {
 				radioRef.current.click();
 			}
 		};
 
 		// Handle focus event
 		const focus = (e: React.FocusEvent<HTMLInputElement>) => {
-			setRadioFocus(true);
+			if (!disabled) {
+				setRadioFocus(true);
+			}
 		};
 
 		// Handle focus event
@@ -59,12 +65,15 @@ export const Radio: React.FC<React.PropsWithChildren<IRadioProps>> =
 
 		// Handle change event
 		const change = (e: React.ChangeEvent<HTMLInputElement>) => {
-			radioCtx.onChange(e);
+			if (!disabled) {
+				radioCtx.onChange(e);
+			}
 		};
 
 		const classes = classNames('jar-radio layout-row', {
 			'jar-radio-checked': isChecked,
 			'jar-radio-focused': radioFocus,
+			'jar-radio-disabled': disabled,
 		});
 
 		return (
@@ -81,7 +90,7 @@ export const Radio: React.FC<React.PropsWithChildren<IRadioProps>> =
 					<div className="jar-radio__circle"></div>
 					<div className="jar-radio__fill"></div>
 					<div className="rippleContainer">
-						<Ripple unbounded={true} listenTo={rippleRef} />
+						<Ripple unbounded={true} listenTo={rippleRef} enabled={!disabled} />
 					</div>
 				</div>
 
@@ -105,4 +114,5 @@ export const Radio: React.FC<React.PropsWithChildren<IRadioProps>> =
 
 Radio.defaultProps = {
 	colour: 'primary',
+	disabled: false,
 };

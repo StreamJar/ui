@@ -83,4 +83,23 @@ describe('Radio', () => {
 
 		fn.mockReset();
 	});
+
+	test('handles being disabled', () => {
+		const fn = jest.fn();
+		const radio = mount((
+			<RadioGroup name="magicGroup" value={'yes'} onChange={fn}>
+				<Radio value="yes">Yes</Radio>
+				<Radio value="disabled" disabled={true}>Disabled</Radio>
+			</RadioGroup>
+		));
+
+		radio.find('input').at(1).simulate('change');
+
+		expect(radio.find('.jar-radio').at(0).hasClass('jar-radio-checked')).toBe(true);
+		expect(radio.find('.jar-radio').at(1).hasClass('jar-radio-checked')).toBe(false);
+
+		expect(fn).toBeCalledTimes(0);
+
+		fn.mockReset();
+	});
 });
