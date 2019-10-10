@@ -5,7 +5,6 @@
 	@include j-primary-color(background, background-accent);
 	padding: $spacing-3x 0px;
 	margin: $spacing-2x;
-	min-height: 80px;
 	position: relative;
 	border-radius: 4px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, .10), 0 5px 15px rgba(0, 0, 0, .01);

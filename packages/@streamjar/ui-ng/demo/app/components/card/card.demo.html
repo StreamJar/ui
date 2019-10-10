@@ -1,5 +1,6 @@
 <demo [config]="config">
 	<div style="padding: 15px;" class="j-theme-bg-background">
+		<h2> Card </h2>
 		<jar-card [icon]="{ email: 'ethan@streamjar.tv' }">
 			<div class="jar-card-content">
 				<p> You've been invited to edit <strong> Ethan</strong>'s overlay </p>
@@ -7,6 +8,17 @@
 			<div class="jar-card-actions">
 				<button jarBtn colour="danger"> Deny </button>
 				<button jarBtn raised> Accept </button>
+			</div>
+		</jar-card>
+
+
+		<h2> Card w/o footer </h2>
+		<jar-card>
+			<div class="jar-card-content" fxLayout="row" fxLayoutAlign="start center">
+				<jar-icon jarTooltip="It's you!" icon="star"></jar-icon>
+
+				<h3 class="j-truncate" style="width: 100%"> Test username </h3>
+				<span fxFlex></span>
 			</div>
 		</jar-card>
 	</div>
