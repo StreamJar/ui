@@ -1,13 +1,13 @@
 {
-  "packages": [
-    "packages/@streamjar/*"
-  ],
-  "command": {
-    "publish": {
-      "npmClient": "npm",
-      "verifyAccess": false
-    }
-  },
-  "registry": "https://registry.npmjs.org",
-  "version": "4.0.3"
+	"packages": [
+		"packages/@streamjar/*"
+	],
+	"command": {
+		"publish": {
+			"npmClient": "npm",
+			"verifyAccess": false
+		}
+	},
+	"registry": "https://npm.pkg.github.com",
+	"version": "4.0.3"
 }
