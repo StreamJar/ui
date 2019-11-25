@@ -47,6 +47,10 @@ export const Input: React.FC<IInputProps> = (props: IInputProps) => {
 	const [inputValue, setInputValue] = React.useState(value);
 	const [inputFocus, setInputFocus] = React.useState(false);
 
+	React.useEffect(() => {
+		setInputValue(value);
+	}, [value]);
+
 	// Handle change event
 	const change = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);

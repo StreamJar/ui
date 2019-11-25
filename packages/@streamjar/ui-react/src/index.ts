@@ -20,6 +20,7 @@ export * from './components/form/radio';
 export * from './components/form/select';
 export * from './components/form/slider';
 export * from './components/form/textarea';
+export * from './components/form/colour';
 
 // Layout
 export * from './layouts/card';

@@ -1,5 +1,8 @@
 {
-	"extends": ["tslint-microsoft-contrib", "tslint-react"],
+	"extends": [
+		"tslint-microsoft-contrib",
+		"tslint-react"
+	],
 	"rules": {
 		"mocha-no-side-effect-code": false,
 		"newline-per-chained-call": false,
@@ -50,9 +53,10 @@
 		"no-import-side-effect": false,
 		"no-increment-decrement": false,
 		"no-parameter-properties": false,
-
 		// todo: remove these
 		"no-console": false,
-		"no-suspicious-comment": false
+		"no-suspicious-comment": false,
+		"align": false,
+		"jsx-no-lambda": false
 	}
 }
