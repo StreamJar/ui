@@ -1,6 +1,6 @@
 {
 	"name": "@streamjar/ui-ng",
-	"version": "4.0.4",
+	"version": "4.0.5",
 	"author": "Luke Thompson <luke@streamjar.tv>",
 	"license": "MIT",
 	"main": "dist/index.js",
@@ -46,7 +46,7 @@
 		"zone.js": "^0.9.1"
 	},
 	"dependencies": {
-		"@streamjar/ui-shared": "^4.0.4",
+		"@streamjar/ui-shared": "^4.0.5",
 		"tslint": "^5.17.0",
 		"typescript": "^3.4.5"
 	},
